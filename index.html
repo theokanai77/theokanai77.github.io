@@ -3,7 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kaya Grubu: Görsel Bir Profil</title>
+    <title>Kaya Grubu | Adım Adım Stratejik Profil</title>
+    <!-- Chosen Palette: Energetic Orange & Crisp White -->
+    <!-- Application Structure Plan: Bu SPA, Kaya Grubu'nun stratejik profilini dikey, adım adım bir anlatı olarak sunmak üzere tasarlanmıştır. Marka ahlakını oluşturmak için temel 'İnsan Hayatı İlkesi' ile başlar. Bunu, grubun ölçeğini anında tanılamak için yüksek etkili KPI'lar takip eder. Uygulamanın kalbi, 'Güvenlik Ekosistemi' ve 'Dikey Entegrasyon' gibi iki temel stratejik avantajı özel HTML/CSS akış diyagramları kullanarak görselleştirir. Pazara liderliğini bağlamsallaştırmak için interaktif grafikler kullanılır. Bu tematik ve mantıksal akış (Etik -> Ölçek -> Sinerji -> Pazar Gücü -> Temel Güç), raporun doğrudan yapısı yerine daha iyi bir hikaye anlatımı ve kullanıcı etkileşimi için seçilmiştir, kullanıcıyı şirketin güçlü yönlerini ve vizyonunu mantıksal bir keşif yoluyla yönlendirir. -->
+    <!-- Visualization & Content Choices: 
+        - Kurucu Felsefe: Amaç 'Bilgilendirme' -> Sunum 'Detaylı açıklayıcı metinli görsel'. Gerekçe: Temel değere güçlü bir görsel ve duygusal bağ sağlar, tüm infografiğin tonunu belirler.
+        - Entegre Güvenlik Ekosistemi: Amaç 'Organize Etme' -> Sunum 'Simge ve kısa açıklamalı HTML/CSS Akış Diyagramı'. Gerekçe: Farklı iş birimleri arasındaki bağlantıyı ve sinerjiyi açıkça gösterir, kapsamlı yaklaşımlarını açıklar.
+        - Dikey Entegrasyon: Amaç 'Organize Etme' -> Sunum 'Simge ve detaylı açıklamalı HTML/CSS Akış Diyagramı'. Gerekçe: Değer zinciri üzerindeki uçtan uca kontrolü görsel olarak ayrıştırır, verimlilik, kalite ve dayanıklılığı vurgular.
+        - Küresel Standartlara Bağlılık: Amaç 'Bilgilendirme' -> Sunum 'Metin etiketleri ızgarası'. Gerekçe: Güvenilirliği pekiştirerek küresel standartlara bağlılığı ve akreditasyonları vurgular.
+        - KPI'lar: Amaç 'Bilgilendirme' -> Sunum 'Büyük sayısal istatistikler ve etiketler ızgarası'. Gerekçe: Şirketin ölçeği ve başarıları hakkında hızlı, yüksek etkili bir genel bakış sunar.
+        - Türkiye Kişisel Koruyucu Donanım (KKD) Pazar Büyümesi: Amaç 'Değişim' -> Sunum 'Çizgi Grafik (Chart.js/Canvas)'. Etkileşim: Üzerine gelindiğinde araç ipuçları. Gerekçe: Tahmini pazar büyümesini ve Kaya Safety'nin bu pazardaki konumunu etkili bir şekilde gösterir.
+        - Küresel Teknik Halat Pazarı: Amaç 'Karşılaştırma' -> Sunum 'Halka Grafik (Chart.js/Canvas)'. Etkileşim: Üzerine gelindiğinde araç ipuçları. Gerekçe: Teknik halat sektöründeki pazar payı bileşimini açıkça gösterir.
+        - İnovasyon Hattı: Amaç 'Bilgilendirme' -> Sunum 'Çubuk Grafik (Chart.js/Canvas)'. Etkileşim: Üzerine gelindiğinde araç ipuçları. Gerekçe: İnovasyon çabalarını nicelendirir.
+        - Tüm diyagramlar ve görsel öğeler yapılandırılmış HTML/CSS ve Tailwind kullanılarak oluşturulmuştur, grafikler ise Chart.js (Canvas oluşturma) kullanır.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,7 +26,8 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #F0F4F8;
+            background-color: #FFFFFF; /* White background */
+            color: #1f2937; /* Dark gray text */
         }
         .chart-container {
             position: relative;
@@ -29,283 +44,413 @@
             }
         }
         .kpi-card {
-            background-color: white;
+            background-color: #FFF;
             border-radius: 0.75rem;
             padding: 1.5rem;
             text-align: center;
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .kpi-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
         }
         .flow-arrow {
-            position: relative;
-            padding-right: 2rem;
+            color: #FF8C00; /* Orange */
+            font-size: 2.5rem;
+            line-height: 1;
+            font-weight: bold;
         }
-        .flow-arrow::after {
-            content: '→';
-            position: absolute;
-            right: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 2rem;
-            color: #00A6ED;
+        .section-card {
+             background-color: #FFF;
+             border-radius: 0.75rem;
+             padding: 2rem;
+             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
         }
-        .timeline-item {
-            position: relative;
-            padding-bottom: 2rem;
-            padding-left: 2.5rem;
-        }
-        .timeline-item:not(:last-child)::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 5px;
-            bottom: -5px;
-            width: 2px;
-            background-color: #00A6ED;
-        }
-        .timeline-dot {
-            position: absolute;
-            left: -8px;
-            top: 0;
-            height: 1.25rem;
-            width: 1.25rem;
-            background-color: white;
-            border: 3px solid #00A6ED;
-            border-radius: 9999px;
-        }
+        .main-heading { color: #FF8C00; } /* Orange */
+        .sub-heading { color: #CC7000; } /* Darker Orange */
+        .accent-text { color: #FFD700; } /* Goldish Yellow for subtle highlights */
         .climber-image {
             width: 100%;
-            max-width: 300px;
+            max-width: 450px;
             height: auto;
             border-radius: 0.75rem;
-            margin-bottom: 1rem;
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 12px -5px rgba(0, 0, 0, 0.2), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+        }
+        .step-icon {
+            font-size: 3rem; /* Larger icons for steps */
+            color: #FF8C00; /* Orange */
+            margin-bottom: 0.75rem;
+        }
+        .step-card {
+            @apply flex flex-col items-center p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300;
         }
     </style>
 </head>
-<body class="text-gray-800">
+<body class="antialiased">
 
-    <div class="container mx-auto p-4 sm:p-8">
+    <div class="container mx-auto p-4 md:p-8 max-w-7xl">
         
-        <header class="text-center mb-12">
-            <h1 class="text-4xl md:text-6xl font-black text-[#0076C2] mb-2">KAYA GRUBU</h1>
-            <p class="text-xl md:text-2xl font-semibold text-[#00A6ED]">Mühendislik Güvenliği, 1980'den Beri Hayatları Güvence Altına Alıyor</p>
+        <header class="text-center my-12">
+            <h1 class="text-5xl md:text-7xl font-black main-heading mb-3">KAYA GRUBU</h1>
+            <p class="text-xl md:text-2xl font-semibold sub-heading">Güvenliğin ve İnovasyonun Temeli, 1980'den Beri</p>
         </header>
 
-        <main>
-            <section id="core-principle" class="mb-16">
-                <div class="bg-white rounded-lg shadow-lg p-8 text-center max-w-4xl mx-auto">
-                    <img src="climber.png" alt="Yüksekte Çalışan İşçi" class="climber-image mx-auto">
-                    <h2 class="text-2xl font-bold text-[#0076C2] mb-4">Kurucu Felsefemiz: İnsan Hayatı İlkesi</h2>
-                    <p class="text-lg text-gray-700 leading-relaxed mb-4">
-                        Yüksekte İşçi - Kaya Grubu'nun ana faaliyet alanlarından yüksekte çalışma güvenliğini temsil eder.
-                    </p>
-                    <p class="text-lg text-gray-700 leading-relaxed mb-4">
-                        Güvenlik Harnesı ve Teknik Halatlar - Şirketin 40+ yıllık uzmanlık alanı olan güvenlik ekipmanları ve halat teknolojilerini simgeler.
-                    </p>
-                    <p class="text-lg text-gray-700 leading-relaxed">
-                        Çalışma, Güvenlik, Hayat - Şirketin temel felsefesini doğrudan vurgular.
-                    </p>
-                    <p class="mt-4 font-semibold text-[#0076C2]">Bu ilke, kimliğimizin temel taşı ve yeniliğimizin motorudur.</p>
+        <main class="space-y-16">
+            
+            <section class="section-card text-center">
+                <h2 class="text-3xl md:text-4xl font-bold main-heading mb-6">Kaya Grubu'nun Yolculuğunu Keşfedin</h2>
+                <p class="text-lg text-gray-700 leading-relaxed max-w-3xl mx-auto">
+                    Kaya Grubu, 1980 yılından bu yana insan hayatına verdiği değerle şekillenen, endüstriyel güvenlikten teknik halatlara, eğitimden macera parklarına kadar geniş bir yelpazede hizmet veren öncü bir kuruluştur. Bu infografik, grubun temel felsefesinden başlayarak, iş modelinin entegre yapısını, küresel pazar liderliğini ve sürekli inovasyon taahhüdünü adım adım gözler önüne seriyor.
+                </p>
+            </section>
+
+            <!-- Step 1: Kurucu Felsefemiz: İnsan Hayatı İlkesi -->
+            <section id="step-1" class="section-card">
+                <div class="flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-8">
+                    <div class="flex-shrink-0">
+                        <img src="climber.png" alt="Yüksekte Çalışan İşçi" class="climber-image">
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold sub-heading mb-3">1. Kurucu Felsefe: İnsan Hayatı İlkesi</h3>
+                        <p class="text-lg text-gray-700 leading-relaxed mb-4">
+                            Kaya Grubu'nun her faaliyetinin özünde, insan hayatına duyulan derin saygı yatar. Bu ilke, ürün tasarımından hizmet sunumuna kadar tüm operasyonlarımıza yön veren temel bir ahlaki pusuladır.
+                        </p>
+                        <ul class="list-none text-left space-y-2 text-gray-700">
+                            <li class="flex items-start">
+                                <span class="text-xl main-heading mr-3">●</span>
+                                <div><strong class="font-semibold">Yüksek Kayalıktaki İşçi:</strong> Ana faaliyet alanımız olan yüksekte çalışma güvenliğini simgeler.</div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-xl main-heading mr-3">●</span>
+                                <div><strong class="font-semibold">Güvenlik Harnesı ve Teknik Halatlar:</strong> 40 yılı aşkın uzmanlığımızın ve ileri teknoloji ekipmanlarımızın sembolüdür.</div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-xl main-heading mr-3">●</span>
+                                <div><strong class="font-semibold">Çalışma, Güvenlik, Hayat:</strong> Şirketimizin temel felsefesini doğrudan vurgular, bu üç kavramın ayrılmaz bütünlüğünü ifade eder.</div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
+            </section>
+
+            <!-- Step 2: Entegre Güvenlik Ekosistemi -->
+            <section id="step-2" class="section-card text-center">
+                <h3 class="text-2xl font-bold sub-heading mb-6">2. Entegre Güvenlik Ekosistemi</h3>
+                <p class="text-lg text-gray-700 leading-relaxed max-w-3xl mx-auto mb-8">
+                    Sadece bir üretici değil, kapsamlı bir çözüm sağlayıcıyız. İş birimlerimiz sinerji içinde çalışarak, gerekli araçları (Ürünler), gerekli bilgiyi (Hizmetler) ve pratik uygulamayı (Çözümler) sunan güçlü bir ekosistem oluşturur.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="step-card">
+                         <div class="step-icon">📦</div>
+                         <h4 class="text-xl font-bold main-heading mb-2">Kaya Safety</h4>
+                         <p class="text-gray-600">Yüksekte çalışma için yüksek performanslı güvenlik ekipmanları ve yaşam hattı sistemleri.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-icon">🧵</div>
+                        <h4 class="text-xl font-bold main-heading mb-2">Kaya Ropes</h4>
+                        <p class="text-gray-600">Her kritik endüstri için gelişmiş halatlar sağlayan teknik omurga.</p>
+                    </div>
+                    <div class="step-card">
+                         <div class="step-icon">🎓</div>
+                         <h4 class="text-xl font-bold main-heading mb-2">Kaya Training</h4>
+                         <p class="text-gray-600">Operasyonel uzmanlık sağlamak için akredite eğitim ve danışmanlık.</p>
+                    </div>
+                     <div class="step-card">
+                         <div class="step-icon">🧗</div>
+                         <h4 class="text-xl font-bold main-heading mb-2">Kaya Adventure</h4>
+                         <p class="text-gray-600">Titiz güvenlik prensiplerini eğlence ve boş zaman ortamlarına uygulamak.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Step 3: Dikey Entegrasyon: Gücümüz -->
+            <section id="step-3" class="section-card text-center">
+                <h3 class="text-2xl font-bold sub-heading mb-6">3. Dikey Entegrasyon: Gücümüz</h3>
+                <p class="text-lg text-gray-700 leading-relaxed max-w-3xl mx-auto mb-8">
+                    Tüm değer zincirini, ilk fikirden küresel teslimata kadar kontrol ederek benzersiz kalite, verimlilik ve tedarik zinciri dayanıklılığı sağlıyoruz. Güvenlik açısından kritik sektörlerde bu hayati öneme sahiptir.
+                </p>
+                <div class="flex flex-col md:flex-row justify-between items-start text-center gap-8">
+                    <div class="flex-1">
+                        <div class="step-icon">💡</div>
+                        <h4 class="font-bold text-xl main-heading mb-2">Ar-Ge ve Tasarım</h4>
+                        <p class="text-gray-600">Alanında Türkiye'nin ilk bakanlık onaylı Tasarım Merkezi, yılda ortalama 30 yeni ürünü piyasaya sürüyor.</p>
+                    </div>
+                     <div class="hidden md:flex items-center justify-center flex-shrink-0">
+                         <span class="flow-arrow">→</span>
+                     </div>
+                     <div class="block md:hidden mx-auto my-4">
+                         <span class="flow-arrow rotate-90">→</span>
+                     </div>
+                    <div class="flex-1">
+                        <div class="step-icon">🏭</div>
+                        <h4 class="font-bold text-xl main-heading mb-2">Gelişmiş Üretim</h4>
+                        <p class="text-gray-600">Gebze'deki son teknoloji halat ve güvenlik ekipmanları tesislerimiz, gelecekteki Birleşik Krallık genişlemesiyle destekleniyor.</p>
+                    </div>
+                     <div class="hidden md:flex items-center justify-center flex-shrink-0">
+                         <span class="flow-arrow">→</span>
+                     </div>
+                     <div class="block md:hidden mx-auto my-4">
+                         <span class="flow-arrow rotate-90">→</span>
+                     </div>
+                    <div class="flex-1">
+                         <div class="step-icon">🔬</div>
+                        <h4 class="font-bold text-xl main-heading mb-2">Test ve Eğitim</h4>
+                        <p class="text-gray-600">Avrupa'nın en büyük ikinci Yüksekte Çalışma simülasyon merkezi ve iki ISO 17025 akrediteli laboratuvarımız.</p>
+                    </div>
+                     <div class="hidden md:flex items-center justify-center flex-shrink-0">
+                         <span class="flow-arrow">→</span>
+                     </div>
+                     <div class="block md:hidden mx-auto my-4">
+                         <span class="flow-arrow rotate-90">→</span>
+                     </div>
+                    <div class="flex-1">
+                        <div class="step-icon">🌍</div>
+                        <h4 class="font-bold text-xl main-heading mb-2">Küresel Dağıtım</h4>
+                        <p class="text-gray-600">80'den fazla ülkede doğrudan satış ve 20'den fazla ülkede proje/eğitim hizmetleri sunuyoruz.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Step 4: Küresel Standartlara Bağlılık -->
+            <section id="step-4" class="section-card text-center">
+                <h3 class="text-2xl font-bold sub-heading mb-6">4. Küresel Standartlara Bağlılık</h3>
+                <p class="text-lg text-gray-700 leading-relaxed max-w-3xl mx-auto mb-8">
+                    Güvenilirliğimiz, ürünlerimizin ve eğitimlerimizin en yüksek küresel güvenlik ve kalite standartlarını sürekli olarak karşılamasını sağlayan, dünyaca ünlü akreditasyonlarla desteklenmektedir.
+                </p>
+                 <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 text-center max-w-4xl mx-auto">
+                    <div class="p-4 bg-orange-50 rounded-lg shadow-sm"><span class="font-bold sub-heading">IOSH</span></div>
+                    <div class="p-4 bg-orange-50 rounded-lg shadow-sm"><span class="font-bold sub-heading">IRATA</span></div>
+                    <div class="p-4 bg-orange-50 rounded-lg shadow-sm"><span class="font-bold sub-heading">GWO</span></div>
+                    <div class="p-4 bg-orange-50 rounded-lg shadow-sm"><span class="font-bold sub-heading">NEBOSH</span></div>
+                    <div class="p-4 bg-orange-50 rounded-lg shadow-sm"><span class="font-bold sub-heading">CE</span></div>
+                    <div class="p-4 bg-orange-50 rounded-lg shadow-sm"><span class="font-bold sub-heading">TSE</span></div>
+                    <div class="p-4 bg-orange-50 rounded-lg shadow-sm"><span class="font-bold sub-heading">NATO</span></div>
+                    <div class="p-4 bg-orange-50 rounded-lg shadow-sm"><span class="font-bold sub-heading">ISO</span></div>
+                    <div class="p-4 bg-orange-50 rounded-lg shadow-sm"><span class="font-bold sub-heading">VQA</span></div>
+                    <div class="p-4 bg-orange-50 rounded-lg shadow-sm"><span class="font-bold sub-heading">NSC</span></div>
+                 </div>
             </section>
             
-            <section id="ecosystem" class="mb-16">
-                <div class="bg-white rounded-lg shadow-lg p-8">
-                    <h2 class="text-3xl font-bold text-center text-[#0076C2] mb-2">Entegre Güvenlik Ekosistemi</h2>
-                    <p class="text-center text-gray-600 mb-8 max-w-3xl mx-auto">Kaya Grubu bir üreticiden fazlasıdır; biz kapsamlı bir çözüm sağlayıcıyız. Bölümlerimiz sinerji içinde çalışarak, güvenlik ve uzmanlık temelinde güçlü bir ekosistem oluşturmaktadır.</p>
-                    
-                    <div class="flex flex-col md:flex-row justify-center items-center md:items-start text-center gap-8">
-                        <div class="flex flex-col items-center">
-                             <div class="text-4xl mb-2">📦</div>
-                             <h3 class="text-xl font-bold text-[#00A6ED]">Kaya Safety</h3>
-                             <p class="text-gray-700">Yüksek performanslı güvenlik ekipmanları ve yaşam hattı sistemleri.</p>
-                        </div>
-                        <div class="hidden md:block text-5xl text-[#FFC107] mt-8">→</div>
-                        <div class="block md:hidden text-5xl text-[#FFC107]">↓</div>
-                        <div class="flex flex-col items-center">
-                            <div class="text-4xl mb-2">🧵</div>
-                            <h3 class="text-xl font-bold text-[#00A6ED]">Kaya Ropes</h3>
-                            <p class="text-gray-700">Her endüstri için gelişmiş halatlarla teknik omurga.</p>
-                        </div>
-                        <div class="hidden md:block text-5xl text-[#FFC107] mt-8">→</div>
-                         <div class="block md:hidden text-5xl text-[#FFC107]">↓</div>
-                        <div class="flex flex-col items-center">
-                             <div class="text-4xl mb-2">🎓</div>
-                             <h3 class="text-xl font-bold text-[#00A6ED]">Kaya Training</h3>
-                             <p class="text-gray-700">Uzmanlığı sağlamak için akredite eğitim ve danışmanlık.</p>
-                        </div>
-                        <div class="hidden md:block text-5xl text-[#FFC107] mt-8">→</div>
-                        <div class="block md:hidden text-5xl text-[#FFC107]">↓</div>
-                         <div class="flex flex-col items-center">
-                             <div class="text-4xl mb-2">🧗</div>
-                             <h3 class="text-xl font-bold text-[#00A6ED]">Kaya Adventure</h3>
-                             <p class="text-gray-700">Güvenlik prensiplerimizi eğlence ortamlarına uygulamak.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section id="vertical-integration" class="mb-16 bg-white rounded-lg shadow-lg p-8">
-                <h2 class="text-3xl font-bold text-center text-[#0076C2] mb-2">Dikey Entegrasyon: Gücümüz</h2>
-                <p class="text-center text-gray-600 mb-8 max-w-3xl mx-auto">Tüm değer zincirini kontrol ederek, ilk fikirden küresel teslimata kadar eşsiz kalite, verimlilik ve dayanıklılık sağlıyoruz.</p>
-                <div class="flex flex-col md:flex-row justify-between text-center gap-6">
-                    <div class="flex-1">
-                        <div class="text-4xl mb-2">💡</div>
-                        <h4 class="font-bold text-lg">Ar-Ge ve Tasarım</h4>
-                        <p class="text-sm text-gray-600">Alanımızdaki Türkiye'nin ilk bakanlık onaylı Tasarım Merkezi.</p>
-                    </div>
-                     <div class="hidden md:block self-center text-4xl text-[#00A6ED] flow-arrow"></div>
-                     <div class="block md:hidden self-center text-4xl text-[#00A6ED]">↓</div>
-                    <div class="flex-1">
-                        <div class="text-4xl mb-2">🏭</div>
-                        <h4 class="font-bold text-lg">Gelişmiş Üretim</h4>
-                        <p class="text-sm text-gray-600">Halat ve güvenlik ekipmanları için son teknoloji tesisler.</p>
-                    </div>
-                     <div class="hidden md:block self-center text-4xl text-[#00A6ED] flow-arrow"></div>
-                     <div class="block md:hidden self-center text-4xl text-[#00A6ED]">↓</div>
-                    <div class="flex-1">
-                         <div class="text-4xl mb-2">🔬</div>
-                        <h4 class="font-bold text-lg">Test ve Eğitim</h4>
-                        <p class="text-sm text-gray-600">Avrupa'nın en büyük simülasyon merkezlerinden ve akredite laboratuvarlarından biri.</p>
-                    </div>
-                     <div class="hidden md:block self-center text-4xl text-[#00A6ED] flow-arrow"></div>
-                     <div class="block md:hidden self-center text-4xl text-[#00A6ED]">↓</div>
-                    <div class="flex-1">
-                        <div class="text-4xl mb-2">🌍</div>
-                        <h4 class="font-bold text-lg">Küresel Dağıtım</h4>
-                        <p class="text-sm text-gray-600">80'den fazla ülkede satış, İngiltere ve AB'de doğrudan varlık.</p>
-                    </div>
-                </div>
-            </section>
-
-             <section id="innovation-future" class="mb-16">
+            <!-- Step 5: Pazar Liderliği ve Büyüme -->
+            <section id="step-5" class="section-card">
+                <h3 class="text-2xl font-bold sub-heading text-center mb-6">5. Pazar Liderliği ve Büyüme</h3>
+                <p class="text-lg text-gray-700 leading-relaxed max-w-3xl mx-auto mb-8 text-center">
+                    Türkiye Kişisel Koruyucu Donanım (KKD) ve Küresel Teknik Halat pazarlarındaki güçlü konumumuzla, sürekli büyüyen sektörlerdeki liderliğimizi sürdürüyoruz.
+                </p>
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    <div class="bg-white rounded-lg shadow-lg p-6">
-                         <h3 class="text-2xl font-bold text-[#0076C2] mb-4">Küresel Standartlara Bağlılık</h3>
-                         <p class="text-gray-600 mb-6">Güvenilirliğimiz, ürünlerimizin ve eğitimlerimizin en yüksek küresel güvenlik ve kalite standartlarını karşılamasını sağlayan dünyaca ünlü akreditasyonlarla desteklenmektedir.</p>
-                         <div class="grid grid-cols-3 gap-4 text-center">
-                            <div class="p-2 bg-blue-50 rounded-lg"><span class="font-bold text-[#0076C2]">IOSH</span></div>
-                            <div class="p-2 bg-blue-50 rounded-lg"><span class="font-bold text-[#0076C2]">IRATA</span></div>
-                            <div class="p-2 bg-blue-50 rounded-lg"><span class="font-bold text-[#0076C2]">GWO</span></div>
-                            <div class="p-2 bg-blue-50 rounded-lg"><span class="font-bold text-[#0076C2]">NEBOSH</span></div>
-                            <div class="p-2 bg-blue-50 rounded-lg"><span class="font-bold text-[#0076C2]">CE</span></div>
-                            <div class="p-2 bg-blue-50 rounded-lg"><span class="font-bold text-[#0076C2]">TSE</span></div>
-                            <div class="p-2 bg-blue-50 rounded-lg"><span class="font-bold text-[#0076C2]">NATO</span></div>
-                            <div class="p-2 bg-blue-50 rounded-lg"><span class="font-bold text-[#0076C2]">ISO</span></div>
-                         </div>
-                    </div>
-                </div>
-            </section>
-            
-            <section id="kpis" class="mb-16">
-                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-                    <div class="kpi-card"><span class="block text-4xl font-bold text-[#00A6ED]">80+</span><span class="text-sm text-gray-600">Ülke Erişimi</span></div>
-                    <div class="kpi-card"><span class="block text-4xl font-bold text-[#00A6ED]">12k+</span><span class="text-sm text-gray-600">Kurumsal Müşteri</span></div>
-                    <div class="kpi-card"><span class="block text-4xl font-bold text-[#00A6ED]">530+</span><span class="text-sm text-gray-600">Patent ve Tasarım</span></div>
-                    <div class="kpi-card"><span class="block text-4xl font-bold text-[#00A6ED]">245+</span><span class="text-sm text-gray-600">Uluslararası Sertifika</span></div>
-                </div>
-            </section>
-
-            <section id="market-position" class="mb-16">
-                <div class="grid grid-cols-1">
-                    <div class="bg-white rounded-lg shadow-lg p-6">
-                        <h3 class="text-2xl font-bold text-[#0076C2] mb-2">Türkiye Kişisel Koruyucu Donanım Pazar Büyümesi</h3>
-                        <p class="text-gray-600 mb-4">Türkiye Kişisel Koruyucu Donanım pazarı istikrarlı bir yükselişte olup, %6 YBBO ile büyümesi öngörülmektedir. Kaya Safety, AB standartlarına ve üstün kaliteye olan bağlılığıyla bu genişleyen pazarda lider konumdadır.</p>
+                    <div class="p-6 bg-orange-50 rounded-lg shadow-sm">
+                        <h4 class="text-xl font-bold main-heading mb-2">Türkiye KKD Pazar Büyümesi</h4>
+                        <p class="text-gray-600 mb-4">Türkiye KKD pazarı istikrarlı bir büyüme trendinde olup, %6 YBBO ile yükselmesi öngörülmektedir. Kaya Safety, AB standartlarına ve üstün kaliteye olan bağlılığıyla bu genişleyen pazarda lider konumdadır.</p>
                         <div class="chart-container">
                             <canvas id="ppeMarketChart"></canvas>
                         </div>
                     </div>
+                    <div class="p-6 bg-orange-50 rounded-lg shadow-sm">
+                        <h4 class="text-xl font-bold main-heading mb-2">Küresel Teknik Halat Pazarı</h4>
+                        <p class="text-gray-600 mb-4">Küresel halat pazarında çelik tel halatlar %72'lik pay ile baskın konumdadır. Kaya Ropes'un bu temel segmentteki uzmanlığı, küresel bir oyuncu olarak konumumuzu sağlamlaştırmaktadır.</p>
+                        <div class="chart-container">
+                            <canvas id="ropesMarketChart"></canvas>
+                        </div>
+                    </div>
                 </div>
             </section>
+
+            <!-- Step 6: İnovasyon ve Fikri Mülkiyet -->
+            <section id="step-6" class="section-card text-center">
+                 <h3 class="text-2xl font-bold sub-heading mb-6">6. İnovasyon ve Fikri Mülkiyet</h3>
+                 <p class="text-lg text-gray-700 leading-relaxed max-w-3xl mx-auto mb-8">
+                    Sürekli yenilikçilik taahhüdümüz, sektördeki öncülüğümüzü pekiştiriyor. Türkiye'nin ilk bakanlık onaylı Tasarım Merkezimiz ile fikri mülkiyet portföyümüzü sürekli genişletiyoruz.
+                 </p>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                    <div class="p-6 bg-orange-50 rounded-lg shadow-sm">
+                        <h4 class="text-xl font-bold main-heading mb-2">İnovasyon Hattımız</h4>
+                        <p class="text-gray-600 mb-4">Her yıl ortalama 30 yeni ürün geliştirerek ve 20 yeni uluslararası sertifika alarak endüstri standartlarının önünde kalıyoruz.</p>
+                        <div class="chart-container h-[300px] md:h-[350px]">
+                            <canvas id="innovationChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="p-6 bg-orange-50 rounded-lg shadow-sm">
+                        <h4 class="text-xl font-bold main-heading mb-2">Fikri Mülkiyet Varlığımız</h4>
+                        <ul class="list-none text-left space-y-2 text-gray-700 pl-4">
+                            <li class="flex items-start">
+                                <span class="text-xl main-heading mr-3">●</span>
+                                <div><strong class="font-semibold">530+</strong> Uluslararası Tasarım Tescili, Faydalı Model ve Marka Patenti</div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-xl main-heading mr-3">●</span>
+                                <div><strong class="font-semibold">245+</strong> Uluslararası Sertifika</div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-xl main-heading mr-3">●</span>
+                                <div><strong class="font-semibold">150+</strong> .COM ve <strong class="font-semibold">30+</strong> .COM.TR Alan Adı</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Step 7: Ulusal ve Küresel Etki -->
+            <section id="step-7" class="section-card text-center">
+                <h3 class="text-2xl font-bold sub-heading mb-6">7. Ulusal ve Küresel Etki</h3>
+                <p class="text-lg text-gray-700 leading-relaxed max-w-3xl mx-auto mb-8">
+                    İhracat odaklı üretim, yerlileşme ve ithal ikamesi stratejilerimizle ulusal ekonomiye katkıda bulunuyor, aynı zamanda küresel ayak izimizi genişletiyoruz.
+                </p>
+                <div class="flex flex-col md:flex-row justify-center items-center gap-8">
+                    <div class="flex-1 flex flex-col items-center p-4 bg-orange-50 rounded-lg shadow-sm">
+                        <div class="step-icon">🇹🇷</div>
+                        <h4 class="text-xl font-bold main-heading mb-2">Ulusal Katkı</h4>
+                        <p class="text-gray-600">İthal ikamesi ve yüksek yerlileşme oranıyla cari açığın azaltılmasına destek.</p>
+                    </div>
+                    <div class="flex-1 flex flex-col items-center p-4 bg-orange-50 rounded-lg shadow-sm">
+                        <div class="step-icon">📈</div>
+                        <h4 class="text-xl font-bold main-heading mb-2">Büyüme Potansiyeli</h4>
+                        <p class="text-gray-600">Halka arz, Özel Sermaye veya Girişim Sermayesi yatırımlarına hazır, şeffaf bir yapı.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Takeaway Box -->
+            <section class="section-card text-center">
+                <h2 class="text-3xl font-bold main-heading mb-6">Kaya Grubu: Temel Çıkarımlar</h2>
+                <div class="max-w-4xl mx-auto text-lg text-gray-700 leading-relaxed space-y-4">
+                    <p>
+                        Kaya Grubu, insan hayatına duyduğu derin bağlılıkla şekillenen bir vizyonla, güvenlik ve teknik halat sektörlerinde entegre çözümler sunan küresel bir liderdir.
+                    </p>
+                    <p>
+                        Dikey entegrasyonu, sürekli inovasyonu ve uluslararası standartlara tam uyumu sayesinde, hem kaliteden ödün vermeyen ürünler sunmakta hem de sektördeki konumunu güçlendirmektedir.
+                    </p>
+                    <p>
+                        Şirket, sadece ürün ve hizmet sağlamakla kalmayıp, kapsamlı eğitim ve danışmanlık faaliyetleriyle de güvenlik bilincini yaygınlaştırarak sektördeki otoritesini pekiştirmektedir.
+                    </p>
+                </div>
+            </section>
+
         </main>
         
-        <footer class="text-center mt-12 pt-8 border-t border-gray-300">
-            <p class="text-gray-600">&copy; 2025 Kaya Grubu. Mükemmellik ve Güvenliğin Görsel Profili.</p>
+        <footer class="text-center mt-16 pt-8 border-t border-gray-300">
+            <p class="text-gray-500">Bu etkileşimli stratejik profil, "Kaya Grubu: Değerler, Vizyon, İş ve Pazar Liderliğinin Stratejik Profili" raporundan üretilmiştir.</p>
         </footer>
 
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const wrapLabel = (label, maxLength = 16) => {
-                if (typeof label !== 'string' || label.length <= maxLength) {
-                    return label;
+        document.addEventListener('DOMContentLoaded', () => {
+            const chartTooltipOptions = {
+                callbacks: {
+                    title: function(tooltipItems) {
+                        const item = tooltipItems[0];
+                        let label = item.chart.data.labels[item.dataIndex];
+                        if (Array.isArray(label)) {
+                            return label.join(' ');
+                        }
+                        return label;
+                    }
                 }
-                const words = label.split(' ');
-                const lines = [];
-                let currentLine = '';
-                words.forEach(word => {
-                    if ((currentLine + ' ' + word).trim().length > maxLength) {
-                        lines.push(currentLine.trim());
-                        currentLine = word;
-                    } else {
-                        currentLine = (currentLine + ' ' + word).trim();
+            };
+            
+            const colorPalette = {
+                primary: '#FF8C00', /* Orange */
+                secondary: '#CC7000', /* Darker Orange */
+                accent: '#FFD700',   /* Goldish Yellow */
+                light: 'rgba(255, 140, 0, 0.2)', /* Light orange for area charts */
+                background: '#FFFFFF', /* White background */
+                text: '#1f2937' /* Dark gray text color */
+            };
+
+            // Türkiye KKD Pazar Büyümesi Grafiği (Çizgi Grafik)
+            const ppeMarketCtx = document.getElementById('ppeMarketChart')?.getContext('2d');
+            if (ppeMarketCtx) {
+                new Chart(ppeMarketCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['2021', '2022', '2023', '2024', '2025', '2026'],
+                        datasets: [{
+                            label: 'Pazar Değeri (Milyon USD)',
+                            data: [575, 609.5, 646.1, 684.8, 725.9, 769.5],
+                            borderColor: colorPalette.primary,
+                            backgroundColor: colorPalette.light,
+                            fill: true,
+                            tension: 0.4,
+                            pointBackgroundColor: colorPalette.primary,
+                            pointBorderColor: colorPalette.background,
+                            pointHoverBackgroundColor: colorPalette.background,
+                            pointHoverBorderColor: colorPalette.primary
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: { beginAtZero: false, ticks: { callback: value => '$' + value + 'M' } },
+                            x: { grid: { display: false } }
+                        },
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: chartTooltipOptions
+                        }
                     }
                 });
-                if (currentLine) {
-                    lines.push(currentLine.trim());
-                }
-                return lines;
-            };
+            }
 
-            const tooltipTitleCallback = (tooltipItems) => {
-                const item = tooltipItems[0];
-                let label = item.chart.data.labels[item.dataIndex];
-                if (Array.isArray(label)) {
-                  return label.join(' ');
-                } else {
-                  return label;
-                }
-            };
-            
-            const brilliantBlues = {
-                primary: '#00A6ED',
-                secondary: '#0076C2',
-                accent: '#FFC107',
-                light: 'rgba(0, 166, 237, 0.2)',
-            };
-            
-            const ppeMarketCtx = document.getElementById('ppeMarketChart').getContext('2d');
-            new Chart(ppeMarketCtx, {
-                type: 'line',
-                data: {
-                    labels: ['2021', '2022', '2023', '2024', '2025', '2026'],
-                    datasets: [{
-                        label: 'Pazar Değeri (Milyon USD)',
-                        data: [575, 609.5, 646.1, 684.8, 725.9, 769.5],
-                        borderColor: brilliantBlues.primary,
-                        backgroundColor: brilliantBlues.light,
-                        fill: true,
-                        tension: 0.4,
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        y: {
-                            beginAtZero: false,
-                            ticks: {
-                                callback: function(value) { return '$' + value + 'M'; }
-                            }
-                        }
+            // Küresel Teknik Halat Pazarı Grafiği (Halka Grafik)
+            const ropesMarketCtx = document.getElementById('ropesMarketChart')?.getContext('2d');
+            if (ropesMarketCtx) {
+                new Chart(ropesMarketCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Çelik Tel Halat', 'Diğer Halatlar (Sentetik vb.)'],
+                        datasets: [{
+                            data: [72, 28],
+                            backgroundColor: [colorPalette.secondary, colorPalette.primary],
+                            borderColor: colorPalette.background,
+                            borderWidth: 4,
+                            hoverOffset: 8
+                        }]
                     },
-                    plugins: {
-                        legend: { display: false },
-                        tooltip: {
-                            callbacks: { title: tooltipTitleCallback }
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        cutout: '60%',
+                        plugins: {
+                            legend: { position: 'bottom', labels: { usePointStyle: true } },
+                            tooltip: chartTooltipOptions
                         }
                     }
-                }
-            });
+                });
+            }
 
-            // Removed ropesMarketChart initialization as per request.
-
+            // İnovasyon Hattı Grafiği (Çubuk Grafik)
+            const innovationCtx = document.getElementById('innovationChart')?.getContext('2d');
+            if (innovationCtx) {
+                new Chart(innovationCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Yıllık Yeni Ürünler', 'Yıllık Yeni Sertifikalar'],
+                        datasets: [{
+                            label: 'Ortalama Yıllık Çıktı',
+                            data: [30, 20],
+                            backgroundColor: [colorPalette.primary, colorPalette.accent],
+                            borderRadius: 4,
+                            barPercentage: 0.6,
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y',
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            x: { beginAtZero: true },
+                            y: { grid: { display: false } }
+                        },
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: chartTooltipOptions
+                        }
+                    }
+                });
+            }
         });
     </script>
 </body>
