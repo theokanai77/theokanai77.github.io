@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AGT ABD Pazarı Stratejisi - İnteraktif İnfografik</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #f0f4f8;
+      }
+      .chart-container {
+        position: relative;
+        width: 100%;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        height: 300px;
+        max-height: 400px;
+      }
+      @media (min-width: 768px) {
+        .chart-container {
+          height: 350px;
+        }
+      }
+      .stat-card {
+        background-color: white;
+        border-radius: 0.75rem;
+        padding: 1.5rem;
+        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1),
+          0 2px 4px -2px rgb(0 0 0 / 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .stat-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1),
+          0 4px 6px -4px rgb(0 0 0 / 0.1);
+      }
+      .timeline-item-card {
+        background-color: white;
+        border-radius: 0.75rem;
+        padding: 1.5rem;
+        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1),
+          0 2px 4px -2px rgb(0 0 0 / 0.1);
+        margin-left: 20px; /* Offset to align with timeline path */
+        position: relative;
+        z-index: 10; /* Ensure it's above the path */
+      }
+      .timeline-item::before {
+        content: "";
+        position: absolute;
+        left: -20px; /* Adjust based on new card margin */
+        top: 2.25rem; /* Align with the top of the card padding */
+        transform: translateY(-50%);
+        width: 12px;
+        height: 12px;
+        border-radius: 9999px;
+        background-color: #043565;
+        border: 2px solid white;
+        z-index: 20; /* Ensure dot is above path and card */
+      }
+      .timeline-path {
+        position: absolute;
+        left: -15px; /* Align with the dot */
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background-color: #a1c3d1;
+        z-index: 1; /* Below cards and dots */
+      }
+    </style>
+  </head>
+  <body class="text-gray-800">
+    <header class="bg-[#043565] text-white text-center py-8 px-4">
+      <h1 class="text-4xl md:text-5xl font-black">AGT ABD Pazarı Stratejisi</h1>
+      <p class="mt-2 text-lg text-[#A1C3D1]">
+        Teknoloji ile Geliştirilen Ahşap Çözümleri
+      </p>
+    </header>
+
+    <main class="container mx-auto p-4 md:p-8">
+      <section id="pazar-analizi" class="mb-16">
+        <h2 class="text-3xl font-bold text-center mb-2 text-[#043565]">
+          Pazar ve Rekabet Analizi: AGT'nin ABD Pazarındaki Konumu
+        </h2>
+        <p class="text-center text-gray-600 mb-8 max-w-3xl mx-auto">
+          ABD pazarı, MDF ve ahşap zemin kaplamaları sektöründe önemli büyüme
+          potansiyeli sunarken, aynı zamanda güçlü rakiplerle dolu bir arenadır.
+          AGT'nin bu pazara girişi, şirketin köklü deneyimi ve yenilikçi
+          yaklaşımıyla desteklenmelidir.
+        </p>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+          <div class="stat-card">
+            <h3 class="text-xl font-bold mb-4 text-center">
+              ABD Pazar Büyüklüğü ve Potansiyeli
+            </h3>
+            <ul
+              class="list-disc list-inside text-gray-700 space-y-2 mx-auto"
+              style="max-width: fit-content"
+            >
+              <li>
+                Kuzey Amerika MDF Pazarı: 2024'te 5.1 milyar USD olan pazarın,
+                2033'te 7.8 milyar USD'ye ulaşması bekleniyor. Bu, %50'den fazla
+                bir büyüme potansiyeli anlamına geliyor.
+              </li>
+              <li>
+                ABD Ahşap Zemin Pazarı: 2024'te 6.33 milyar USD büyüklüğünde.
+              </li>
+              <li>
+                Mobilya Sektöründe MDF: Mobilya üretiminde MDF'nin dominant
+                kullanımı, AGT için sürekli bir talep tabanı oluşturuyor.
+              </li>
+              <li>
+                Büyüme Dinamikleri: İnşaat sektöründeki canlanma ve yenileme
+                projeleri, MDF ve ahşap ürünlerine olan talebi artırmaktadır.
+              </li>
+            </ul>
+            <div class="chart-container h-72 md:h-80 mt-6">
+              <canvas id="competitorChart"></canvas>
+            </div>
+            <p class="text-sm text-gray-500 mt-4 text-center">
+              Shaw ve Mohawk gibi dev rakipler, pazarın büyüklüğünü gösterirken,
+              AGT'nin niş alanlara odaklanma gerekliliğini ortaya koyuyor.
+            </p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+          <div class="stat-card">
+            <h3 class="text-xl font-bold mb-4 text-center">
+              ABD Pazarında Ana Rakipler ve Stratejileri
+            </h3>
+            <div class="space-y-6">
+              <div>
+                <h4 class="font-semibold text-[#00A6A6]">
+                  1. Shaw Industries Group
+                </h4>
+                <ul class="list-disc list-inside text-gray-700 text-sm mt-1">
+                  <li>
+                    <span class="font-semibold italic">Güçlü Yönler:</span> 6
+                    milyar dolarlık yıllık ciro, Berkshire Hathaway'in güçlü
+                    finansal desteği, 18.000 çalışanla geniş operasyonel ağ,
+                    güçlü distribüsyon kanalları.
+                  </li>
+                  <li>
+                    <span class="font-semibold italic">Zayıf Yönleri:</span>
+                    Temel olarak halı ve zemin kaplamaları odaklı, MDF komponent
+                    alanında sınırlı uzmanlık.
+                  </li>
+                  <li>
+                    <span class="font-semibold italic"
+                      >Pazarlama Stratejileri:</span
+                    >
+                    Sürdürülebilirlik odaklı pazarlama (geri dönüşüm
+                    programları), çoklu marka portföyü yönetimi (konut ve ticari
+                    markalarla geniş kitlelere ulaşım).
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-semibold text-[#E29930]">
+                  2. Mohawk Industries
+                </h4>
+                <ul class="list-disc list-inside text-gray-700 text-sm mt-1">
+                  <li>
+                    <span class="font-semibold italic">Güçlü Yönler:</span> 10.8
+                    milyar dolarlık ciro, küresel zemin kaplama pazarında lider,
+                    77 üretim tesisi.
+                  </li>
+                  <li>
+                    <span class="font-semibold italic">Zayıf Yönleri:</span>
+                    Müşteri hizmetlerinde rakiplerinden düşük performans, fiyat
+                    rekabetçiliğinde zayıf algı.
+                  </li>
+                  <li>
+                    <span class="font-semibold italic"
+                      >Pazarlama Stratejileri:</span
+                    >
+                    Çeşitlilik ve kapsayıcılık odaklı pazarlama, teknoloji ve
+                    inovasyon vurgusu (yeni ürün geliştirme ve Ar-Ge
+                    yatırımları).
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-semibold text-[#F15946]">3. EGGER Group</h4>
+                <ul class="list-disc list-inside text-gray-700 text-sm mt-1">
+                  <li>
+                    <span class="font-semibold italic">Güçlü Yönler:</span>
+                    AGT'ye en yakın rakip (MDF ve TFL konusunda uzmanlık), Kuzey
+                    Carolina'da 700 milyon dolarlık yatırım ve üretim tesisi,
+                    Avrupa teknolojisi ve tasarım kalitesi.
+                  </li>
+                  <li>
+                    <span class="font-semibold italic">Zayıf Yönleri:</span> ABD
+                    pazarında nispeten yeni, sınırlı yerel distribüsyon ağı
+                    (ancak hızla genişliyor).
+                  </li>
+                  <li>
+                    <span class="font-semibold italic"
+                      >Pazarlama Stratejileri:</span
+                    >
+                    Teknoloji ve kalite odaklı pozisyonlama, B2B odaklı
+                    pazarlama (mimarlar ve tasarımcılarla işbirliği, sektörel
+                    etkinliklerde aktif rol).
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <h3 class="text-xl font-bold mb-4 text-center">
+              Pazar Boşlukları ve AGT İçin Fırsatlar
+            </h3>
+            <div class="space-y-4">
+              <div class="flex items-start bg-gray-50 p-3 rounded-lg">
+                <span class="text-2xl mr-4 text-[#E29930]">🎯</span>
+                <div>
+                  <h4 class="font-semibold">Orta Segment MDF Pazarı</h4>
+                  <p class="text-sm text-gray-600">
+                    Premium ve ekonomik segmentler arasındaki fiyat/kalite
+                    boşluğu, AGT'nin Avrupa kalitesini rekabetçi fiyatlarla
+                    sunarak bu alanda güçlü bir konum elde etmesini
+                    sağlayabilir.
+                  </p>
+                </div>
+              </div>
+              <div class="flex items-start bg-gray-50 p-3 rounded-lg">
+                <span class="text-2xl mr-4 text-[#F15946]">🧩</span>
+                <div>
+                  <h4 class="font-semibold">
+                    Özelleştirilmiş Mobilya Bileşenleri
+                  </h4>
+                  <p class="text-sm text-gray-600">
+                    Küçük ve orta ölçekli mobilya üreticileri için standart dışı
+                    veya özel tasarım MDF çözümlerine olan talep. AGT'nin üretim
+                    esnekliği ve geniş ürün gamı bu alanda önemli bir avantaj
+                    sunabilir.
+                  </p>
+                </div>
+              </div>
+              <div class="flex items-start bg-gray-50 p-3 rounded-lg">
+                <span class="text-2xl mr-4 text-[#00A6A6]">🌿</span>
+                <div>
+                  <h4 class="font-semibold">Sürdürülebilir MDF Ürünleri</h4>
+                  <p class="text-sm text-gray-600">
+                    Çevre bilincinin artmasıyla birlikte, çevre dostu ve düşük
+                    emisyonlu ürünlere olan talep yükselmektedir. AGT'nin mevcut
+                    FSC ve PEFC sertifikaları, bu segmentte lider konuma gelme
+                    potansiyeli taşımaktadır.
+                  </p>
+                </div>
+              </div>
+              <div class="flex items-start bg-gray-50 p-3 rounded-lg">
+                <span class="text-2xl mr-4 text-[#043565]">💻</span>
+                <div>
+                  <h4 class="font-semibold">Dijital Pazarlama Odaklılık</h4>
+                  <p class="text-sm text-gray-600">
+                    Geleneksel B2B pazarlama yaklaşımlarının ötesinde, hedef
+                    kitleye doğrudan ulaşan, veri odaklı ve yenilikçi dijital
+                    stratejilere olan ihtiyaç. AGT, bu alanda liderliği ele
+                    geçirme ve rekabet avantajı sağlama potansiyeline sahiptir.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="zaman-cizelgesi" class="mb-16">
+        <h2 class="text-3xl font-bold text-center mb-2 text-[#043565]">
+          Uygulama Zaman Çizelgesi: ABD Pazarına Giriş ve Büyüme Yol Haritası
+        </h2>
+        <p class="text-center text-gray-600 mb-8 max-w-3xl mx-auto">
+          AGT'nin ABD pazarına başarılı girişi ve sürdürülebilir büyümesi için
+          detaylı bir 12 aylık yol haritası ve uzun vadeli stratejik hedefler.
+        </p>
+        <div class="relative pl-8 md:pl-16">
+          <div class="timeline-path"></div>
+          <div class="space-y-12">
+            <div class="relative timeline-item timeline-item-card">
+              <div
+                class="absolute -left-10 md:-left-14 top-4 text-5xl text-[#00A6A6] z-20"
+              >
+                ⚙️
+              </div>
+              <h3 class="text-xl font-bold text-[#043565] mb-2">
+                Faz 1: Temel Altyapı ve Hazırlık (İlk 3 Ay)
+              </h3>
+              <ul
+                class="list-disc list-inside text-gray-700 space-y-1 text-sm pl-4"
+              >
+                <li>
+                  <span class="font-semibold"
+                    >Pazar Araştırması Derinleştirme:</span
+                  >
+                  Hedef segmentlerde (mobilya üreticileri, distribütörler,
+                  mimarlar) detaylı müşteri ihtiyaç analizi ve bölgesel pazar
+                  dinamiklerinin haritalandırılması.
+                </li>
+                <li>
+                  <span class="font-semibold"
+                    >Dijital Platform Kurulumu ve Optimizasyon:</span
+                  >
+                  ABD pazarı için optimize edilmiş, yerelleştirilmiş (dil, ölçü
+                  birimleri) ve duyarlı web sitesinin (www.agtwood.com)
+                  geliştirilmesi ve SEO uyumlu hale getirilmesi. LinkedIn
+                  Business hesabı, YouTube kanalı ve diğer ilgili B2B sosyal
+                  medya platformlarının oluşturulması/güncellenmesi.
+                </li>
+                <li>
+                  <span class="font-semibold"
+                    >Pazarlama Materyalleri Hazırlığı:</span
+                  >
+                  ABD pazarına özel teknik broşürler, ürün katalogları, şirket
+                  sunumları, vaka çalışmaları ve referans materyallerinin
+                  oluşturulması. Yüksek kaliteli ürün görselleri ve tanıtım
+                  videolarının prodüksiyonu.
+                </li>
+                <li>
+                  <span class="font-semibold"
+                    >İlk Distribütör Ortaklığı Görüşmeleri:</span
+                  >
+                  Potansiyel distribütörlerin belirlenmesi, ilk temasların
+                  kurulması ve distribütör programlarının (MDF desteği, eğitim)
+                  taslağının oluşturulması.
+                </li>
+              </ul>
+            </div>
+            <div class="relative timeline-item timeline-item-card">
+              <div
+                class="absolute -left-10 md:-left-14 top-4 text-5xl text-[#E29930] z-20"
+              >
+                🚀
+              </div>
+              <h3 class="text-xl font-bold text-[#043565] mb-2">
+                Faz 2: Pazara Giriş ve İlk Müşteri Kazanımı (4-6. Aylar)
+              </h3>
+              <ul
+                class="list-disc list-inside text-gray-700 space-y-1 text-sm pl-4"
+              >
+                <li>
+                  <span class="font-semibold">Fuar Katılımları:</span> AWFS
+                  (Association of Woodworking & Furnishings Suppliers) ve IWF
+                  (International Woodworking Fair) gibi büyük sektörel fuarlara
+                  katılımın planlanması ve stand kurulumu. Fuarlarda potansiyel
+                  müşterilerle yüz yüze görüşmeler ve ürün tanıtımları.
+                </li>
+                <li>
+                  <span class="font-semibold">Dijital Kampanya Başlatma:</span>
+                  LinkedIn B2B reklam kampanyalarının hedeflenen kitlelere
+                  yönelik başlatılması. Google Ads (arama ağı ve görüntülü
+                  reklamlar) ile anahtar kelime odaklı kampanyalar. Sektörel web
+                  sitelerinde (ThomasNet, Global Wood) şirket profillerinin
+                  aktif hale getirilmesi.
+                </li>
+                <li>
+                  <span class="font-semibold"
+                    >Satış Ekibi İstihdamı ve Eğitimi:</span
+                  >
+                  Bölgesel satış temsilcilerinin (Kuzey Carolina, Virginia,
+                  Georgia, Michigan odaklı) işe alınması ve ürün bilgisi, satış
+                  teknikleri ve AGT değer önerisi konularında kapsamlı
+                  eğitimlerin verilmesi.
+                </li>
+                <li>
+                  <span class="font-semibold"
+                    >İlk Müşteri Ziyaretleri ve Pilot Projeler:</span
+                  >
+                  Hedef mobilya üreticileri ve distribütörlerle ilk yüz yüze
+                  görüşmelerin yapılması. Küçük ölçekli pilot projelerle
+                  ürünlerin pazar adaptasyonunun test edilmesi ve geri bildirim
+                  toplanması.
+                </li>
+              </ul>
+            </div>
+            <div class="relative timeline-item timeline-item-card">
+              <div
+                class="absolute -left-10 md:-left-14 top-4 text-5xl text-[#F15946] z-20"
+              >
+                📈
+              </div>
+              <h3 class="text-xl font-bold text-[#043565] mb-2">
+                Faz 3: Büyüme, Optimizasyon ve Uzun Vadeli Stratejiler (7-12.
+                Aylar ve Sonrası)
+              </h3>
+              <ul
+                class="list-disc list-inside text-gray-700 space-y-1 text-sm pl-4"
+              >
+                <li>
+                  <span class="font-semibold"
+                    >Distribütör ve Ortaklık Programları:</span
+                  >
+                  Market Development Funds (MDF) programlarının aktif olarak
+                  yürütülmesi ve distribütörlere pazarlama desteği sağlanması.
+                  Müşterilere yönelik teknik eğitim programları ve atölye
+                  çalışmalarının düzenlenmesi. Yerel mobilya markalarıyla
+                  co-branding ve işbirliği projelerinin geliştirilmesi.
+                </li>
+                <li>
+                  <span class="font-semibold"
+                    >İçerik Stratejisinin Genişletilmesi:</span
+                  >
+                  MDF kullanım rehberleri, teknik spesifikasyonlar,
+                  sürdürülebilir mobilya üretimi hakkında detaylı blog yazıları
+                  ve makaleler. Sektör trend raporları, pazar analizleri ve
+                  çevreci üretim süreçleri hakkında "düşünce liderliği"
+                  içeriklerinin yayınlanması. Başarılı proje vaka çalışmaları,
+                  müşteri röportajları ve referans videolarının oluşturulması.
+                </li>
+                <li>
+                  <span class="font-semibold"
+                    >Performans İzleme ve Optimizasyon:</span
+                  >
+                  Tüm pazarlama ve satış faaliyetlerinin KPI'lar (marka
+                  farkındalığı, potansiyel müşteri sayısı, dönüşüm oranları,
+                  müşteri kazanım maliyeti, yatırım getirisi) üzerinden düzenli
+                  olarak izlenmesi. Müşteri geri bildirimlerine ve pazar
+                  dinamiklerine göre stratejinin sürekli güncellenmesi ve
+                  optimize edilmesi.
+                </li>
+                <li>
+                  <span class="font-semibold"
+                    >Yıl Sonu Değerlendirmesi ve Gelecek Planlaması:</span
+                  >
+                  İlk yılın performansının kapsamlı bir şekilde
+                  değerlendirilmesi. ABD MDF pazarında %5 pazar payı hedefine
+                  ulaşma yolunda atılacak sonraki adımların belirlenmesi. Kuzey
+                  Amerika'da potansiyel üretim tesisi ortaklıkları için ön
+                  araştırmaların başlatılması ve sürdürülebilir ürün segmentinde
+                  lider konuma gelme stratejilerinin detaylandırılması.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="bg-[#043565] text-white text-center py-6 px-4 mt-8">
+      <p>
+        Bu infografik, AGT'nin ABD pazarı için hazırlanan pazarlama stratejisi
+        verilerine dayanmaktadır.
+      </p>
+      <p class="text-sm text-[#A1C3D1] mt-1">
+        © 2025 AGT - Tüm Hakları Saklıdır.
+      </p>
+    </footer>
+
+    <script>
+      const tooltipTitleCallback = (tooltipItems) => {
+        const item = tooltipItems[0];
+        let label = item.chart.data.labels[item.dataIndex];
+        if (Array.isArray(label)) {
+          return label.join(" ");
+        }
+        return label;
+      };
+
+      const vibrantPalette = [
+        "#00A6A6",
+        "#E29930",
+        "#F15946",
+        "#043565",
+        "#A1C3D1",
+      ];
+
+      const competitorChartCtx = document
+        .getElementById("competitorChart")
+        .getContext("2d");
+      new Chart(competitorChartCtx, {
+        type: "bar",
+        data: {
+          labels: ["Shaw Industries", "Mohawk Industries"],
+          datasets: [
+            {
+              label: "Yıllık Ciro (Milyar USD)",
+              data: [6, 10.8],
+              backgroundColor: [vibrantPalette[0], vibrantPalette[1]],
+              borderColor: [vibrantPalette[0], vibrantPalette[1]],
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          indexAxis: "y",
+          scales: {
+            x: {
+              beginAtZero: true,
+              title: { display: true, text: "Milyar USD" },
+            },
+          },
+          plugins: {
+            legend: { display: false },
+            tooltip: { callbacks: { title: tooltipTitleCallback } },
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
