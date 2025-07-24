@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kastamonu Entegre - Rusya Pazarı İnfografik Analizi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #f0f4f8;
+      }
+      .chart-container {
+        position: relative;
+        width: 100%;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        height: 350px;
+        max-height: 400px;
+      }
+      @media (min-width: 768px) {
+        .chart-container {
+          height: 400px;
+        }
+      }
+      .kpi-card {
+        background-color: #ffffff;
+        border-radius: 0.75rem;
+        padding: 1.5rem;
+        text-align: center;
+        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1),
+          0 2px 4px -2px rgb(0 0 0 / 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .kpi-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1),
+          0 4px 6px -4px rgb(0 0 0 / 0.1);
+      }
+      .kpi-value {
+        font-size: 3rem;
+        font-weight: 900;
+        color: #005cb9;
+      }
+      .kpi-label {
+        font-size: 1rem;
+        color: #4a5568;
+        margin-top: 0.5rem;
+      }
+      .section-title {
+        font-size: 2.25rem;
+        font-weight: 700;
+        color: #00449e;
+        text-align: center;
+        margin-bottom: 1rem;
+      }
+      .section-subtitle {
+        font-size: 1.125rem;
+        color: #2d3748;
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto 3rem auto;
+      }
+      .card {
+        background-color: white;
+        border-radius: 0.75rem;
+        padding: 1.5rem;
+        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1),
+          0 2px 4px -2px rgb(0 0 0 / 0.1);
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50">
+    <header class="bg-white shadow-md py-6">
+      <div class="container mx-auto px-6 text-center">
+        <h1 class="text-4xl font-black text-[#00449E]">
+          Kastamonu Entegre'nin Rusya'daki Başarı Formülü
+        </h1>
+        <p class="text-lg text-gray-600 mt-2">
+          MDF ve Parke Pazarında Liderliğe Giden Yolun Veri Odaklı Analizi
+        </p>
+      </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+      <section id="kpis" class="mb-16">
+        <h2 class="section-title">
+          Stratejik Varlık: Rakamlarla Pazar Hakimiyeti
+        </h2>
+        <p class="section-subtitle">
+          Kastamonu Entegre'nin Rusya'ya olan bağlılığı, devasa yatırımlar ve
+          Avrupa'nın en büyük üretim tesisiyle somutlaşıyor. Bu ölçek, şirkete
+          hem yerel pazarda hem de ihracatta ezici bir üstünlük sağlıyor.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div class="kpi-card">
+            <div class="kpi-value">€450M</div>
+            <div class="kpi-label">Rusya'ya Yapılan Toplam Yatırım</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-value">1.</div>
+            <div class="kpi-label">
+              Rusya'nın En Büyük MDF & Parke Üreticisi
+            </div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-value">25%</div>
+            <div class="kpi-label">Rus Ağaç İşleme Sanayi Kapasite Payı</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-value">10+</div>
+            <div class="kpi-label">İhracat Yapılan Ülke Sayısı</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="market-share" class="mb-16">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+          <div class="card">
+            <h3 class="text-xl font-bold text-center mb-4 text-[#005CB9]">
+              Satış Dağılımı: Yerel Odak, Küresel Erişim (2023)
+            </h3>
+            <div
+              class="chart-container"
+              style="height: 300px; max-height: 300px"
+            >
+              <canvas id="salesDistributionChart"></canvas>
+            </div>
+          </div>
+          <div class="text-gray-700 text-lg">
+            <h3 class="text-2xl font-bold mb-4 text-[#00449E]">
+              İthal İkamesinin Lideri
+            </h3>
+            <p class="mb-4">
+              Üretimin yaklaşık %70'ini Rusya iç pazarına yönlendiren Kastamonu
+              Entegre, ülkenin ithal ikamesi hedeflerine doğrudan katkı
+              sağlıyor. Bu strateji, "pahalı Avrupa ürünleri yerine yerli
+              alternatifleri" tercih eden Rus tüketicisinin talebiyle mükemmel
+              bir uyum yakalıyor.
+            </p>
+            <p>
+              Kalan %30'luk ihracat payı ise şirketin Rusya'daki tesisini BDT ve
+              Asya pazarları için stratejik bir merkez olarak konumlandırıyor.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="market-trends" class="mb-16">
+        <h2 class="section-title">
+          Rusya Pazarının Nabzı: Trendler ve Tüketici Dinamikleri
+        </h2>
+        <p class="section-subtitle">
+          Rusya inşaat sektörü istikrarlı bir büyüme sergilerken, tüketici
+          tercihleri de kalite, estetik ve çevre bilinci ekseninde yeniden
+          şekilleniyor. Kastamonu Entegre, bu dinamikleri yakından takip ederek
+          pazarın ihtiyaçlarına tam zamanında cevap veriyor.
+        </p>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div class="card">
+            <h3 class="text-xl font-bold text-center mb-4 text-[#005CB9]">
+              İnşaat Sektörü Büyüme Projeksiyonu (Yıllık %)
+            </h3>
+            <div class="chart-container">
+              <canvas id="constructionGrowthChart"></canvas>
+            </div>
+          </div>
+          <div class="card flex flex-col justify-center items-center p-6">
+            <h3 class="text-xl font-bold text-center mb-4 text-[#005CB9]">
+              Tüketici Öncelikleri: Ne Arıyorlar?
+            </h3>
+            <p class="text-gray-700 text-base leading-relaxed text-center">
+              Rus tüketiciler, döşeme ve mobilya seçimlerinde giderek daha
+              bilinçli hale geliyor. Temel öncelikler arasında
+              <strong class="text-[#00449E]">Dayanıklılık</strong> ve
+              <strong class="text-[#00449E]">Yerli Üretim</strong> başı çekiyor.
+              Ürünlerin uzun ömürlü olması ve yerel ekonomiye katkı sağlaması
+              büyük önem taşıyor. Ayrıca,
+              <strong class="text-[#00449E]">Çevre Dostu Olma</strong> ve
+              <strong class="text-[#00449E]">Estetik & Tasarım</strong> da
+              yüksek öncelikli faktörler arasında yer alıyor.
+              <strong class="text-[#00449E]">Fiyat İstikrarı</strong> ise satın
+              alma kararlarında hala etkili bir rol oynuyor. Bu eğilimler,
+              Kastamonu Entegre'nin yerel üretim, kalite ve sürdürülebilirlik
+              odaklı stratejisinin Rusya pazarında neden bu kadar başarılı
+              olduğunu açıklıyor.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="marketing-hooks" class="mb-16">
+        <h2 class="section-title">
+          Pazarlama Kancaları: Tüketicinin Kalbine Giden Yol
+        </h2>
+        <p class="section-subtitle">
+          Kastamonu Entegre, ürünlerini sadece bir yapı malzemesi olarak değil,
+          bir yaşam tarzı vaadi olarak pazarlıyor. Estetik, dayanıklılık, sağlık
+          ve kullanım kolaylığı gibi temel vaatler, Rus tüketicisinin hem
+          duygusal hem de rasyonel ihtiyaçlarına sesleniyor.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="card">
+            <h3 class="text-xl font-bold text-center mb-4 text-[#005CB9]">
+              Laminat Parke Pazarlama Vaatleri
+            </h3>
+            <div class="chart-container">
+              <canvas id="laminateHooksChart"></canvas>
+            </div>
+          </div>
+          <div class="card">
+            <h3 class="text-xl font-bold text-center mb-4 text-[#005CB9]">
+              MDF Pazarlama Vaatleri
+            </h3>
+            <div class="chart-container">
+              <canvas id="mdfHooksChart"></canvas>
+            </div>
+          </div>
+        </div>
+        <div
+          class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-center"
+        >
+          <div class="bg-white p-4 rounded-lg shadow">
+            <div class="text-3xl mb-2">💎</div>
+            <h4 class="font-bold text-[#00449E]">Estetik & Tasarım</h4>
+            <p class="text-sm text-gray-600">
+              Geniş dekor yelpazesi, Japandi ve Boho gibi modern trendlere
+              uygunluk.
+            </p>
+          </div>
+          <div class="bg-white p-4 rounded-lg shadow">
+            <div class="text-3xl mb-2">🛡️</div>
+            <h4 class="font-bold text-[#00449E]">Dayanıklılık & Performans</h4>
+            <p class="text-sm text-gray-600">
+              Yüksek aşınma (31-34 sınıfı), darbe ve nem direnci.
+            </p>
+          </div>
+          <div class="bg-white p-4 rounded-lg shadow">
+            <div class="text-3xl mb-2">🌿</div>
+            <h4 class="font-bold text-[#00449E]">Sağlık & Çevre</h4>
+            <p class="text-sm text-gray-600">
+              Hygiene+, Mavi Melek sertifikaları ve düşük formaldehit içeriği.
+            </p>
+          </div>
+          <div class="bg-white p-4 rounded-lg shadow">
+            <div class="text-3xl mb-2">⚙️</div>
+            <h4 class="font-bold text-[#00449E]">Kalite & İşlenebilirlik</h4>
+            <p class="text-sm text-gray-600">
+              Mobilya üreticileri için homojen yoğunluk ve hassas işleme imkanı.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="digital-presence" class="mb-16">
+        <h2 class="section-title">Entegre Pazarlama ve Dijital Ayak İzi</h2>
+        <p class="section-subtitle">
+          Kastamonu Entegre, geleneksel pazarlama kanallarını dijital
+          platformlarla birleştirerek 360 derecelik bir iletişim stratejisi
+          izliyor. Sektör fuarlarından sosyal medyaya uzanan bu entegre
+          yaklaşım, marka bilinirliğini ve müşteri sadakatini en üst düzeye
+          çıkarıyor.
+        </p>
+
+        <div class="card mb-8">
+          <h3 class="text-xl font-bold text-center mb-6 text-[#005CB9]">
+            Pazarlama Kanalları Akış Şeması
+          </h3>
+          <div
+            class="flex flex-col md:flex-row justify-center items-center gap-4 text-center"
+          >
+            <div class="bg-[#e6f0fa] p-4 rounded-lg shadow-sm w-full md:w-1/4">
+              <h4 class="font-bold text-[#00449E]">Sektör Etkinlikleri</h4>
+              <p class="text-sm">
+                MosBuild, Mebel gibi fuarlarda sponsorluk ve trend
+                belirleyicilik
+              </p>
+            </div>
+            <div
+              class="text-2xl font-bold text-[#0072CE] transform md:rotate-0 rotate-90"
+            >
+              &rarr;
+            </div>
+            <div class="bg-[#e6f0fa] p-4 rounded-lg shadow-sm w-full md:w-1/4">
+              <h4 class="font-bold text-[#00449E]">Bayi Ağı & Ortaklıklar</h4>
+              <p class="text-sm">
+                Yılda 60+ etkinlik, seminer ve konferans ile güçlü ilişkiler
+              </p>
+            </div>
+            <div
+              class="text-2xl font-bold text-[#0072CE] transform md:rotate-0 rotate-90"
+            >
+              &rarr;
+            </div>
+            <div class="bg-[#e6f0fa] p-4 rounded-lg shadow-sm w-full md:w-1/4">
+              <h4 class="font-bold text-[#00449E]">Dijital Varlık</h4>
+              <p class="text-sm">
+                Web sitesi, blog ve sosyal medya ile doğrudan tüketici
+                etkileşimi
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="card text-center">
+            <img
+              src="https://placehold.co/80x80/0077B5/FFFFFF?text=in"
+              alt="LinkedIn"
+              class="mx-auto mb-3 rounded-full"
+            />
+            <h4 class="font-bold text-lg text-[#005CB9]">LinkedIn</h4>
+            <p class="text-gray-600 mt-1">
+              Kurumsal iletişim, profesyonel ağ oluşturma ve iş ortaklıkları
+              geliştirme platformu olarak aktif kullanılıyor.
+            </p>
+          </div>
+          <div class="card text-center">
+            <img
+              src="https://placehold.co/80x80/4C75A3/FFFFFF?text=VK"
+              alt="VKontakte"
+              class="mx-auto mb-3 rounded-full"
+            />
+            <h4 class="font-bold text-lg text-[#005CB9]">VKontakte (VK)</h4>
+            <p class="text-gray-600 mt-1">
+              Rusya'nın en popüler sosyal ağında ürün tanıtımları, marka
+              bilinirliği ve tüketici etkileşimi için resmi sayfa.
+            </p>
+          </div>
+          <div class="card text-center">
+            <img
+              src="https://placehold.co/80x80/EE8208/FFFFFF?text=OK"
+              alt="Odnoklassniki"
+              class="mx-auto mb-3 rounded-full"
+            />
+            <h4 class="font-bold text-lg text-[#005CB9]">Odnoklassniki</h4>
+            <p class="text-gray-600 mt-1">
+              Geniş bir kitleye ulaşmak ve marka sadakati oluşturmak için
+              kullanılan bir diğer önemli yerel sosyal medya kanalı.
+            </p>
+          </div>
+          <div class="card text-center">
+            <img
+              src="https://placehold.co/80x80/0088CC/FFFFFF?text=TG"
+              alt="Telegram"
+              class="mx-auto mb-3 rounded-full"
+            />
+            <h4 class="font-bold text-lg text-[#005CB9]">Telegram</h4>
+            <p class="text-gray-600 mt-1">
+              Hızlı bilgi akışı, bayi ve ortaklarla anlık iletişim için
+              potansiyel bir kanal olarak değerlendiriliyor.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="bg-[#00449E] text-white py-6 mt-12">
+      <div class="container mx-auto px-6 text-center">
+        <p>
+          &copy; 2024 Kastamonu Entegre Pazar Analizi. Tüm veriler sağlanan
+          raporlardan derlenmiştir.
+        </p>
+        <p class="text-sm opacity-75 mt-2">
+          Bu infografik, Canvas Infographics tarafından oluşturulmuştur.
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      const brilliantBlues = [
+        "#00449E",
+        "#005CB9",
+        "#0072CE",
+        "#3C89D9",
+        "#66A2E4",
+      ];
+      const tooltipTitleCallback = (tooltipItems) => {
+        const item = tooltipItems[0];
+        let label = item.chart.data.labels[item.dataIndex];
+        if (Array.isArray(label)) {
+          return label.join(" ");
+        } else {
+          return label;
+        }
+      };
+
+      const wrapLabel = (label) => {
+        const maxLength = 16;
+        if (label.length <= maxLength) return label;
+        const words = label.split(" ");
+        let lines = [];
+        let currentLine = "";
+        for (const word of words) {
+          if (
+            (currentLine + " " + word).length > maxLength &&
+            currentLine.length > 0
+          ) {
+            lines.push(currentLine);
+            currentLine = word;
+          } else {
+            currentLine = currentLine ? currentLine + " " + word : word;
+          }
+        }
+        if (currentLine) lines.push(currentLine);
+        return lines;
+      };
+
+      const commonChartOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: "top",
+            labels: {
+              color: "#4A5568",
+            },
+          },
+          tooltip: {
+            callbacks: {
+              title: tooltipTitleCallback,
+            },
+          },
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: { color: "#4A5568" },
+            grid: { color: "#E2E8F0" },
+          },
+          x: {
+            ticks: { color: "#4A5568" },
+            grid: { display: false },
+          },
+        },
+      };
+
+      new Chart(document.getElementById("salesDistributionChart"), {
+        type: "doughnut",
+        data: {
+          labels: ["Rusya İç Pazarı", "İhracat"],
+          datasets: [
+            {
+              label: "Satış Dağılımı",
+              data: [70, 30],
+              backgroundColor: [brilliantBlues[1], brilliantBlues[3]],
+              borderColor: "#ffffff",
+              borderWidth: 2,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: "bottom",
+              labels: {
+                color: "#4A5568",
+                font: { size: 14 },
+              },
+            },
+          },
+        },
+      });
+
+      const constructionGrowthData = {
+        labels: ["2024", "2025", "2026", "2027", "2028", "2029"],
+        datasets: [
+          {
+            label: "Yıllık Büyüme (%)",
+            data: [4.2, 0.8, 2.5, 2.5, 2.5, 2.5],
+            fill: true,
+            borderColor: brilliantBlues[2],
+            backgroundColor: "rgba(60, 137, 217, 0.2)",
+            tension: 0.4,
+          },
+        ],
+      };
+      new Chart(document.getElementById("constructionGrowthChart"), {
+        type: "line",
+        data: constructionGrowthData,
+        options: commonChartOptions,
+      });
+
+      // Tüketici Öncelikleri grafiği kaldırıldığı için ilgili Chart.js kodu da kaldırıldı.
+      // const consumerPrioritiesData = {
+      //     labels: ['Dayanıklılık', 'Çevre Dostu Olma', 'Estetik & Tasarım', 'Fiyat İstikrarı', 'Yerli Üretim'],
+      //     datasets: [{
+      //         label: 'Önem Düzeyi',
+      //         data: [95, 90, 80, 75, 98],
+      //         backgroundColor: [
+      //             brilliantBlues[0],
+      //             brilliantBlues[1],
+      //             brilliantBlues[2],
+      //             brilliantBlues[3],
+      //             brilliantBlues[4]
+      //         ],
+      //         borderColor: brilliantBlues[0],
+      //         borderWidth: 1
+      //     }]
+      // };
+      // new Chart(document.getElementById('consumerPrioritiesChart'), {
+      //     type: 'bar',
+      //     data: consumerPrioritiesData,
+      //     options: {
+      //         ...commonChartOptions,
+      //         indexAxis: 'y',
+      //         plugins: {
+      //             ...commonChartOptions.plugins,
+      //             legend: { display: false }
+      //         }
+      //     }
+      // });
+
+      const laminateHooksData = {
+        labels: [
+          "Estetik & Tasarım",
+          "Dayanıklılık",
+          "Sağlık & Çevre",
+          "Kullanım Kolaylığı",
+          "Marka Güveni",
+        ],
+        datasets: [
+          {
+            label: "Laminat Parke",
+            data: [9, 8.5, 9.5, 7, 8],
+            backgroundColor: "rgba(0, 114, 206, 0.2)",
+            borderColor: brilliantBlues[2],
+            pointBackgroundColor: brilliantBlues[2],
+            pointBorderColor: "#fff",
+            pointHoverBackgroundColor: "#fff",
+            pointHoverBorderColor: brilliantBlues[2],
+          },
+        ],
+      };
+      new Chart(document.getElementById("laminateHooksChart"), {
+        type: "radar",
+        data: laminateHooksData,
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: { callbacks: { title: tooltipTitleCallback } },
+          },
+          scales: {
+            r: {
+              angleLines: { color: "#E2E8F0" },
+              grid: { color: "#E2E8F0" },
+              pointLabels: {
+                color: "#4A5568",
+                font: { size: 12 },
+              },
+              ticks: {
+                backdropColor: "transparent",
+                color: "#4A5568",
+              },
+              suggestedMin: 0,
+              suggestedMax: 10,
+            },
+          },
+        },
+      });
+
+      const mdfHooksData = {
+        labels: [
+          "Kalite & İşlenebilirlik",
+          "Tasarım Esnekliği",
+          "Dayanıklılık",
+          "Düşük Formaldehit",
+          "Fiyat/Performans",
+        ],
+        datasets: [
+          {
+            label: "MDF",
+            data: [9.5, 8, 8.5, 9, 8],
+            backgroundColor: "rgba(102, 162, 228, 0.2)",
+            borderColor: brilliantBlues[4],
+            pointBackgroundColor: brilliantBlues[4],
+            pointBorderColor: "#fff",
+            pointHoverBackgroundColor: "#fff",
+            pointHoverBorderColor: brilliantBlues[4],
+          },
+        ],
+      };
+      new Chart(document.getElementById("mdfHooksChart"), {
+        type: "radar",
+        data: mdfHooksData,
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: { callbacks: { title: tooltipTitleCallback } },
+          },
+          scales: {
+            r: {
+              angleLines: { color: "#E2E8F0" },
+              grid: { color: "#E2E8F0" },
+              pointLabels: {
+                color: "#4A5568",
+                font: { size: 12 },
+              },
+              ticks: {
+                backdropColor: "transparent",
+                color: "#4A5568",
+              },
+              suggestedMin: 0,
+              suggestedMax: 10,
+            },
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

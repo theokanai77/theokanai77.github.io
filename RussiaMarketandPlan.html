@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AGT Rusya Pazarı 6 Aylık Pazarlama Stratejisi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #f3f4f6;
+      }
+      .chart-container {
+        position: relative;
+        margin: auto;
+        height: 320px;
+        width: 100%;
+        max-width: 450px;
+      }
+      @media (min-width: 768px) {
+        .chart-container {
+          height: 400px;
+        }
+      }
+      .stat-card h3 {
+        color: #003f5c;
+      }
+      .timeline::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 0;
+        bottom: 0;
+        width: 4px;
+        background-color: #003f5c;
+        border-radius: 2px;
+      }
+      .timeline-item {
+        width: calc(50% - 2rem);
+      }
+      .timeline-item:nth-child(odd) {
+        align-self: flex-start;
+      }
+      .timeline-item:nth-child(even) {
+        align-self: flex-end;
+      }
+      .timeline-item::after {
+        content: "";
+        position: absolute;
+        top: 1rem;
+        width: 20px;
+        height: 20px;
+        background-color: white;
+        border: 4px solid #003f5c;
+        border-radius: 50%;
+        z-index: 1;
+      }
+      .timeline-item:nth-child(odd)::after {
+        right: -2.5rem;
+        transform: translateX(50%);
+      }
+      .timeline-item:nth-child(even)::after {
+        left: -2.5rem;
+        transform: translateX(-50%);
+      }
+    </style>
+  </head>
+  <body class="text-gray-800">
+    <header class="bg-[#003f5c] text-white p-8 text-center">
+      <h1 class="text-4xl md:text-5xl font-extrabold mb-2">
+        AGT Rusya Pazarı 6 Aylık İletişim Planı
+      </h1>
+      <p class="text-lg text-gray-300 max-w-3xl mx-auto">
+        Rusya ahşap panel pazarında sürdürülebilir büyüme için yol haritamız.
+      </p>
+    </header>
+
+    <main class="container mx-auto p-4 md:p-8">
+      <section id="market-analysis" class="mb-16">
+        <h2 class="text-3xl font-bold text-center mb-8">
+          Pazar Fırsatları: Büyüyen Bir Pazar
+        </h2>
+        <p class="text-center max-w-3xl mx-auto mb-12 text-gray-600">
+          Rusyanın ahşap panel ve bağlantılı sektörleri, AGT için milyarlarca
+          dolarlık önemli büyüme fırsatları sunuyor. Bu dinamik pazar, stratejik
+          bir giriş için doğru zemini hazırlıyor.
+        </p>
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center"
+        >
+          <div
+            class="stat-card bg-white p-6 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300"
+          >
+            <h3 class="text-4xl font-extrabold mb-2">$6.6 Milyar</h3>
+            <p class="text-gray-700 font-semibold">Ahşap Panel Pazarı</p>
+            <p class="text-green-500 font-bold text-xl mt-2">%5.3 Büyüme</p>
+          </div>
+          <div
+            class="stat-card bg-white p-6 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300"
+          >
+            <h3 class="text-4xl font-extrabold mb-2">$2.9 Milyar</h3>
+            <p class="text-gray-700 font-semibold">MDF Pazarı</p>
+            <p class="text-green-500 font-bold text-xl mt-2">%4.4 Büyüme</p>
+          </div>
+          <div
+            class="stat-card bg-white p-6 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300"
+          >
+            <h3 class="text-4xl font-extrabold mb-2">$7.3 Milyar</h3>
+            <p class="text-gray-700 font-semibold">Mobilya Sektörü</p>
+            <p class="text-green-500 font-bold text-xl mt-2">%2.7 Büyüme</p>
+          </div>
+          <div
+            class="stat-card bg-white p-6 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300"
+          >
+            <h3 class="text-4xl font-extrabold mb-2">$160.5 Milyar</h3>
+            <p class="text-gray-700 font-semibold">İnşaat Sektörü</p>
+            <p class="text-green-500 font-bold text-xl mt-2">%3.0 Büyüme</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="competitors" class="mb-16">
+        <h2 class="text-3xl font-bold text-center mb-8">
+          Rekabet Analizi: Pazar Payları
+        </h2>
+        <p class="text-center max-w-3xl mx-auto mb-12 text-gray-600">
+          Pazar, birkaç büyük oyuncu tarafından domine ediliyor. Stratejimiz, bu
+          rekabet ortamında AGTyı farklılaştırarak premium segment ve orta
+          segmentteki boşluklardan yararlanmaktır.
+        </p>
+        <div class="bg-white p-6 rounded-lg shadow-lg">
+          <div class="chart-container">
+            <canvas id="competitorChart"></canvas>
+          </div>
+        </div>
+      </section>
+
+      <section id="marketing-tactics" class="mb-16">
+        <h2 class="text-3xl font-bold text-center mb-8">
+          Pazarlama Taktikleri ve Kanalları
+        </h2>
+        <p class="text-center max-w-3xl mx-auto mb-12 text-gray-600">
+          Başarıya ulaşmak için dijital pazarlama, B2B fuarlar, içerik
+          pazarlaması ve yerel iş ortaklıklarını birleştiren entegre bir
+          yaklaşım benimsiyoruz. Bu stratejinin ana sütunları aşağıda
+          detaylandırılmıştır:
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="bg-white p-6 rounded-lg shadow-lg">
+            <h3 class="text-xl font-bold mb-4 text-[#003f5c]">
+              Dijital Pazarlama
+            </h3>
+            <ul class="list-disc pl-5 text-gray-700 space-y-2">
+              <li>
+                Arama Motoru Optimizasyonu (SEO): Rusça anahtar kelimeler (МДФ
+                панели, мебельные щиты, панели для мебели) ve www.agtwood.comun
+                Rusça versiyonunun yerel SEO (Moskova, St. Petersburg,
+                Yekaterinburg odaklı) optimizasyonu.
+              </li>
+              <li>
+                Arama Motoru Reklamcılığı (SEM): Google Ads ve Yandex.Direct
+                kampanyaları ile B2B odaklı anahtar kelimeler ve rekabet
+                analizi. Aylık 50.000 ruble reklam bütçesi.
+              </li>
+              <li>
+                Sosyal Medya Pazarlaması: LinkedIn'de B2B içerik stratejisi,
+                Rusyada popüler Telegram kanalları ve YouTube'da teknik videolar
+                ile fabrika tanıtımları.
+              </li>
+            </ul>
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow-lg">
+            <h3 class="text-xl font-bold mb-4 text-[#7a5195]">
+              B2B Fuarlar ve Etkinlikler
+            </h3>
+            <ul class="list-disc pl-5 text-gray-700 space-y-2">
+              <li>
+                Öncelikli Fuarlar: MEBEL Moskova (Kasım 2025), Batimat Rusya
+                (İnşaat ve yapı malzemeleri) ve Lesexpo (Orman ürünleri fuarı)
+                gibi önemli etkinliklere katılım.
+              </li>
+              <li>
+                Etkinlik Stratejisi: Ürün örnekleri ve teknik kataloglar sunumu,
+                canlı demonstrasyonlar ve kalite testleri, B2B toplantılar ve
+                distribütör buluşmaları düzenleme.
+              </li>
+            </ul>
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow-lg">
+            <h3 class="text-xl font-bold mb-4 text-[#ef5675]">
+              İçerik Pazarlaması
+            </h3>
+            <ul class="list-disc pl-5 text-gray-700 space-y-2">
+              <li>
+                Teknik İçerikler: Rusça ürün katalogları, teknik dökümanlar,
+                case study'ler, referans projeleri, MDF kullanım rehberleri ve
+                kalite sertifikaları/test raporları.
+              </li>
+              <li>
+                Dijital İçerikler: Fabrika ve üretim süreci videoları,
+                webinarlar, online eğitimler, blog yazıları ve sektör
+                analizleri.
+              </li>
+            </ul>
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow-lg">
+            <h3 class="text-xl font-bold mb-4 text-[#ffa600]">
+              Yerel İş Ortaklıkları
+            </h3>
+            <ul class="list-disc pl-5 text-gray-700 space-y-2">
+              <li>
+                Distribütör Ağı Kurma: Moskova, St. Petersburg, Novosibirsk'te
+                yerel distribütörlerle özel anlaşmalar ve stok desteği sağlama.
+              </li>
+              <li>
+                Stratejik Ortaklıklar: Yerel mobilya üreticileriyle uzun vadeli
+                anlaşmalar, inşaat firmaları ile proje bazlı işbirlikleri ve
+                mimarlık ofisleri ile teknik destek ortaklıkları.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="timeline" class="mb-16">
+        <h2 class="text-3xl font-bold text-center mb-8">Uygulama Takvimi</h2>
+        <p class="text-center max-w-3xl mx-auto mb-12 text-gray-600">
+          Stratejimizi hayata geçirmek için aylık adımlarla ilerleyen detaylı
+          bir yol haritası hazırladık. Her ay, belirli hedeflere odaklanarak
+          ilerlemeyi sağlayacağız.
+        </p>
+        <div class="relative flex flex-col items-center p-4 timeline">
+          <div
+            class="timeline-item relative mb-8 p-6 bg-white rounded-lg shadow-lg border-l-4 border-[#7a5195]"
+          >
+            <h4 class="font-bold text-lg">1. Ay (Ağustos 2025)</h4>
+            <p class="text-sm text-gray-600">
+              Pazar araştırmasının tamamlanması, Rusça web sitesinin optimize
+              edilmesi, ilk dijital reklam kampanyalarının başlatılması ve yerel
+              partner araştırmasına başlanması.
+            </p>
+          </div>
+          <div
+            class="timeline-item relative mb-8 p-6 bg-white rounded-lg shadow-lg border-r-4 border-[#bc5090]"
+          >
+            <h4 class="font-bold text-lg">2. Ay (Eylül 2025)</h4>
+            <p class="text-sm text-gray-600">
+              Ürün katalogları ve tanıtım videoları gibi içeriklerin üretilmesi,
+              LinkedIn ve diğer sosyal medya platformlarında kampanyaların
+              başlatılması, ilk B2B etkinliklere katılım ve potansiyel
+              distribütörlerle görüşmeler.
+            </p>
+          </div>
+          <div
+            class="timeline-item relative mb-8 p-6 bg-white rounded-lg shadow-lg border-l-4 border-[#ef5675]"
+          >
+            <h4 class="font-bold text-lg">3. Ay (Ekim 2025)</h4>
+            <p class="text-sm text-gray-600">
+              İlk fuar katılımı için hazırlıkların tamamlanması, lead nurturing
+              kampanyalarının başlatılması, müşteri ziyaretlerine başlanması ve
+              ilk partner anlaşmalarının imzalanması.
+            </p>
+          </div>
+          <div
+            class="timeline-item relative mb-8 p-6 bg-white rounded-lg shadow-lg border-r-4 border-[#ff764a]"
+          >
+            <h4 class="font-bold text-lg">4. Ay (Kasım 2025)</h4>
+            <p class="text-sm text-gray-600">
+              MEBEL Moskova fuarına katılım, büyük müşterilerle pilot projelerin
+              başlatılması ve medya ilişkileri ile PR faaliyetlerinin
+              yürütülmesi.
+            </p>
+          </div>
+          <div
+            class="timeline-item relative mb-8 p-6 bg-white rounded-lg shadow-lg border-l-4 border-[#ffa600]"
+          >
+            <h4 class="font-bold text-lg">5. Ay (Aralık 2025)</h4>
+            <p class="text-sm text-gray-600">
+              Yıl sonu yoğun satış aktivitelerinin gerçekleştirilmesi, mevcut
+              müşteri ilişkilerinin güçlendirilmesi ve 2026 stratejisi için
+              planlama çalışmalarına başlanması.
+            </p>
+          </div>
+          <div
+            class="timeline-item relative mb-8 p-6 bg-white rounded-lg shadow-lg border-r-4 border-[#003f5c]"
+          >
+            <h4 class="font-bold text-lg">6. Ay (Ocak 2026)</h4>
+            <p class="text-sm text-gray-600">
+              İlk 6 aylık sonuçların detaylı analiz edilmesi, başarılı
+              taktiklerin ölçeklendirilmesi ve yeni pazar segmentlerine
+              genişleme fırsatlarının değerlendirilmesi.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="roi" class="mb-16">
+        <h2 class="text-3xl font-bold text-center mb-8">
+          Kanal Bazında ROI Tahminleri
+        </h2>
+        <p class="text-center max-w-3xl mx-auto mb-12 text-gray-600">
+          Her pazarlama kanalının potansiyel yatırım getirisini dikkatle analiz
+          ettik. En yüksek getiriyi, doğrudan pazar erişimi sağlayan yerel
+          ortaklıklardan ve geniş kitlelere ulaşan dijital pazarlamadan
+          bekliyoruz.
+        </p>
+        <div class="bg-white p-6 rounded-lg shadow-lg">
+          <div class="chart-container h-96">
+            <canvas id="roiChart"></canvas>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="bg-[#003f5c] text-white p-8 text-center mt-16">
+      <h2 class="text-3xl font-bold mb-4">Benzersiz Değer Önerimiz</h2>
+      <p class="text-xl font-semibold">Türk Kalitesi, Güvenilir Tedarik</p>
+      <div class="mt-4 text-gray-300">
+        <p>AGT &copy; 2025. Tüm hakları saklıdır.</p>
+      </div>
+    </footer>
+
+    <script>
+      const tooltipTitleCallback = (tooltipItems) => {
+        const item = tooltipItems[0];
+        let label = item.chart.data.labels[item.dataIndex];
+        if (Array.isArray(label)) {
+          return label.join(" ");
+        }
+        return label;
+      };
+
+      const commonChartOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: "top",
+            labels: {
+              font: {
+                size: 14,
+                family: "Inter",
+              },
+              color: "#374151",
+            },
+          },
+          tooltip: {
+            callbacks: {
+              title: tooltipTitleCallback,
+            },
+            backgroundColor: "#003f5c",
+            titleFont: { size: 16, family: "Inter" },
+            bodyFont: { size: 14, family: "Inter" },
+            padding: 12,
+            cornerRadius: 6,
+          },
+        },
+      };
+
+      const chartColors = [
+        "#003f5c",
+        "#7a5195",
+        "#ef5675",
+        "#ffa600",
+        "#374c80",
+      ];
+
+      const createCompetitorChart = () => {
+        const ctx = document.getElementById("competitorChart").getContext("2d");
+        new Chart(ctx, {
+          type: "doughnut",
+          data: {
+            labels: ["Kastamonu Entegre", "Kronospan", "EGGER", "Diğerleri"],
+            datasets: [
+              {
+                label: "Pazar Payı",
+                data: [25, 20, 15, 40],
+                backgroundColor: chartColors,
+                borderColor: "#ffffff",
+                borderWidth: 4,
+              },
+            ],
+          },
+          options: { ...commonChartOptions },
+        });
+      };
+
+      const createRoiChart = () => {
+        const ctx = document.getElementById("roiChart").getContext("2d");
+        new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: [
+              "Yerel Ortaklıklar",
+              "Dijital Pazarlama",
+              "B2B Fuarlar",
+              "İçerik Pazarlaması",
+            ],
+            datasets: [
+              {
+                label: "Tahmini ROI (%)",
+                data: [350, 300, 250, 200],
+                backgroundColor: chartColors,
+                borderColor: chartColors.map((color) => color + "B3"),
+                borderWidth: 1,
+                borderRadius: 5,
+              },
+            ],
+          },
+          options: {
+            ...commonChartOptions,
+            indexAxis: "y",
+            scales: {
+              x: {
+                beginAtZero: true,
+                grid: {
+                  color: "#e5e7eb",
+                },
+                ticks: {
+                  font: { size: 12, family: "Inter" },
+                  callback: function (value) {
+                    return value + "%";
+                  },
+                },
+              },
+              y: {
+                grid: {
+                  display: false,
+                },
+                ticks: {
+                  font: { size: 14, family: "Inter" },
+                },
+              },
+            },
+            plugins: {
+              ...commonChartOptions.plugins,
+              legend: {
+                display: false,
+              },
+            },
+          },
+        });
+      };
+
+      window.onload = () => {
+        createCompetitorChart();
+        createRoiChart();
+      };
+    </script>
+  </body>
+</html>

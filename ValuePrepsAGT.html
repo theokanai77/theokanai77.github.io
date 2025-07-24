@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AGT Değer Önerileri ve Parke Detayları</title>
+    <!-- Chosen Palette: Calm & Harmonious -->
+    <!-- Application Structure Plan: Bu SPA, AGT'nin temel değer önerileri ve laminat parke ürünlerine odaklanarak, bilgiyi tematik ve etkileşimli bölümlere ayırır. 'Giriş' bölümü genel bir bakış sunar. 'Değer Haritası' bölümü, AGT'nin değer önerilerini interaktif bir kabarcık grafiği ve tıklanabilir kartlarla detaylandırır. 'Laminat Parke Detayları' bölümü, parke ürünlerinin özelliklerini, teknolojilerini ve koleksiyonlarını sunar. 'Sertifikalar' bölümü, parke ürünleriyle ilgili kalite ve sürdürülebilirlik sertifikalarını interaktif etiketlerle gösterir. Bu yapı, kullanıcının ilgilendiği konuya derinlemesine dalmasını sağlayarak öğrenme deneyimini kişiselleştirir ve bilginin akılda kalıcılığını artırır. -->
+    <!-- Visualization & Content Choices: 
+        - Rapor Bilgisi: Yönetici Özeti -> Goal: Inform -> Viz/Presentation: Büyük başlık ve özet metin.
+        - Rapor Bilgisi: 11 Değer Önerisinin rekabetçi konumu -> Goal: Karşılaştırma -> Viz/Presentation: Bubble Chart (Chart.js) -> Interaction: Hover (detay görme) -> Justification: Üç farklı metriği (Müşteri Etkisi, AGT Üstünlüğü, Pazar Farklılaşması) tek bir görselde sezgisel olarak karşılaştırma imkanı sunar.
+        - Rapor Bilgisi: Her bir değer önerisinin detaylı anlatısı -> Goal: Organize & Inform -> Viz/Presentation: Tıklanabilir kartlar ve Modal Pencere -> Interaction: Click (detaylı bilgi modalını açma) -> Justification: Kullanıcının ilgisini çeken konuya odaklanmasını sağlar, bilgi kirliliğini önler ve öğrenme sürecini kişiselleştirir.
+        - Rapor Bilgisi: Laminat Parke özellikleri, teknolojileri ve koleksiyonları -> Goal: Inform & Organize -> Viz/Presentation: Başlıklar, listeler ve metin blokları.
+        - Rapor Bilgisi: Parke sertifikaları -> Goal: Inform & Build Trust -> Viz/Presentation: Etkileşimli Etiket Duvarı (HTML/CSS/JS) -> Interaction: Hover (açıklama gösterme) -> Justification: Yoğun ve teknik bilgiyi, kullanıcıyı yormadan, sadece ilgilendiğinde detaya ulaşabileceği modern bir arayüzle sunar.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #fdfbf8;
+        color: #333d4b;
+        scroll-behavior: smooth;
+      }
+      .container {
+        max-width: 1200px;
+      }
+      .chart-container {
+        position: relative;
+        margin: auto;
+        height: 50vh;
+        width: 100%;
+        max-width: 800px;
+        max-height: 500px;
+      }
+      .value-prop-card {
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+      }
+      .value-prop-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05),
+          0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      }
+      .modal-overlay {
+        transition: opacity 0.3s ease;
+      }
+      .modal-content {
+        transition: transform 0.3s ease;
+      }
+      .problem-solving-text {
+        font-size: 1.05rem;
+        font-weight: 500;
+        color: #1a3a53;
+        border-left: 4px solid #a67b5b;
+        padding-left: 1rem;
+        margin-top: 1rem;
+        background-color: #fdfbf8;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+      }
+      .cert-tag {
+        background-color: #efe8e1;
+        color: #333d4b;
+        padding: 0.3rem 0.7rem;
+        border-radius: 9999px;
+        font-size: 0.8rem;
+        font-weight: 500;
+        transition: background-color 0.2s ease;
+        position: relative;
+        cursor: help;
+      }
+      .cert-tag:hover {
+        background-color: #d1c4b7;
+      }
+      .cert-tooltip {
+        visibility: hidden;
+        opacity: 0;
+        position: absolute;
+        bottom: 120%;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #1a3a53;
+        color: white;
+        padding: 0.5rem 0.75rem;
+        border-radius: 0.375rem;
+        font-size: 0.75rem;
+        white-space: nowrap;
+        z-index: 10;
+        transition: opacity 0.2s ease, visibility 0.2s ease;
+        pointer-events: none;
+      }
+      .cert-tag:hover .cert-tooltip {
+        visibility: visible;
+        opacity: 1;
+      }
+      .cert-tooltip::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        margin-left: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: #1a3a53 transparent transparent transparent;
+      }
+    </style>
+  </head>
+  <body class="antialiased">
+    <!-- Header & Navigation -->
+    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-40 shadow-sm">
+      <div
+        class="container mx-auto px-6 py-4 flex justify-between items-center"
+      >
+        <h1 class="text-3xl font-extrabold text-[#1A3A53]">AGT</h1>
+        <nav class="hidden md:flex space-x-6">
+          <a
+            href="#intro"
+            class="text-[#A67B5B] hover:text-[#8A644D] font-semibold transition-colors"
+            >Giriş</a
+          >
+          <a
+            href="#value-explorer"
+            class="text-[#A67B5B] hover:text-[#8A644D] font-semibold transition-colors"
+            >Değer Önerileri</a
+          >
+          <a
+            href="#parke-details"
+            class="text-[#A67B5B] hover:text-[#8A644D] font-semibold transition-colors"
+            >Laminat Parke</a
+          >
+          <a
+            href="#parke-certs"
+            class="text-[#A67B5B] hover:text-[#8A644D] font-semibold transition-colors"
+            >Sertifikalar</a
+          >
+        </nav>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto p-4 md:p-8">
+      <!-- Section 1: Introduction -->
+      <section id="intro" class="text-center py-12 md:py-20">
+        <h2
+          class="text-4xl md:text-5xl font-extrabold text-[#1A3A53] mb-4 tracking-tight"
+        >
+          AGT Değer Bazlı Satış Yaklaşımı
+        </h2>
+        <p class="max-w-3xl mx-auto text-lg text-gray-600">
+          Bu interaktif kılavuz, AGT'nin benzersiz değer önerilerini ve laminat
+          parke ürünlerinin üstün özelliklerini keşfetmek için tasarlandı.
+          Müşterilerimizin gerçek sorunlarına çözüm sunan güvenilir danışmanlar
+          olmak için bu bilgileri kullanın.
+        </p>
+      </section>
+
+      <!-- Section 2: Value Proposition Explorer -->
+      <section id="value-explorer" class="mb-20">
+        <h3 class="text-3xl font-bold text-center text-[#1A3A53] mb-2">
+          AGT'nin Değer Haritası: Rekabet Avantajınız
+        </h3>
+        <p class="text-center text-gray-500 mb-10">
+          Değer önerilerimizin müşteri üzerindeki etkisini ve pazardaki
+          benzersizliğini keşfedin. Kabarcıkların üzerine gelerek detayları
+          görün.
+        </p>
+        <div
+          class="bg-white p-4 md:p-8 rounded-lg shadow-lg border border-gray-200"
+        >
+          <div class="chart-container">
+            <canvas id="valuePropChart"></canvas>
+          </div>
+          <p class="text-center text-xs text-gray-400 mt-4">
+            Grafik üzerindeki her bir kabarcık bir değer önerisini temsil eder.
+            Yatay eksen 'Müşteri Etkisi'ni, dikey eksen 'AGT'nin Teknolojik
+            Üstünlüğü'nü, kabarcık boyutu ise 'Pazar Farklılaşması'nı gösterir.
+          </p>
+
+          <hr class="my-12 border-gray-200" />
+
+          <h4 class="text-2xl font-bold text-center text-[#1A3A53] mb-8">
+            Değer Önerilerini Detaylı İnceleyin
+          </h4>
+          <div
+            id="vp-grid"
+            class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+          >
+            <!-- VP Cards will be injected here by JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 3: Laminat Parke Deep Dive -->
+      <section id="parke-details" class="mb-20">
+        <h3 class="text-3xl font-bold text-center text-[#1A3A53] mb-2">
+          Laminat Parke: Zarafet ve Dayanıklılık
+        </h3>
+        <p class="text-center text-gray-500 mb-10">
+          AGT laminat parke ürünlerinin benzersiz özelliklerini, temel
+          teknolojilerini ve sundukları spesifik müşteri faydalarını keşfedin.
+        </p>
+        <div
+          class="bg-white p-6 md:p-8 rounded-lg shadow-lg border border-gray-200"
+        >
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+              <h4 class="text-2xl font-bold text-[#A67B5B] mb-4">
+                Temel Özellikler ve Teknolojiler
+              </h4>
+              <ul class="list-disc list-inside space-y-2 text-gray-600">
+                <li>
+                  <strong>72 Saat Su Direnci:</strong> Mutfak ve banyo gibi
+                  ıslak alanlarda zemin hasarı endişesini ortadan kaldırır, uzun
+                  ömürlü kullanım sağlar.
+                </li>
+                <li>
+                  <strong>Çizilmeye Karşı Direnç:</strong> Evcil hayvanlar ve
+                  çocukların olduğu aktif evlerde zeminin ilk günkü estetiğini
+                  korur.
+                </li>
+                <li>
+                  <strong>Antistatik Özellik (Yoga Serisi):</strong> Toz ve kir
+                  birikimini azaltır, evde daha temiz, ferah ve hijyenik bir
+                  ortam sunar.
+                </li>
+                <li>
+                  <strong>Register Emboss Teknolojisi:</strong> Gerçek ahşabın
+                  doğal dokusunu ve sıcaklığını zemine taşır, otantik bir
+                  atmosfer yaratır.
+                </li>
+                <li>
+                  <strong>Easy Click Sistemi:</strong> Hızlı ve kolay montaj
+                  sayesinde tadilat süresini kısaltır, yaşam alanlarında minimum
+                  kesinti sağlar.
+                </li>
+                <li>
+                  <strong>Yerden Isıtmaya Uygunluk:</strong> Isıtma
+                  sistemleriyle uyumlu çalışarak mekanlarda eşit ve konforlu ısı
+                  dağılımı sağlar.
+                </li>
+                <li>
+                  <strong>UV Direnci:</strong> Güneş ışınlarına maruz kalsa bile
+                  renklerin solmasını geciktirir, zeminin estetiğini korur.
+                </li>
+                <li>
+                  <strong>Anti-Alerjik Özellikler:</strong> Toz ve alerjenlerin
+                  birikmesini engeller, özellikle alerjisi olan bireyler için
+                  sağlıklı yaşam alanları sunar.
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="text-2xl font-bold text-[#A67B5B] mb-4">
+                Koleksiyonlarımız
+              </h4>
+              <ul class="list-disc list-inside space-y-2 text-gray-600">
+                <li>
+                  <span class="font-semibold">PERA:</span> Zarafeti ve tasarım
+                  çok yönlülüğü ile bilinmektedir.
+                </li>
+                <li>
+                  <span class="font-semibold">YOGA:</span> Antistatik
+                  özellikleriyle öne çıkmakta, konfor ve hijyeni teşvik
+                  etmektedir.
+                </li>
+                <li>
+                  <span class="font-semibold">MOOD XLarge:</span> Daha büyük
+                  boyutlar sunarak daha görkemli bir estetik sağlamaktadır.
+                </li>
+              </ul>
+              <h4 class="text-2xl font-bold text-[#A67B5B] mb-4 mt-8">
+                Neden AGT Laminat Parke?
+              </h4>
+              <p class="text-gray-600">
+                AGT laminat parke, sadece bir zemin kaplaması değil, yaşam
+                alanlarınıza değer katan, estetik, dayanıklılık ve sağlık odaklı
+                bir çözümdür. Gelişmiş teknolojilerimiz ve sürdürülebilirlik
+                taahhüdümüzle, müşterilerinizin beklentilerini aşan bir deneyim
+                sunuyoruz.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 4: Certifications -->
+      <section id="parke-certs" class="mb-20">
+        <h3 class="text-3xl font-bold text-center text-[#1A3A53] mb-2">
+          Sertifikalar ve Kalite Güvencesi
+        </h3>
+        <p class="text-center text-gray-500 mb-10">
+          AGT'nin kalite, sağlık ve çevreye olan bağlılığı, uluslararası
+          geçerliliğe sahip sertifikalarla desteklenmektedir. Sertifikaların
+          üzerine gelerek anlamlarını öğrenin.
+        </p>
+        <div
+          class="bg-white p-6 md:p-8 rounded-lg shadow-lg border border-gray-200"
+        >
+          <div id="certs-parke" class="flex flex-wrap justify-center gap-3">
+            <!-- Certs will be injected here by JS -->
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#1A3A53] text-white mt-20 py-8">
+      <div class="container mx-auto px-6 text-center">
+        <p>&copy; 2024 AGT | Değer Yaratır, Geleceği Şekillendirir.</p>
+        <p class="text-sm text-gray-400 mt-2">
+          Bu interaktif eğitim materyali AGT Satış Ekibi için özel olarak
+          hazırlanmıştır.
+        </p>
+      </div>
+    </footer>
+
+    <!-- Modal Structure -->
+    <div
+      id="vp-modal"
+      class="modal-overlay fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4 z-50 opacity-0 pointer-events-none"
+    >
+      <div
+        class="modal-content bg-white w-full max-w-2xl rounded-lg shadow-2xl p-8 transform scale-95"
+      >
+        <div class="flex justify-between items-start">
+          <div>
+            <h3 id="modal-title" class="text-3xl font-bold text-[#1A3A53]"></h3>
+            <p id="modal-summary" class="text-gray-500 mt-1"></p>
+          </div>
+          <button
+            id="modal-close"
+            class="text-gray-400 hover:text-gray-800 text-3xl"
+          >
+            &times;
+          </button>
+        </div>
+        <hr class="my-4" />
+        <div>
+          <h4 class="font-semibold text-lg text-[#A67B5B] mb-2">
+            Problem Çözme Dili / Satış Anlatısı
+          </h4>
+          <div id="modal-narrative" class="problem-solving-text"></div>
+        </div>
+        <div class="mt-6">
+          <h4 class="font-semibold text-lg text-[#A67B5B] mb-2">
+            İlgili Teknolojiler ve Kanıtlar
+          </h4>
+          <div
+            id="modal-proofs"
+            class="flex flex-wrap gap-3 items-center"
+          ></div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const valuePropositions = [
+          {
+            id: 1,
+            title: "Fiyat Rekabetinden Çıkış",
+            summary:
+              "Özel koleksiyonlarla müşteri deneyimini farklılaştırarak ciro ve kârlılığı artırın.",
+            narrative:
+              "Müşterilerinizin sürekli fiyat odaklı yaklaşımlarından bunaldınız mı? AGT'nin size özel sunduğu koleksiyonlarla, artık fiyat rekabetine girmek zorunda kalmayacaksınız. Müşterilerinize piyasada eşi benzeri olmayan tasarımlar ve üstün kalite sunarak, onların dikkatini benzersiz değere çekecek, böylece hem cironuzu hem de kârlılığınızı hiç olmadığı kadar artıracaksınız.",
+            proofs: ["Özel Koleksiyonlar", "Marka Değeri"],
+            icon: "💰",
+            impact: 9,
+            uniqueness: 10,
+            differentiation: 9,
+          },
+          {
+            id: 2,
+            title: "Yüksek Su Dayanımı",
+            summary:
+              "72 saat suya dayanıklı parkeler ile tüm yaşam alanlarında şık ve dayanıklı zemin çözümleri sunun.",
+            narrative:
+              "Müşterileriniz banyo veya mutfak gibi alanlarda zeminlerinin su hasarından korunması konusunda endişeli mi? AGT'nin 72 saat suya dayanıklı parkeleriyle, artık su dökülmeleri veya nem sorunları geçmişte kalıyor. Evlerinin her köşesinde gönül rahatlığıyla kullanabilecekleri, hem şık hem de maksimum koruma sağlayan zeminler sunarak, onların en büyük endişelerinden birini ortadan kaldırıyoruz.",
+            proofs: ["ISO 4760", "72 Saat Testi"],
+            icon: "💧",
+            impact: 10,
+            uniqueness: 9,
+            differentiation: 8,
+          },
+          {
+            id: 3,
+            title: "Çizilmeye Karşı Direnç",
+            summary:
+              "Aktif yaşam tarzları için çizilmeye dayanıklı yüzeyler ile uzun ömürlü kullanım sağlayın.",
+            narrative:
+              "Müşterileriniz evcil hayvanları veya çocukları nedeniyle zeminlerinin hızla yıpranmasından mı şikayetçi? AGT'nin çizilmeye karşı üstün dirençli parkeleriyle, yaşam alanları ne kadar hareketli olursa olsun zeminleriniz ilk günkü estetiğini korur. Yıllarca sürecek dayanıklılık ve güzellik sunarak, müşterilerinizin 'yıpranma' endişesini tamamen ortadan kaldırıyoruz.",
+            proofs: ["AC4-32 Yüzey"],
+            icon: "🛡️",
+            impact: 9,
+            uniqueness: 8,
+            differentiation: 7,
+          },
+          {
+            id: 4,
+            title: "Antistatik Teknoloji",
+            summary:
+              "Yoga parke serisi ile antistatik özellik sayesinde konforu ve hijyeni ön plana çıkarın.",
+            narrative:
+              "Müşterileriniz evlerindeki statik elektrikten veya sürekli tozlanmadan rahatsız mı oluyor? AGT'nin özel Antistatik Yoga parke serisi ile bu sorunlara veda edin. Zeminlerinizdeki statik elektriği nötrleyerek toz ve kir tutmaz, böylece evleri her zaman daha ferah, daha temiz ve daha hijyenik kalır. Onlara hem konfor hem de kolay temizlik vadediyoruz.",
+            proofs: ["Yoga Serisi"],
+            icon: "✨",
+            impact: 7,
+            uniqueness: 10,
+            differentiation: 8,
+          },
+          {
+            id: 5,
+            title: "Sağlıklı Mekanlar",
+            summary:
+              "Hijyenik ve kolay temizlenebilir yüzeyler ile sağlıklı yaşam alanları oluşturun.",
+            narrative:
+              "Özellikle çocuklu aileler için evin hijyeni konusunda endişeleriniz mi var? AGT parkeleri, antibakteriyel ve kolay temizlenebilir yüzeyleriyle bu endişeleri ortadan kaldırıyor. Mikrop barındırmayan ve leke tutmayan yapısıyla, çocuklarınız için güvenli ve sağlıklı bir oyun alanı sunarken, temizliği de zahmetsiz hale getiriyoruz. Sağlıklı yaşamı zeminden başlatın!",
+            proofs: ["Antibakteriyel Yüzey", "E0 Emisyon"],
+            icon: "💚",
+            impact: 9,
+            uniqueness: 9,
+            differentiation: 6,
+          },
+          {
+            id: 6,
+            title: "Geniş Renk ve Doku Seçenekleri",
+            summary:
+              "170’den fazla dekor ile her tarza ve ihtiyaca uygun zemin ve panel çözümleri sunun.",
+            narrative:
+              "Müşterileriniz hayallerindeki dekorasyonu yaratmakta zorlanıyor, doğru renk ve dokuyu bulamıyor mu? AGT'nin 170'ten fazla benzersiz dekor seçeneğiyle, her zevke ve her mekana uygun 'tam aradığım' dedirtecek çözümü sunuyoruz. Onlara sınırsız tasarım özgürlüğü vadederek, mükemmel uyumu yakalamalarına yardımcı oluyoruz.",
+            proofs: ["170+ Dekor"],
+            icon: "🎨",
+            impact: 8,
+            uniqueness: 7,
+            differentiation: 7,
+          },
+          {
+            id: 7,
+            title: "Gerçek Ahşap Hissiyatı",
+            summary:
+              "Register Emboss teknolojisi ile doğallık hissini yaşam alanlarına taşıyın.",
+            narrative:
+              "Müşterileriniz doğal ahşabın sıcaklığını ve dokusunu arıyor, ancak maliyet veya bakım endişeleri mi taşıyor? AGT'nin devrim niteliğindeki Register Emboss teknolojisi ile gerçek ahşap hissini zemine taşıyoruz. Gözle görülen ve elle hissedilen bu doğallık, mekanlara otantik bir atmosfer katarken, ahşabın tüm avantajlarını bakım derdi olmadan sunarak onların beklentilerini aşıyoruz.",
+            proofs: ["Register Emboss"],
+            icon: "🌳",
+            impact: 8,
+            uniqueness: 10,
+            differentiation: 9,
+          },
+          {
+            id: 8,
+            title: "Kolay ve Hızlı Montaj",
+            summary:
+              "Easy click sistemi ile montaj süresini kısaltın, memnuniyet oranını artırın.",
+            narrative:
+              "Müşterileriniz uzun ve zahmetli tadilat süreçlerinden mi çekiniyor? AGT'nin Easy Click sistemi sayesinde montaj artık bir sorun değil. Bir odanın zeminini saatler içinde döşeyerek, müşterilerinizin yaşam alanlarında minimum kesinti sağlıyor, zamandan ve iş gücünden tasarruf ederek maksimum memnuniyet yaratıyoruz.",
+            proofs: ["Easy Click Sistemi"],
+            icon: "🛠️",
+            impact: 7,
+            uniqueness: 8,
+            differentiation: 5,
+          },
+          {
+            id: 9,
+            title: "Sürdürülebilir Üretim",
+            summary:
+              "%100 geri dönüştürülebilir malzeme kullanımı ve biyokütle enerji üretimiyle doğaya saygılı üretim.",
+            narrative:
+              "Müşterileriniz çevreye duyarlı seçimler yapmak istiyor, ancak kaliteli ve estetik ürünlerden ödün vermek istemiyor mu? AGT ile bu mümkün! %100 geri dönüştürülebilir malzemelerle ve biyokütle enerjisiyle ürettiğimiz ürünlerimizle, hem doğayı koruyor hem de yaşam alanlarına değer katıyoruz. Onlara sadece bir ürün değil, aynı zamanda gelecek nesillere bırakılacak temiz bir dünya için bir yatırım sunuyoruz.",
+            proofs: ["FSC", "PEFC", "Biyokütle Enerji"],
+            icon: "🌍",
+            impact: 8,
+            uniqueness: 9,
+            differentiation: 8,
+          },
+          {
+            id: 10,
+            title: "Hızlı Stok ve Teslimat Avantajı",
+            summary:
+              "AGT stok yönetimiyle projelerde zaman kaybetmeden müşteriye hızlı teslimat sağlayın.",
+            narrative:
+              "Müşterileriniz proje gecikmelerinden veya ürün bekleme sürelerinden mi endişe ediyor? AGT'nin güçlü stok yönetimi ve yaygın dağıtım ağı sayesinde, seçilen ürünler anında teslim edilir. Projelerinizde zaman kaybı yaşamadan, taahhüt ettiğiniz sürelerde tamamlayarak müşteri güvenini ve memnuniyetini en üst seviyeye çıkarın. Zamanında teslimat, zamanında kazanç demektir!",
+            proofs: ["Geniş Depo Ağı"],
+            icon: "🚚",
+            impact: 9,
+            uniqueness: 7,
+            differentiation: 6,
+          },
+          {
+            id: 11,
+            title: "Sağlıklı İç Mekan Havası",
+            summary:
+              "Floorscore sertifikalı parkeler ile iç mekan hava kalitesine katkı sağlayın.",
+            narrative:
+              "Müşterileriniz evlerinin iç hava kalitesi ve sağlık üzerindeki etkileri konusunda endişeli mi? AGT'nin FloorScore sertifikalı parkeleriyle bu endişeleri giderin. Ürünlerimiz düşük VOC emisyonlarıyla evinizin havasını temiz tutar, özellikle çocuklu ve hassas bünyeli aileler için güvenli ve sağlıklı bir yaşam alanı sunar. Onlara sadece güzel değil, aynı zamanda nefes alınabilir bir ev vadediyoruz.",
+            proofs: ["FloorScore", "E0 Emisyon", "CARB"],
+            icon: "🌬️",
+            impact: 10,
+            uniqueness: 9,
+            differentiation: 8,
+          },
+        ];
+
+        const parkeCertifications = [
+          {
+            name: "FloorScore",
+            desc: "Düşük VOC emisyonlarını garanti eder, sağlıklı iç hava kalitesi sağlar.",
+          },
+          {
+            name: "CE",
+            desc: "Avrupa Birliği sağlık, güvenlik ve çevre koruma standartlarına uygunluk.",
+          },
+          {
+            name: "E1 / E0",
+            desc: "Düşük formaldehit emisyon seviyelerini belirtir, iç hava kalitesine katkıda bulunur.",
+          },
+          {
+            name: "EN13329",
+            desc: "Laminat parke için Avrupa genel performans ve dayanıklılık standardı.",
+          },
+          { name: "TSE", desc: "Türk Standartları Enstitüsü kalite onayı." },
+          {
+            name: "Bfl S1",
+            desc: "Düşük alev yayılımı ile yüksek yangın güvenliği sınıfı.",
+          },
+          {
+            name: "ISO 4760",
+            desc: "Parke su direnci için uluslararası standart.",
+          },
+          { name: "FSC", desc: "Sorumlu ve sürdürülebilir orman yönetimi." },
+          {
+            name: "PEFC",
+            desc: "Sürdürülebilir orman yönetimi uygulamaları onayı.",
+          },
+          {
+            name: "Sıfır Atık Sertifikası",
+            desc: "Üretim süreçlerinde atık yönetiminde yüksek standartlara ulaşıldığını gösterir.",
+          },
+          {
+            name: "Çevresel Ürün Beyanı (EPD)",
+            desc: "Bir ürünün yaşam döngüsü boyunca çevresel performansının şeffaf bir şekilde beyan edildiğini gösterir.",
+          },
+          {
+            name: "CARB Sertifikası",
+            desc: "Formaldehit emisyonları için katı standartlara uygunluğu gösterir, sağlıklı iç mekan havasını destekler.",
+          },
+        ];
+
+        const vpGrid = document.getElementById("vp-grid");
+        valuePropositions.forEach((vp) => {
+          const card = document.createElement("div");
+          card.className =
+            "value-prop-card cursor-pointer bg-white p-3 rounded-lg text-center border border-gray-200";
+          card.dataset.id = vp.id;
+          card.innerHTML = `
+                    <div class="text-3xl mb-2">${vp.icon}</div>
+                    <h5 class="font-semibold text-sm text-[#1A3A53]">${vp.title}</h5>
+                `;
+          vpGrid.appendChild(card);
+        });
+
+        function createCertElements(certArray, containerId) {
+          const container = document.getElementById(containerId);
+          container.innerHTML = "";
+          certArray.forEach((cert) => {
+            const certEl = document.createElement("div");
+            certEl.className = "cert-tag";
+            certEl.innerHTML = `
+                        <span>${cert.name}</span>
+                        <div class="cert-tooltip">${cert.desc}</div>
+                    `;
+            container.appendChild(certEl);
+          });
+        }
+
+        createCertElements(parkeCertifications, "certs-parke");
+
+        const modal = document.getElementById("vp-modal");
+        const modalClose = document.getElementById("modal-close");
+        const modalTitle = document.getElementById("modal-title");
+        const modalSummary = document.getElementById("modal-summary");
+        const modalNarrative = document.getElementById("modal-narrative");
+        const modalProofs = document.getElementById("modal-proofs");
+
+        vpGrid.addEventListener("click", function (e) {
+          const card = e.target.closest(".value-prop-card");
+          if (card) {
+            const vpId = parseInt(card.dataset.id);
+            const vpData = valuePropositions.find((vp) => vp.id === vpId);
+
+            modalTitle.textContent = vpData.title;
+            modalSummary.textContent = vpData.summary;
+            modalNarrative.textContent = vpData.narrative;
+
+            modalProofs.innerHTML = "";
+            vpData.proofs.forEach((proof) => {
+              const proofEl = document.createElement("span");
+              proofEl.className =
+                "bg-gray-200 text-gray-700 text-sm font-medium px-2.5 py-0.5 rounded-full";
+              proofEl.textContent = proof;
+              modalProofs.appendChild(proofEl);
+            });
+
+            modal.classList.remove("opacity-0", "pointer-events-none");
+            modal.querySelector(".modal-content").classList.remove("scale-95");
+          }
+        });
+
+        function closeModal() {
+          modal.classList.add("opacity-0", "pointer-events-none");
+          modal.querySelector(".modal-content").classList.add("scale-95");
+        }
+
+        modalClose.addEventListener("click", closeModal);
+        modal.addEventListener("click", function (e) {
+          if (e.target === modal) {
+            closeModal();
+          }
+        });
+
+        const ctx = document.getElementById("valuePropChart").getContext("2d");
+        new Chart(ctx, {
+          type: "bubble",
+          data: {
+            datasets: valuePropositions.map((vp) => ({
+              label: vp.title,
+              data: [
+                {
+                  x: vp.impact,
+                  y: vp.uniqueness,
+                  r: vp.differentiation * 1.5,
+                },
+              ],
+              backgroundColor: `rgba(166, 123, 91, ${
+                0.4 + vp.differentiation / 20
+              })`,
+              borderColor: "#A67B5B",
+              borderWidth: 2,
+            })),
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                display: false,
+              },
+              tooltip: {
+                backgroundColor: "#1A3A53",
+                titleColor: "white",
+                bodyColor: "white",
+                callbacks: {
+                  label: function (context) {
+                    let label = context.dataset.label || "";
+                    if (label) {
+                      label += ": ";
+                    }
+                    const dataPoint = context.raw;
+                    label += `(Müşteri Etkisi: ${dataPoint.x}, AGT Üstünlüğü: ${
+                      dataPoint.y
+                    }, Pazar Farklılaşması: ${dataPoint.r / 1.5})`;
+                    return label;
+                  },
+                },
+              },
+            },
+            scales: {
+              x: {
+                title: {
+                  display: true,
+                  text: "Müşteri Etkisi →",
+                  font: { weight: "bold", size: 14, color: "#333D4B" },
+                },
+                min: 5,
+                max: 11,
+                ticks: { color: "#333D4B" },
+                grid: { color: "#EFE8E1" },
+              },
+              y: {
+                title: {
+                  display: true,
+                  text: "AGT Teknolojik Üstünlüğü →",
+                  font: { weight: "bold", size: 14, color: "#333D4B" },
+                },
+                min: 5,
+                max: 11,
+                ticks: { color: "#333D4B" },
+                grid: { color: "#EFE8E1" },
+              },
+            },
+          },
+        });
+      });
+    </script>
+  </body>
+</html>
