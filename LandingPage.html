@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      NeoGraftX Doktor Portalı - Yönlendirmelerinizi Anlık Takip Edin
+    </title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        line-height: 1.6;
+        color: #333;
+        overflow-x: hidden;
+      }
+
+      /* Navigation */
+      .navbar {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+        padding: 1rem 0;
+        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 2rem;
+      }
+
+      .logo {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #2563eb;
+        text-decoration: none;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: #333;
+        font-weight: 500;
+        transition: color 0.3s ease;
+      }
+
+      .nav-links a:hover {
+        color: #2563eb;
+      }
+
+      .nav-buttons {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .btn {
+        padding: 0.75rem 1.5rem;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+        font-size: 0.9rem;
+      }
+
+      .btn-secondary {
+        background: transparent;
+        color: #2563eb;
+        border: 2px solid #2563eb;
+      }
+
+      .btn-secondary:hover {
+        background: #2563eb;
+        color: white;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, #2563eb, #1d4ed8);
+        color: white;
+        box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+      }
+
+      /* Hero Section */
+      .hero {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+        opacity: 0.3;
+      }
+
+      .hero-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        color: white;
+      }
+
+      .hero h1 {
+        font-size: 3.5rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        line-height: 1.2;
+      }
+
+      .hero h2 {
+        font-size: 1.5rem;
+        font-weight: 400;
+        margin-bottom: 2rem;
+        opacity: 0.9;
+      }
+
+      .hero .btn-primary {
+        font-size: 1.1rem;
+        padding: 1rem 2rem;
+        margin-bottom: 1rem;
+      }
+
+      .hero-subtitle {
+        font-size: 0.9rem;
+        opacity: 0.8;
+      }
+
+      /* Trust Section */
+      .trust-section {
+        background: white;
+        padding: 3rem 0;
+        text-align: center;
+      }
+
+      .trust-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+
+      .trust-title {
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-bottom: 2rem;
+        color: #666;
+      }
+
+      .trust-logos {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 3rem;
+        flex-wrap: wrap;
+      }
+
+      .trust-logo {
+        background: #f8fafc;
+        padding: 1rem 2rem;
+        border-radius: 12px;
+        font-weight: 600;
+        color: #64748b;
+        border: 2px solid #e2e8f0;
+      }
+
+      /* Features Section */
+      .features {
+        background: #f8fafc;
+        padding: 5rem 0;
+      }
+
+      .features-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+
+      .section-title {
+        text-align: center;
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: #1e293b;
+      }
+
+      .section-subtitle {
+        text-align: center;
+        font-size: 1.2rem;
+        color: #64748b;
+        margin-bottom: 4rem;
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 2rem;
+      }
+
+      .feature-card {
+        background: white;
+        padding: 2.5rem;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+      }
+
+      .feature-icon {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, #2563eb, #1d4ed8);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1.5rem;
+        color: white;
+        font-size: 1.5rem;
+      }
+
+      .feature-title {
+        font-size: 1.3rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        color: #1e293b;
+      }
+
+      .feature-description {
+        color: #64748b;
+        line-height: 1.7;
+      }
+
+      /* Demo Section */
+      .demo-section {
+        background: white;
+        padding: 5rem 0;
+      }
+
+      .demo-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+      }
+
+      .demo-content h2 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        color: #1e293b;
+      }
+
+      .demo-content p {
+        font-size: 1.1rem;
+        color: #64748b;
+        margin-bottom: 2rem;
+        line-height: 1.7;
+      }
+
+      .demo-image {
+        background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+        border-radius: 16px;
+        padding: 2rem;
+        position: relative;
+        min-height: 400px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .demo-image::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600"><rect width="800" height="600" fill="%23f8fafc"/><rect x="50" y="50" width="700" height="500" rx="8" fill="white" stroke="%23e2e8f0" stroke-width="2"/><rect x="70" y="80" width="200" height="30" rx="4" fill="%23e2e8f0"/><rect x="70" y="130" width="150" height="20" rx="4" fill="%23f1f5f9"/><rect x="70" y="160" width="180" height="20" rx="4" fill="%23f1f5f9"/><rect x="70" y="190" width="120" height="20" rx="4" fill="%23f1f5f9"/><rect x="300" y="80" width="400" height="200" rx="8" fill="%23f1f5f9"/><rect x="320" y="100" width="360" height="30" rx="4" fill="%23e2e8f0"/><rect x="320" y="140" width="100" height="40" rx="4" fill="%232563eb"/><rect x="440" y="140" width="100" height="40" rx="4" fill="%23f1f5f9"/><rect x="560" y="140" width="100" height="40" rx="4" fill="%23f1f5f9"/><rect x="70" y="300" width="300" height="150" rx="8" fill="%23f1f5f9"/><rect x="90" y="320" width="260" height="20" rx="4" fill="%23e2e8f0"/><rect x="90" y="350" width="120" height="15" rx="4" fill="%23e2e8f0"/><rect x="90" y="375" width="100" height="15" rx="4" fill="%23e2e8f0"/><rect x="90" y="400" width="80" height="15" rx="4" fill="%23e2e8f0"/><rect x="400" y="300" width="300" height="150" rx="8" fill="%23f1f5f9"/><rect x="420" y="320" width="260" height="20" rx="4" fill="%23e2e8f0"/><rect x="420" y="350" width="120" height="15" rx="4" fill="%23e2e8f0"/><rect x="420" y="375" width="100" height="15" rx="4" fill="%23e2e8f0"/><rect x="420" y="400" width="80" height="15" rx="4" fill="%23e2e8f0"/></svg>');
+        background-size: cover;
+        border-radius: 16px;
+      }
+
+      .video-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: #f1f5f9;
+        color: #64748b;
+        padding: 0.75rem 1.5rem;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+
+      .video-btn:hover {
+        background: #e2e8f0;
+        color: #475569;
+      }
+
+      /* How It Works */
+      .how-it-works {
+        background: #f8fafc;
+        padding: 5rem 0;
+      }
+
+      .steps-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+
+      .steps-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+      }
+
+      .step-card {
+        background: white;
+        padding: 2rem;
+        border-radius: 16px;
+        text-align: center;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        position: relative;
+      }
+
+      .step-number {
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, #2563eb, #1d4ed8);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 700;
+        font-size: 1.2rem;
+        margin: 0 auto 1.5rem;
+      }
+
+      .step-title {
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        color: #1e293b;
+      }
+
+      .step-description {
+        color: #64748b;
+        line-height: 1.6;
+      }
+
+      /* Trust & Compliance */
+      .trust-compliance {
+        background: white;
+        padding: 5rem 0;
+      }
+
+      .compliance-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+
+      .compliance-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        margin-top: 3rem;
+      }
+
+      .compliance-card {
+        background: #f8fafc;
+        padding: 2.5rem;
+        border-radius: 16px;
+        border-left: 4px solid #2563eb;
+      }
+
+      .compliance-title {
+        font-size: 1.3rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        color: #1e293b;
+      }
+
+      .compliance-text {
+        color: #64748b;
+        line-height: 1.7;
+        margin-bottom: 1.5rem;
+      }
+
+      .compliance-badge {
+        display: inline-block;
+        background: #2563eb;
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+        font-weight: 600;
+        font-size: 0.9rem;
+      }
+
+      /* CTA Section */
+      .cta-section {
+        background: linear-gradient(135deg, #2563eb, #1d4ed8);
+        padding: 5rem 0;
+        text-align: center;
+        color: white;
+      }
+
+      .cta-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+
+      .cta-section h2 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+      }
+
+      .cta-section p {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+        opacity: 0.9;
+      }
+
+      /* FAQ Section */
+      .faq-section {
+        background: #f8fafc;
+        padding: 5rem 0;
+      }
+
+      .faq-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+
+      .faq-item {
+        background: white;
+        margin-bottom: 1rem;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      }
+
+      .faq-question {
+        padding: 1.5rem;
+        background: white;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: 600;
+        color: #1e293b;
+        transition: background 0.3s ease;
+      }
+
+      .faq-question:hover {
+        background: #f8fafc;
+      }
+
+      .faq-answer {
+        padding: 0 1.5rem 1.5rem;
+        color: #64748b;
+        line-height: 1.6;
+        display: none;
+      }
+
+      .faq-answer.active {
+        display: block;
+      }
+
+      .faq-toggle {
+        background: none;
+        border: none;
+        font-size: 1.2rem;
+        color: #64748b;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+      }
+
+      .faq-toggle.active {
+        transform: rotate(45deg);
+      }
+
+      /* Footer */
+      .footer {
+        background: #1e293b;
+        color: white;
+        padding: 3rem 0 1rem;
+      }
+
+      .footer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-bottom: 2rem;
+      }
+
+      .footer-section h3 {
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+      }
+
+      .footer-section p {
+        color: #94a3b8;
+        line-height: 1.6;
+        margin-bottom: 1rem;
+      }
+
+      .footer-links {
+        list-style: none;
+      }
+
+      .footer-links li {
+        margin-bottom: 0.5rem;
+      }
+
+      .footer-links a {
+        color: #94a3b8;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .footer-links a:hover {
+        color: white;
+      }
+
+      .social-links {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .social-link {
+        width: 40px;
+        height: 40px;
+        background: #334155;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        text-decoration: none;
+        transition: background 0.3s ease;
+      }
+
+      .social-link:hover {
+        background: #2563eb;
+      }
+
+      .footer-bottom {
+        border-top: 1px solid #334155;
+        padding-top: 1rem;
+        text-align: center;
+        color: #94a3b8;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+        }
+
+        .hero h1 {
+          font-size: 2.5rem;
+        }
+
+        .demo-container {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+
+        .compliance-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .features-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .steps-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* Animations */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .fade-in-up {
+        animation: fadeInUp 0.6s ease-out;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <a href="#" class="logo">NeoGraftX</a>
+        <ul class="nav-links">
+          <li><a href="#features">Özellikler</a></li>
+          <li><a href="#how-it-works">Nasıl Çalışır?</a></li>
+          <li><a href="#faq">SSS</a></li>
+        </ul>
+        <div class="nav-buttons">
+          <a href="#" class="btn btn-secondary">Giriş Yap</a>
+          <a href="#cta" class="btn btn-primary">ÜCRETSİZ DEMO TALEP ET</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-content fade-in-up">
+        <h1>NeoGraftX Doktor Portalı: Yönlendirmelerinizi Anlık Takip Edin</h1>
+        <h2>
+          Randevu, işlem ve komisyon ödemelerinizi tek ekranda görün,
+          otomasyonla iş akışınızı güçlendirin.
+        </h2>
+        <a href="#cta" class="btn btn-primary">ÜCRETSİZ DEMO TALEP ET</a>
+        <p class="hero-subtitle">Kredi kartı gerekmez. Kurulum ücreti yok.</p>
+      </div>
+    </section>
+
+    <!-- Trust Section -->
+    <section class="trust-section">
+      <div class="trust-container">
+        <h3 class="trust-title">BİZE GÜVENEN KLİNİKLER VE CERRAHLAR:</h3>
+        <div class="trust-logos">
+          <div class="trust-logo">Dr. Barış Çakır</div>
+          <div class="trust-logo">Dr. Serdar Eren</div>
+          <div class="trust-logo">Estetik Klinik</div>
+          <div class="trust-logo">Sağlık Grubu</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+      <div class="features-container">
+        <h2 class="section-title">Tüm Süreçler Tek Ekranda, Kontrol Sizde</h2>
+        <p class="section-subtitle">
+          Yönlendirdiğiniz hastalarınızla ilgili her adımı şeffaf bir şekilde
+          izleyin ve yönetin.
+        </p>
+
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-calendar-alt"></i>
+            </div>
+            <h3 class="feature-title">Anlık Randevu Takibi</h3>
+            <p class="feature-description">
+              Bekleyen, onaylanan ve tamamlanan tüm randevuları anlık olarak
+              görün. Otomatik bildirimlerle hasta takibini kolaylaştırın, iptal
+              oranını minimize edin.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-stethoscope"></i>
+            </div>
+            <h3 class="feature-title">Şeffaf Operasyon Süreci</h3>
+            <p class="feature-description">
+              Hastanızın operasyon sürecinin her aşamasından (Planlandı, Devam
+              Ediyor, Bitti) haberdar olun. Karmaşık bilgi akışını ortadan
+              kaldırın.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-wallet"></i>
+            </div>
+            <h3 class="feature-title">Otomatik Komisyon Yönetimi</h3>
+            <p class="feature-description">
+              Bekleyen ve tamamlanan ödemelerinizi net bir şekilde görüntüleyin.
+              Hak edişleriniz otomatik hesaplansın ve zamanında hesabınıza
+              yatsın.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section class="demo-section">
+      <div class="demo-container">
+        <div class="demo-content">
+          <h2>Kullanıcı Dostu Arayüzü Yakından Görün</h2>
+          <p>
+            Karmaşadan uzak, sadece ihtiyacınız olan bilgilere odaklanan modern
+            bir dashboard deneyimi.
+          </p>
+          <a href="#" class="video-btn">
+            <i class="fas fa-play"></i>
+            VİDEO TANITIMI İZLE (1:45)
+          </a>
+        </div>
+        <div class="demo-image">
+          <!-- Dashboard mockup will be displayed here -->
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works" id="how-it-works">
+      <div class="steps-container">
+        <h2 class="section-title">Sadece 4 Adımda Zahmetsiz Süreç</h2>
+        <p class="section-subtitle">
+          Hasta yönlendirmeden ödeme almaya kadar tüm süreci sizin için
+          basitleştirdik.
+        </p>
+
+        <div class="steps-grid">
+          <div class="step-card">
+            <div class="step-number">1</div>
+            <h3 class="step-title">HASTA YÖNLENDİRİN</h3>
+            <p class="step-description">
+              Portala giriş yapın ve birkaç temel bilgiyle hastanızı sisteme
+              saniyeler içinde kaydedin.
+            </p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-number">2</div>
+            <h3 class="step-title">RANDEVU OLUŞTURULSUN</h3>
+            <p class="step-description">
+              Ekibimiz hastayla iletişime geçer ve uygun randevuyu oluşturur.
+              Tüm süreci panelinizden takip edebilirsiniz.
+            </p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-number">3</div>
+            <h3 class="step-title">SİSTEM HESAPLASIN</h3>
+            <p class="step-description">
+              Operasyon başarıyla tamamlandığında, sistem tanımlı komisyon
+              oranınıza göre hak edişinizi otomatik olarak hesaplar.
+            </p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-number">4</div>
+            <h3 class="step-title">ÖDEMENİZ YAPILSIN</h3>
+            <p class="step-description">
+              Hesaplanan komisyon tutarınız, operasyon sonrası en geç 7 iş günü
+              içinde belirttiğiniz hesaba otomatik olarak aktarılır.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Trust & Compliance -->
+    <section class="trust-compliance">
+      <div class="compliance-container">
+        <h2 class="section-title">Güvenli, Şeffaf ve Yasalara Tam Uyumlu</h2>
+        <p class="section-subtitle">
+          Hasta verileri ve ticari bilgileriniz bizimle güvende.
+        </p>
+
+        <div class="compliance-grid">
+          <div class="compliance-card">
+            <h3 class="compliance-title">Veri Güvenliği ve Uyumluluk</h3>
+            <p class="compliance-text">
+              Platformumuz, hasta mahremiyetini ve veri güvenliğini en üst
+              düzeyde tutar. Tüm süreçlerimiz
+              <strong>KVKK (Kişisel Verilerin Korunması Kanunu)</strong> ile
+              %100 uyumludur.
+            </p>
+          </div>
+
+          <div class="compliance-card">
+            <h3 class="compliance-title">Uluslararası Standartlar</h3>
+            <p class="compliance-text">
+              Yönlendirme modelimiz, uluslararası sağlık hukuku standartlarına
+              ve etik kurallara uygun olarak tasarlanmıştır.
+            </p>
+            <div class="compliance-badge">STARK LAW & ANTI-KICKBACK UYUMLU</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="cta">
+      <div class="cta-container">
+        <h2>NeoGraftX'in Verimliliğini Deneyimlemeye Hazır mısınız?</h2>
+        <p>
+          Hemen demo talep edin ve yönlendirme süreçlerinizi nasıl otomatize
+          edebileceğinizi uzman ekibimizle birlikte keşfedin.
+        </p>
+        <a
+          href="#"
+          class="btn btn-primary"
+          style="
+            background: white;
+            color: #2563eb;
+            font-size: 1.1rem;
+            padding: 1rem 2rem;
+          "
+          >ÜCRETSİZ DEMO TALEP ET</a
+        >
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section" id="faq">
+      <div class="faq-container">
+        <h2 class="section-title">Aklınızdaki Sorular</h2>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(this)">
+            Ödeme takibini nasıl yapıyorum?
+            <button class="faq-toggle">+</button>
+          </div>
+          <div class="faq-answer">
+            Portal içerisindeki "Ödemeler" bölümünden tamamlanan operasyonlara
+            ait hak edişlerinizi, ödeme tarihlerini ve toplam kazancınızı anlık
+            olarak takip edebilirsiniz.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(this)">
+            Hasta bilgileri nasıl korunuyor?
+            <button class="faq-toggle">+</button>
+          </div>
+          <div class="faq-answer">
+            Tüm veriler uçtan uca şifreleme ile korunmakta ve KVKK
+            standartlarına uygun güvenli sunucularda saklanmaktadır. Hasta
+            verilerine sadece yetkili kişiler erişebilir.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(this)">
+            Platformu kullanmanın maliyeti nedir?
+            <button class="faq-toggle">+</button>
+          </div>
+          <div class="faq-answer">
+            NeoGraftX portalının kullanımı için herhangi bir abonelik veya
+            başlangıç ücreti yoktur. Modelimiz, yalnızca başarıyla tamamlanan
+            operasyonlar üzerinden komisyon esasına dayanır. Detaylı bilgi için
+            demo talebinde bulunabilirsiniz.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-grid">
+          <div class="footer-section">
+            <h3>NeoGraftX</h3>
+            <p>Yönlendirme süreçlerinizi dijitalleştirin.</p>
+            <p>
+              <strong>İletişim:</strong><br />
+              info@neograftx.com<br />
+              +90 212 123 45 67
+            </p>
+          </div>
+
+          <div class="footer-section">
+            <h3>Hızlı Linkler</h3>
+            <ul class="footer-links">
+              <li><a href="#">Gizlilik Politikası</a></li>
+              <li><a href="#">Kullanım Koşulları</a></li>
+              <li><a href="#faq">SSS</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-section">
+            <h3>Bizi Takip Edin</h3>
+            <div class="social-links">
+              <a href="#" class="social-link">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+              <a href="#" class="social-link">
+                <i class="fab fa-instagram"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>© 2024 NeoGraftX. Tüm hakları saklıdır.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // FAQ Toggle Function
+      function toggleFAQ(element) {
+        const answer = element.nextElementSibling;
+        const toggle = element.querySelector(".faq-toggle");
+
+        if (answer.classList.contains("active")) {
+          answer.classList.remove("active");
+          toggle.classList.remove("active");
+          toggle.textContent = "+";
+        } else {
+          answer.classList.add("active");
+          toggle.classList.add("active");
+          toggle.textContent = "×";
+        }
+      }
+
+      // Smooth scrolling for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        });
+      });
+
+      // Add scroll effect to navbar
+      window.addEventListener("scroll", function () {
+        const navbar = document.querySelector(".navbar");
+        if (window.scrollY > 100) {
+          navbar.style.background = "rgba(255, 255, 255, 0.98)";
+        } else {
+          navbar.style.background = "rgba(255, 255, 255, 0.95)";
+        }
+      });
+
+      // Add animation on scroll
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver(function (entries) {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("fade-in-up");
+          }
+        });
+      }, observerOptions);
+
+      // Observe all sections
+      document.querySelectorAll("section").forEach((section) => {
+        observer.observe(section);
+      });
+    </script>
+  </body>
+</html>
