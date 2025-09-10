@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Acarkent Coliseum: 2025 Son Çeyrek Pazarlama Stratejisi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #f8fafc;
+      }
+      .chart-container {
+        position: relative;
+        width: 100%;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        height: 350px;
+        max-height: 400px;
+      }
+      @media (max-width: 768px) {
+        .chart-container {
+          height: 300px;
+        }
+      }
+      .kpi-card {
+        background-color: #556270;
+        color: white;
+      }
+      .kpi-value {
+        font-size: 3rem;
+        font-weight: 800;
+        line-height: 1;
+        color: #4ecdc4;
+      }
+      .timeline-item::before {
+        content: "";
+        position: absolute;
+        left: 1.25rem;
+        top: 1.25rem;
+        bottom: -1.25rem;
+        width: 2px;
+        background-color: #e5e7eb;
+        transform: translateX(-50%);
+      }
+      .timeline-item:last-child::before {
+        display: none;
+      }
+      .timeline-marker {
+        position: absolute;
+        left: 1.25rem;
+        top: 1.25rem;
+        height: 1rem;
+        width: 1rem;
+        border-radius: 9999px;
+        transform: translateX(-50%);
+      }
+    </style>
+  </head>
+  <body class="text-[#556270]">
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8">
+      <header class="text-center mb-12">
+        <h1 class="text-4xl md:text-5xl font-extrabold text-[#45B7D1] mb-2">
+          Acarkent Coliseum
+        </h1>
+        <p class="text-xl md:text-2xl font-semibold">
+          2025 Son Çeyrek Büyüme Stratejisi: Mahallenin Sağlıklı Yaşam Merkezi
+        </p>
+      </header>
+
+      <main class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div class="lg:col-span-3 bg-white rounded-lg shadow-lg p-6">
+          <h2 class="text-2xl font-bold mb-4 text-[#FF6B6B]">
+            Son Çeyrek Misyonumuz: Büyük Resim
+          </h2>
+          <p class="mb-6">
+            2025'in son çeyreği, Acarkent Coliseum'un Beykoz bölgesindeki lider
+            sağlıklı yaşam merkezi konumunu sağlamlaştırmak için kritik bir
+            dönemdir. Stratejimiz, bütünsel sağlık yaklaşımımızı, güçlü topluluk
+            bağlarımızı ve aile odaklı ortamımızı vurgulayarak üye sayımızda
+            anlamlı bir artış sağlamaya odaklanmıştır. Başarıyı ölçeceğimiz
+            temel performans göstergelerimiz bunlardır.
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
+            <div class="kpi-card rounded-lg p-6">
+              <div class="kpi-value"></div>
+              <div class="mt-2 font-semibold">Yeni Üye Kazanımı</div>
+            </div>
+            <div class="kpi-card rounded-lg p-6">
+              <div class="kpi-value"></div>
+              <div class="mt-2 font-semibold">Kadın Üye Oranı Hedefi</div>
+            </div>
+            <div class="kpi-card rounded-lg p-6">
+              <div class="kpi-value"></div>
+              <div class="mt-2 font-semibold">Sosyal Medya Etkileşimi</div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="lg:col-span-1 bg-white rounded-lg shadow-lg p-6 flex flex-col"
+        >
+          <h2 class="text-2xl font-bold mb-4 text-[#FF6B6B]">
+            Topluluğumuz: Hedef Kitle
+          </h2>
+          <p class="mb-4 text-sm">
+            Odağımızda Acarkent, Beykoz ve Çubuklu'da yaşayan, rahatına ve
+            kaliteye değer veren, özellikle 35 yaş üstü, bir topluluğa ait olma
+            hissini arayan kadınlar yer alıyor.
+          </p>
+          <div class="chart-container flex-grow">
+            <canvas id="genderRatioChart"></canvas>
+          </div>
+          <p class="text-center text-sm mt-2 font-medium">
+            Üye demografimizi, %55 kadın üye hedefine ulaşarak topluluğumuzu
+            daha iyi yansıtacak şekilde dönüştürmeyi amaçlıyoruz.
+          </p>
+        </div>
+
+        <div class="lg:col-span-2 bg-white rounded-lg shadow-lg p-6">
+          <h2 class="text-2xl font-bold mb-4 text-[#FF6B6B]">
+            Rekabet Analizi
+          </h2>
+          <p class="mb-4">
+            Pazar, salt fitness'tan bütünsel sağlığa doğru kayıyor. Hillside ve
+            Clubhouse gibi rakipler niş premium hizmetlere odaklanırken, MAC
+            agresif bir şekilde büyüyor. Coliseum ise aile dostu, ulaşılabilir
+            ve toplulukla bütünleşmiş wellness konseptiyle lider olmak için
+            eşsiz bir fırsata sahip.
+          </p>
+          <div class="chart-container">
+            <canvas id="competitorChart"></canvas>
+          </div>
+        </div>
+
+        <div class="lg:col-span-3 bg-white rounded-lg shadow-lg p-6">
+          <h2 class="text-2xl font-bold mb-4 text-[#FF6B6B]">
+            Stratejik Yol Haritası: Detaylı 3 Aylık Eylem Planı
+          </h2>
+          <p class="mb-6">
+            Son çeyrek stratejimiz, kadın üyelerimizi merkeze alan ve uzun
+            vadeli sadakat oluşturmayı hedefleyen detaylı eylemler üzerine
+            kuruludur. Her ay, yeni hizmetler, özel etkinlikler ve hedefli
+            iletişimle sürdürülebilir bir büyüme ivmesi yaratacağız.
+          </p>
+
+          <div class="space-y-8">
+            <div>
+              <h3
+                class="text-2xl font-bold text-[#F7B801] border-b-2 border-[#F7B801] pb-2 mb-4"
+              >
+                Ekim: Rutine ve Kendine Dönüş
+              </h3>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <h4 class="font-bold">Pazarlama ve İletişim</h4>
+                  <ul class="list-disc list-inside mt-2 text-sm space-y-1">
+                    <li>
+                      "Sağlıklı Yaşa, İyi Hisset" kampanyası ile kadınları
+                      hedefleyen dijital reklamlar (Instagram, Facebook).
+                    </li>
+                    <li>
+                      Başarılı kadın üyelerin ilham veren hikayelerini içeren
+                      video ve blog içerikleri.
+                    </li>
+                    <li>
+                      Kadın eğitmenlerimizi ve uzmanlarımızı öne çıkaran sosyal
+                      medya paylaşımları.
+                    </li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 class="font-bold">Ürün ve Hizmet Geliştirme</h4>
+                  <ul class="list-disc list-inside mt-2 text-sm space-y-1">
+                    <li>
+                      Yeni Grup Dersleri: "Postür ve Esneklik", "Menopoz Dönemi
+                      için Pilates", "Kadınlara Özel Fonksiyonel Antrenman".
+                    </li>
+                    <li>
+                      "Mindful Yoga" ve "Nefes Teknikleri" atölyeleri ile
+                      zihinsel sağlığa odaklanma.
+                    </li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 class="font-bold">Topluluk ve Etkinlikler</h4>
+                  <ul class="list-disc list-inside mt-2 text-sm space-y-1">
+                    <li>
+                      "Kadın Sağlığı Sohbetleri" seminer serisi (Beslenme,
+                      hormonal denge, stres yönetimi).
+                    </li>
+                    <li>
+                      "Arkadaşını Getir, Birlikte Güçlen" referans programını
+                      özel teşviklerle yeniden başlatma.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h3
+                class="text-2xl font-bold text-[#4ECDC4] border-b-2 border-[#4ECDC4] pb-2 mb-4"
+              >
+                Kasım: Değer ve Aile Odaklı Ay
+              </h3>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <h4 class="font-bold">Pazarlama ve İletişim</h4>
+                  <ul class="list-disc list-inside mt-2 text-sm space-y-1">
+                    <li>
+                      "Kendine Vakit Ayır" temalı Black Friday kampanyası: Spa,
+                      masaj ve kişisel antrenman paketlerinde özel indirimler.
+                    </li>
+                    <li>
+                      Yerel kadın girişimci dernekleri ve gruplarıyla işbirliği
+                      ve tanıtım çalışmaları.
+                    </li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 class="font-bold">Üyelik ve Sadakat</h4>
+                  <ul class="list-disc list-inside mt-2 text-sm space-y-1">
+                    <li>
+                      "1 Yıllık Sağlık Yatırımı" paketi: Taksit seçenekleri ve
+                      ücretsiz wellness danışmanlığı ile uzun vadeli üyeliği
+                      teşvik etme.
+                    </li>
+                    <li>
+                      Mevcut üyelere özel "sadakat indirimi" ile yenilemeleri
+                      teşvik etme.
+                    </li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 class="font-bold">Topluluk ve Etkinlikler</h4>
+                  <ul class="list-disc list-inside mt-2 text-sm space-y-1">
+                    <li>
+                      "Anneler ve Kızları" Yoga & Brunch etkinliği ile aile
+                      bağlarını güçlendirme.
+                    </li>
+                    <li>
+                      "Açık Kapı Aile Günü": Potansiyel üyelerin aileleriyle
+                      tesisi deneyimlemesi için bir hafta sonu etkinliği.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h3
+                class="text-2xl font-bold text-[#45B7D1] border-b-2 border-[#45B7D1] pb-2 mb-4"
+              >
+                Aralık: Sürdürülebilir Yeni Başlangıçlar
+              </h3>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <h4 class="font-bold">Pazarlama ve İletişim</h4>
+                  <ul class="list-disc list-inside mt-2 text-sm space-y-1">
+                    <li>
+                      "Yeni Yılda Kalıcı Sağlık" kampanyası: Kısa vadeli
+                      hedefler yerine sürdürülebilir alışkanlıklara odaklanan
+                      içerikler.
+                    </li>
+                    <li>
+                      Kurumsal üyelik paketlerini bölgedeki şirketlerin İK
+                      departmanlarına tanıtma.
+                    </li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 class="font-bold">Ürün ve Hizmet Geliştirme</h4>
+                  <ul class="list-disc list-inside mt-2 text-sm space-y-1">
+                    <li>
+                      "Coliseum Kadınlar Kulübü" Lansmanı: Sadık kadın üyelere
+                      özel etkinlikler, atölyeler ve marka indirimleri sunan bir
+                      program.
+                    </li>
+                    <li>
+                      Online Beslenme ve Diyet Danışmanlığı hizmetini başlatma.
+                    </li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 class="font-bold">Topluluk ve Etkinlikler</h4>
+                  <ul class="list-disc list-inside mt-2 text-sm space-y-1">
+                    <li>
+                      "2026 Sağlık Hedeflerini Belirleme ve Planlama" atölyesi.
+                    </li>
+                    <li>
+                      Üyelere özel, sağlıklı atıştırmalıkların sunulduğu Yılbaşı
+                      Partisi.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const energeticPlayfulPalette = {
+          coral: "#FF6B6B",
+          turquoise: "#4ECDC4",
+          blue: "#45B7D1",
+          yellow: "#F7B801",
+          darkGray: "#556270",
+          lightGray: "#C7F464",
+        };
+
+        const processLabels = (labels) => {
+          return labels.map((label) => {
+            if (typeof label === "string" && label.length > 16) {
+              const words = label.split(" ");
+              const newLabel = [];
+              let line = "";
+              words.forEach((word) => {
+                if ((line + word).length > 16) {
+                  newLabel.push(line.trim());
+                  line = "";
+                }
+                line += word + " ";
+              });
+              newLabel.push(line.trim());
+              return newLabel;
+            }
+            return label;
+          });
+        };
+
+        const tooltipTitleCallback = {
+          plugins: {
+            tooltip: {
+              callbacks: {
+                title: function (tooltipItems) {
+                  const item = tooltipItems[0];
+                  let label = item.chart.data.labels[item.dataIndex];
+                  if (Array.isArray(label)) {
+                    return label.join(" ");
+                  } else {
+                    return label;
+                  }
+                },
+              },
+            },
+            legend: {
+              labels: {
+                boxWidth: 20,
+              },
+            },
+          },
+        };
+
+        const genderRatioCtx = document
+          .getElementById("genderRatioChart")
+          .getContext("2d");
+        new Chart(genderRatioCtx, {
+          type: "doughnut",
+          data: {
+            labels: ["Kadın Üye Hedefi", "Erkek Üye"],
+            datasets: [
+              {
+                label: "Cinsiyet Oranı Hedefi",
+                data: [55, 45],
+                backgroundColor: [
+                  energeticPlayfulPalette.coral,
+                  energeticPlayfulPalette.blue,
+                ],
+                borderColor: "#ffffff",
+                borderWidth: 4,
+                hoverOffset: 4,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            cutout: "70%",
+            plugins: {
+              legend: {
+                position: "bottom",
+              },
+              tooltip: tooltipTitleCallback.plugins.tooltip,
+            },
+          },
+        });
+
+        const competitorCtx = document
+          .getElementById("competitorChart")
+          .getContext("2d");
+        new Chart(competitorCtx, {
+          type: "bar",
+          data: {
+            labels: processLabels([
+              "Bütünsel Wellness Odağı",
+              "Aile Dostu Olma",
+              "Teknoloji Entegrasyonu",
+              "Premium Fiyatlandırma",
+            ]),
+            datasets: [
+              {
+                label: "Acarkent Coliseum",
+                data: [9, 9, 7, 10],
+                backgroundColor: energeticPlayfulPalette.turquoise,
+                borderColor: energeticPlayfulPalette.turquoise,
+                borderWidth: 1,
+              },
+              {
+                label: "Hillside/Clubhouse",
+                data: [9, 5, 7, 10],
+                backgroundColor: energeticPlayfulPalette.coral,
+                borderColor: energeticPlayfulPalette.coral,
+                borderWidth: 1,
+              },
+              {
+                label: "MAC/MACFit",
+                data: [6, 6, 9, 6],
+                backgroundColor: energeticPlayfulPalette.yellow,
+                borderColor: energeticPlayfulPalette.yellow,
+                borderWidth: 1,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              y: {
+                beginAtZero: true,
+                max: 10,
+                title: {
+                  display: true,
+                  text: "Puan (1-10)",
+                },
+              },
+            },
+            plugins: {
+              ...tooltipTitleCallback.plugins,
+              title: {
+                display: true,
+                text: "Rekabetçi Konumlandırma Puanı (Yüksek olan daha iyi/fazla)",
+              },
+            },
+          },
+        });
+      });
+    </script>
+  </body>
+</html>
