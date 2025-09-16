@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2be4A.com - Türkiye Pazarı Dijital Pazarlama Stratejisi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #f0f4f8;
+      }
+      .chart-container {
+        position: relative;
+        width: 100%;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        height: 300px;
+        max-height: 400px;
+      }
+      @media (min-width: 768px) {
+        .chart-container {
+          height: 350px;
+        }
+      }
+      .kpi-card::before {
+        content: var(--emoji);
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+        display: block;
+      }
+    </style>
+  </head>
+  <body class="text-gray-800">
+    <header class="bg-white shadow-md">
+      <div class="container mx-auto px-6 py-8 text-center">
+        <h1 class="text-4xl md:text-5xl font-extrabold text-[#005F73]">
+          2be4A.com Türkiye Pazarına Giriş Stratejisi
+        </h1>
+        <p class="mt-4 text-lg text-[#0A9396]">
+          Entegre Dijital Pazarlama Yol Haritası ile Marka Bilinirliği ve
+          Sürdürülebilir Büyüme
+        </p>
+      </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+      <section id="consumer-behavior" class="mb-16">
+        <h2 class="text-3xl font-bold text-center mb-8 text-[#005F73]">
+          Türk Tüketicisini Anlamak: Dijital Alışkanlıklar
+        </h2>
+        <p class="max-w-3xl mx-auto text-center mb-10 text-gray-600">
+          Başarılı bir strateji, hedef kitlenin dijital dünyadaki davranışlarını
+          derinlemesine anlamakla başlar. Türk tüketicileri dijital kanalları
+          aktif olarak kullanmakta ve online alışverişe büyük ilgi
+          göstermektedir.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div
+            class="bg-white rounded-lg shadow-lg p-6 flex flex-col justify-between"
+          >
+            <div>
+              <h3 class="text-xl font-bold text-center mb-4 text-[#005F73]">
+                Haftalık Online Alışveriş Oranı
+              </h3>
+              <div class="chart-container h-64 sm:h-72">
+                <canvas id="shoppingFrequencyChart"></canvas>
+              </div>
+            </div>
+            <p class="text-sm text-center mt-4 text-gray-600">
+              Türkiye'deki internet kullanıcılarının %66'sı haftada en az bir
+              kez online alışveriş yapıyor. Bu durum, e-ticaret kanallarının ne
+              kadar kritik olduğunu kanıtlıyor.
+            </p>
+          </div>
+          <div
+            class="bg-white rounded-lg shadow-lg p-6 flex flex-col justify-between"
+          >
+            <div>
+              <h3 class="text-xl font-bold text-center mb-4 text-[#005F73]">
+                En Popüler Sosyal Medya Platformları (2025)
+              </h3>
+              <div class="chart-container h-64 sm:h-72">
+                <canvas id="socialMediaChart"></canvas>
+              </div>
+            </div>
+            <p class="text-sm text-center mt-4 text-gray-600">
+              Toplam 58 milyon aktif sosyal medya kullanıcısı ile Türkiye, marka
+              bilinirliği ve hedef kitleye ulaşım için Instagram ve TikTok gibi
+              platformlarda büyük fırsatlar sunuyor.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="competition" class="mb-16">
+        <h2 class="text-3xl font-bold text-center mb-8 text-[#005F73]">
+          Rekabet Arenası
+        </h2>
+        <p class="max-w-3xl mx-auto text-center mb-10 text-gray-600">
+          Pazar, hem güçlü yerel markalar hem de global devler tarafından domine
+          edilmektedir. 2be4A.com'un bu rekabette sıyrılması için özgün bir
+          değer önerisi sunması gerekmektedir.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="bg-white rounded-lg shadow-lg p-8">
+            <h3 class="text-2xl font-bold mb-4 text-[#0A9396] text-center">
+              Güçlü Yerel Markalar
+            </h3>
+            <ul class="space-y-3 text-center">
+              <li class="text-lg font-semibold bg-blue-50 p-3 rounded-md">
+                Mavi
+              </li>
+              <li class="text-lg font-semibold bg-blue-50 p-3 rounded-md">
+                LC Waikiki
+              </li>
+              <li class="text-lg font-semibold bg-blue-50 p-3 rounded-md">
+                DeFacto
+              </li>
+              <li class="text-lg font-semibold bg-blue-50 p-3 rounded-md">
+                Koton
+              </li>
+              <li class="text-lg font-semibold bg-blue-50 p-3 rounded-md">
+                LTB & Colin's
+              </li>
+            </ul>
+          </div>
+          <div class="bg-white rounded-lg shadow-lg p-8">
+            <h3 class="text-2xl font-bold mb-4 text-[#0A9396] text-center">
+              Etkili Global Markalar
+            </h3>
+            <ul class="space-y-3 text-center">
+              <li class="text-lg font-semibold bg-teal-50 p-3 rounded-md">
+                Levi's
+              </li>
+              <li class="text-lg font-semibold bg-teal-50 p-3 rounded-md">
+                Zara
+              </li>
+              <li class="text-lg font-semibold bg-teal-50 p-3 rounded-md">
+                Mango
+              </li>
+              <li class="text-lg font-semibold bg-teal-50 p-3 rounded-md">
+                Jack & Jones
+              </li>
+              <li class="text-lg font-semibold bg-teal-50 p-3 rounded-md">
+                Diesel
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="strategy-roadmap" class="mb-16">
+        <h2 class="text-3xl font-bold text-center mb-8 text-[#005F73]">
+          3 Aşamalı Stratejik Yol Haritası
+        </h2>
+        <p class="max-w-3xl mx-auto text-center mb-12 text-gray-600">
+          Marka bilinirliği oluşturmak, güven kazanmak ve sürdürülebilir satış
+          büyümesi elde etmek için tasarlanmış entegre dijital pazarlama planı.
+        </p>
+        <div
+          class="relative flex flex-col md:flex-row justify-between items-start w-full"
+        >
+          <div
+            class="hidden md:block absolute top-10 left-0 w-full h-1 bg-[#94D2BD] transform"
+          ></div>
+
+          <div
+            class="flex flex-col items-center relative z-10 w-full md:w-1/3 p-4"
+          >
+            <div
+              class="w-20 h-20 rounded-full bg-[#0A9396] text-white flex items-center justify-center text-3xl font-bold mb-4 border-4 border-white shadow-lg flex-shrink-0"
+            >
+              1
+            </div>
+            <div class="bg-white rounded-lg shadow-lg p-6 text-center w-full">
+              <h3 class="text-xl font-bold mb-2 text-[#005F73]">
+                Aşama 1: Temel Atma ve Marka Bilinirliği
+              </h3>
+              <p class="font-semibold text-[#CA6702] mb-4">(1-3. Aylar)</p>
+              <h4 class="font-bold text-[#005F73] mb-2">Ana Hedefler</h4>
+              <p class="text-sm text-gray-600 mb-4">
+                Güçlü bir dijital varlık oluşturmak ve hedef kitlede ilk marka
+                farkındalığını yaratmak.
+              </p>
+              <h4 class="font-bold text-[#005F73] mb-3">Detaylı Aksiyonlar</h4>
+              <ul class="text-left space-y-3 text-sm text-gray-700">
+                <li class="flex items-start">
+                  <span class="mr-2">🌐</span
+                  ><span
+                    ><b>SEO Odaklı Web Sitesi:</b> Mobil uyumlu, hızlı ve
+                    kullanıcı dostu bir e-ticaret sitesi kurmak. Temel SEO
+                    ayarlarını yapmak.</span
+                  >
+                </li>
+                <li class="flex items-start">
+                  <span class="mr-2">📱</span
+                  ><span
+                    ><b>Sosyal Medya Kurulumu:</b> Instagram, TikTok ve
+                    Facebook'ta marka kimliğine uygun profiller
+                    oluşturmak.</span
+                  >
+                </li>
+                <li class="flex items-start">
+                  <span class="mr-2">✍️</span
+                  ><span
+                    ><b>İçerik Üretimi:</b> Stil önerileri ve denim bakım
+                    rehberleri gibi ilgi çekici blog ve sosyal medya içerikleri
+                    oluşturmak.</span
+                  >
+                </li>
+                <li class="flex items-start">
+                  <span class="mr-2">🚀</span
+                  ><span
+                    ><b>Lansman Kampanyası:</b> "Türkiye'ye Merhaba" temalı,
+                    özel indirimler içeren dijital bir kampanya
+                    düzenlemek.</span
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div
+            class="flex flex-col items-center relative z-10 w-full md:w-1/3 p-4 mt-8 md:mt-0"
+          >
+            <div
+              class="w-20 h-20 rounded-full bg-[#0A9396] text-white flex items-center justify-center text-3xl font-bold mb-4 border-4 border-white shadow-lg flex-shrink-0"
+            >
+              2
+            </div>
+            <div class="bg-white rounded-lg shadow-lg p-6 text-center w-full">
+              <h3 class="text-xl font-bold mb-2 text-[#005F73]">
+                Aşama 2: Büyüme ve Etkileşim
+              </h3>
+              <p class="font-semibold text-[#CA6702] mb-4">(4-9. Aylar)</p>
+              <h4 class="font-bold text-[#005F73] mb-2">Ana Hedefler</h4>
+              <p class="text-sm text-gray-600 mb-4">
+                Web sitesi trafiğini artırmak, ilk satışları gerçekleştirmek ve
+                marka güvenilirliğini pekiştirmek.
+              </p>
+              <h4 class="font-bold text-[#005F73] mb-3">Detaylı Aksiyonlar</h4>
+              <ul class="text-left space-y-3 text-sm text-gray-700">
+                <li class="flex items-start">
+                  <span class="mr-2">📊</span
+                  ><span
+                    ><b>Performans Pazarlaması:</b> Google ve Meta
+                    (Instagram/Facebook) reklamlarıyla hedeflenmiş kitlelere
+                    ulaşmak.</span
+                  >
+                </li>
+                <li class="flex items-start">
+                  <span class="mr-2">🌟</span
+                  ><span
+                    ><b>Influencer İşbirlikleri:</b> Moda alanındaki mikro ve
+                    makro influencer'lar ile sponsorlu içerikler ve ürün
+                    tanıtımları yapmak.</span
+                  >
+                </li>
+                <li class="flex items-start">
+                  <span class="mr-2">🛒</span
+                  ><span
+                    ><b>Pazaryeri Entegrasyonu:</b> Trendyol ve Hepsiburada gibi
+                    platformlarda mağaza açarak ek satış kanalları
+                    oluşturmak.</span
+                  >
+                </li>
+                <li class="flex items-start">
+                  <span class="mr-2">✉️</span
+                  ><span
+                    ><b>E-posta Pazarlaması:</b> Bülten aboneliği ve hoş geldin
+                    otomasyonları ile potansiyel müşteri listesi
+                    oluşturmak.</span
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div
+            class="flex flex-col items-center relative z-10 w-full md:w-1/3 p-4 mt-8 md:mt-0"
+          >
+            <div
+              class="w-20 h-20 rounded-full bg-[#0A9396] text-white flex items-center justify-center text-3xl font-bold mb-4 border-4 border-white shadow-lg flex-shrink-0"
+            >
+              3
+            </div>
+            <div class="bg-white rounded-lg shadow-lg p-6 text-center w-full">
+              <h3 class="text-xl font-bold mb-2 text-[#005F73]">
+                Aşama 3: Optimizasyon ve Sadakat
+              </h3>
+              <p class="font-semibold text-[#CA6702] mb-4">(10-12+ Aylar)</p>
+              <h4 class="font-bold text-[#005F73] mb-2">Ana Hedefler</h4>
+              <p class="text-sm text-gray-600 mb-4">
+                Müşteri sadakatini artırmak ve reklam harcamasının getirisini
+                (ROAS) maksimize etmek.
+              </p>
+              <h4 class="font-bold text-[#005F73] mb-3">Detaylı Aksiyonlar</h4>
+              <ul class="text-left space-y-3 text-sm text-gray-700">
+                <li class="flex items-start">
+                  <span class="mr-2">🔄</span
+                  ><span
+                    ><b>Yeniden Pazarlama:</b> Siteyi ziyaret edip alışveriş
+                    yapmayan kullanıcılara özel reklamlar göstermek.</span
+                  >
+                </li>
+                <li class="flex items-start">
+                  <span class="mr-2">💖</span
+                  ><span
+                    ><b>Sadakat Programı:</b> Puan toplama ve özel indirimler
+                    sunan bir müşteri sadakat programı başlatmak.</span
+                  >
+                </li>
+                <li class="flex items-start">
+                  <span class="mr-2">📈</span
+                  ><span
+                    ><b>Veri Analizi ve A/B Testleri:</b> Google Analytics
+                    verilerini analiz ederek reklamları ve siteyi sürekli
+                    iyileştirmek.</span
+                  >
+                </li>
+                <li class="flex items-start">
+                  <span class="mr-2">📸</span
+                  ><span
+                    ><b>Kullanıcı İçerikleri (UGC):</b> Müşterileri, ürünlerle
+                    çektikleri fotoğrafları paylaşmaya teşvik eden kampanyalar
+                    düzenlemek.</span
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="budget-kpi" class="mb-16">
+        <h2 class="text-3xl font-bold text-center mb-8 text-[#005F73]">
+          Yatırım ve Başarı Metrikleri
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="bg-white rounded-lg shadow-lg p-6">
+            <h3 class="text-xl font-bold text-center mb-4 text-[#005F73]">
+              Örnek Dijital Pazarlama Bütçe Dağılımı
+            </h3>
+            <div class="chart-container h-80 sm:h-96">
+              <canvas id="budgetAllocationChart"></canvas>
+            </div>
+            <p class="text-sm text-center mt-4 text-gray-600">
+              Bütçe, maksimum etki için performansa dayalı kanallara, marka
+              bilinirliğine ve içerik üretimine dengeli bir şekilde
+              dağıtılmalıdır.
+            </p>
+          </div>
+          <div class="bg-white rounded-lg shadow-lg p-6">
+            <h3 class="text-xl font-bold text-center mb-8 text-[#005F73]">
+              Anahtar Performans Göstergeleri (KPI)
+            </h3>
+            <div class="grid grid-cols-2 gap-6">
+              <div class="kpi-card text-center" style="--emoji: '📈'">
+                <h4 class="font-bold text-[#0A9396]">Marka Bilinirliği</h4>
+                <p class="text-sm text-gray-600">
+                  Web sitesi trafiği, sosyal medya takipçi sayısı ve etkileşim
+                  oranları.
+                </p>
+              </div>
+              <div class="kpi-card text-center" style="--emoji: '🎯'">
+                <h4 class="font-bold text-[#0A9396]">Dönüşüm Oranı</h4>
+                <p class="text-sm text-gray-600">
+                  Satın alma, bülten aboneliği gibi hedeflenen eylemlerin
+                  yüzdesi.
+                </p>
+              </div>
+              <div class="kpi-card text-center" style="--emoji: '🔄'">
+                <h4 class="font-bold text-[#0A9396]">
+                  Müşteri Yaşam Boyu Değeri (CLV)
+                </h4>
+                <p class="text-sm text-gray-600">
+                  Bir müşterinin marka ile ilişkisi boyunca getirdiği toplam
+                  gelir.
+                </p>
+              </div>
+              <div class="kpi-card text-center" style="--emoji: '💰'">
+                <h4 class="font-bold text-[#0A9396]">
+                  Reklam Harcamasının Getirisi (ROAS)
+                </h4>
+                <p class="text-sm text-gray-600">
+                  Yapılan her bir birim reklam harcamasından elde edilen gelir.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="bg-[#005F73] text-white mt-12">
+      <div class="container mx-auto px-6 py-8 text-center">
+        <h3 class="text-2xl font-bold">Sonuç</h3>
+        <p class="mt-4 max-w-3xl mx-auto">
+          Bu veri odaklı ve çok kanallı dijital pazarlama stratejisi,
+          2be4A.com'un Türkiye'nin rekabetçi denim pazarında güçlü bir yer
+          edinmesini, hedef kitlesiyle kalıcı bir bağ kurmasını ve
+          sürdürülebilir bir ticari başarı elde etmesini sağlayacak yol
+          haritasını sunmaktadır.
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      const brilliantBluesPalette = {
+        darkTeal: "#005F73",
+        mediumTeal: "#0A9396",
+        lightTeal: "#94D2BD",
+        sand: "#E9D8A6",
+        orange: "#EE9B00",
+        darkOrange: "#CA6702",
+        rust: "#BB3E03",
+      };
+
+      const tooltipTitleCallback = function (tooltipItems) {
+        const item = tooltipItems[0];
+        let label = item.chart.data.labels[item.dataIndex];
+        if (Array.isArray(label)) {
+          return label.join(" ");
+        } else {
+          return label;
+        }
+      };
+
+      const commonTooltipOptions = {
+        plugins: {
+          tooltip: {
+            callbacks: {
+              title: tooltipTitleCallback,
+            },
+          },
+        },
+      };
+
+      const wrapLabel = (label) => {
+        const maxLength = 16;
+        if (label.length <= maxLength) return label;
+
+        const words = label.split(" ");
+        const lines = [];
+        let currentLine = "";
+
+        words.forEach((word) => {
+          if ((currentLine + " " + word).trim().length > maxLength) {
+            lines.push(currentLine.trim());
+            currentLine = word;
+          } else {
+            currentLine = (currentLine + " " + word).trim();
+          }
+        });
+        if (currentLine) {
+          lines.push(currentLine.trim());
+        }
+        return lines;
+      };
+
+      const shoppingFrequencyCtx = document
+        .getElementById("shoppingFrequencyChart")
+        .getContext("2d");
+      new Chart(shoppingFrequencyCtx, {
+        type: "doughnut",
+        data: {
+          labels: [
+            "Haftada En Az 1 Kez Online Alışveriş Yapanlar",
+            "Diğerleri",
+          ],
+          datasets: [
+            {
+              data: [66, 34],
+              backgroundColor: [
+                brilliantBluesPalette.orange,
+                brilliantBluesPalette.lightTeal,
+              ],
+              borderColor: "#ffffff",
+              borderWidth: 4,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          cutout: "70%",
+          plugins: {
+            legend: {
+              position: "bottom",
+            },
+            tooltip: commonTooltipOptions.plugins.tooltip,
+          },
+        },
+      });
+
+      const socialMediaCtx = document
+        .getElementById("socialMediaChart")
+        .getContext("2d");
+      new Chart(socialMediaCtx, {
+        type: "bar",
+        data: {
+          labels: ["Instagram", "TikTok", "Facebook", "X (Twitter)"],
+          datasets: [
+            {
+              label: "Aktif Kullanıcı (Milyon)",
+              data: [57.1, 37.7, 34.35, 20.9],
+              backgroundColor: [
+                brilliantBluesPalette.darkTeal,
+                brilliantBluesPalette.mediumTeal,
+                brilliantBluesPalette.lightTeal,
+                brilliantBluesPalette.sand,
+              ],
+              borderColor: brilliantBluesPalette.darkTeal,
+              borderWidth: 1,
+              borderRadius: 5,
+            },
+          ],
+        },
+        options: {
+          indexAxis: "y",
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: false,
+            },
+            tooltip: commonTooltipOptions.plugins.tooltip,
+          },
+          scales: {
+            x: {
+              title: {
+                display: true,
+                text: "Milyon Kullanıcı",
+              },
+            },
+          },
+        },
+      });
+
+      const budgetAllocationCtx = document
+        .getElementById("budgetAllocationChart")
+        .getContext("2d");
+      const budgetLabels = [
+        "Performans Pazarlaması (Google & Sosyal Medya Ads)",
+        "Influencer Pazarlaması",
+        "İçerik Üretimi ve SEO",
+        "E-posta & CRM",
+        "Analiz ve Optimizasyon",
+      ];
+      new Chart(budgetAllocationCtx, {
+        type: "pie",
+        data: {
+          labels: budgetLabels.map(wrapLabel),
+          datasets: [
+            {
+              data: [40, 25, 20, 10, 5],
+              backgroundColor: [
+                brilliantBluesPalette.darkTeal,
+                brilliantBluesPalette.mediumTeal,
+                brilliantBluesPalette.orange,
+                brilliantBluesPalette.lightTeal,
+                brilliantBluesPalette.sand,
+              ],
+              borderColor: "#ffffff",
+              borderWidth: 2,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: "bottom",
+              labels: {
+                boxWidth: 15,
+              },
+            },
+            tooltip: commonTooltipOptions.plugins.tooltip,
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
