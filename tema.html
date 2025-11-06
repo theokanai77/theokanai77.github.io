@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tema Metal - Pazar Araştırması Raporu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #f5f5f5;
+      }
+      .chart-container {
+        position: relative;
+        width: 100%;
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+        height: 300px;
+        max-height: 350px;
+      }
+      @media (min-width: 768px) {
+        .chart-container {
+          height: 320px;
+        }
+      }
+      .flow-step {
+        background-color: #0381c9;
+        color: white;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        text-align: center;
+        font-weight: 600;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+          0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        min-width: 180px;
+      }
+      .flow-arrow {
+        width: 0;
+        height: 0;
+        border-top: 20px solid transparent;
+        border-bottom: 20px solid transparent;
+        border-left: 20px solid #00449e;
+      }
+      .flow-container {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 1.5rem;
+      }
+      .flow-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        flex-basis: 200px;
+        flex-grow: 1;
+      }
+      .flow-subtext {
+        font-size: 0.875rem;
+        color: #333333;
+        text-align: center;
+        min-height: 40px;
+      }
+      .flow-separator {
+        display: none;
+      }
+      @media (min-width: 768px) {
+        .flow-separator {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-basis: 50px;
+          flex-grow: 0;
+        }
+      }
+      @media (max-width: 767px) {
+        .flow-item {
+          flex-basis: 100%;
+        }
+        .flow-arrow-down {
+          width: 0;
+          height: 0;
+          border-left: 20px solid transparent;
+          border-right: 20px solid transparent;
+          border-top: 20px solid #00449e;
+          margin-top: 0.5rem;
+          margin-bottom: 0.5rem;
+        }
+        .flow-separator .flow-arrow {
+          display: none;
+        }
+        .flow-item:not(:last-child) .flow-separator-mobile {
+          display: block;
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-[#F5F5F5] text-[#333333]">
+    <header class="bg-[#00449E] text-white p-6 shadow-lg">
+      <div class="container mx-auto max-w-6xl">
+        <h1 class="text-3xl md:text-4xl font-bold">
+          Tema Metal Sanayi ve Ticaret A.Ş.
+        </h1>
+        <p class="text-xl text-[#8ED3EF] mt-1">
+          Dijital Pazar Araştırması ve Strateji Raporu
+        </p>
+      </div>
+    </header>
+
+    <main class="container mx-auto max-w-6xl p-4 md:p-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <section class="bg-white rounded-lg shadow-md p-6">
+          <h2 class="text-2xl font-semibold text-[#00449E] mb-4">
+            1. Alıcı Davranışları ve Tercihleri
+          </h2>
+          <p class="mb-6 text-gray-700">
+            Sektördeki alıcıların (trafo üreticileri, regülatör firmaları vb.)
+            elektrik çeliği bobinlerini nasıl ve nereden tedarik ettiğini
+            anlamak, dijital stratejinin temelini oluşturur.
+          </p>
+
+          <h3 class="text-lg font-semibold text-[#0381C9] mb-3">
+            B2B Satın Alma Kanalı Dağılımı
+          </h3>
+          <div class="chart-container">
+            <canvas id="buyerChannelChart"></canvas>
+          </div>
+          <p class="text-sm text-gray-600 mt-4 text-center">
+            Alımların büyük çoğunluğu hala doğrudan üreticiler ve özel
+            distribütörler üzerinden gerçekleşse de, B2B e-ticaret
+            platformlarının payı hızla artmaktadır.
+          </p>
+
+          <h3 class="text-lg font-semibold text-[#0381C9] mt-8 mb-3">
+            Benzer Ürün Stoklayan Başlıca Firma Tipleri
+          </h3>
+          <ul class="list-disc list-inside space-y-2 text-gray-700">
+            <li>Transformatör Üreticileri (Dağıtım, Güç)</li>
+            <li>Elektrik Motoru ve Jeneratör Üreticileri</li>
+            <li>Regülatör, UPS ve Güç Elektroniği Firmaları</li>
+            <li>Büyük Endüstriyel Otomasyon Tedarikçileri</li>
+            <li>Özel Metal ve Bobin İşleme Merkezleri</li>
+          </ul>
+        </section>
+
+        <section class="bg-white rounded-lg shadow-md p-6">
+          <h2 class="text-2xl font-semibold text-[#00449E] mb-4">
+            2. B2B ve Distribütör Fırsatları
+          </h2>
+          <p class="mb-6 text-gray-700">
+            Hem yerel hem de global dijital pazar yerleri, yeni müşterilere
+            ulaşmak için kritik öneme sahiptir. Uzman distribütörlerle ilişkiler
+            de dijital olarak yönetilmelidir.
+          </p>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
+            <div>
+              <h3 class="text-lg font-semibold text-[#0381C9] mb-3">
+                Önemli B2B Platformları (Türkiye)
+              </h3>
+              <ul class="list-disc list-inside space-y-2 text-gray-700">
+                <li>Endustriyel.com</li>
+                <li>N11Pro / Hepsiburada Business</li>
+                <li>Makina AlSat</li>
+                <li>Sektörel İhracat Portalları</li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold text-[#0381C9] mb-3">
+                Önemli B2B Platformları (Global)
+              </h3>
+              <ul class="list-disc list-inside space-y-2 text-gray-700">
+                <li>Alibaba</li>
+                <li>DirectIndustry</li>
+                <li>Europages</li>
+                <li>Global Sources</li>
+              </ul>
+            </div>
+          </div>
+
+          <h3 class="text-lg font-semibold text-[#0381C9] mb-3">
+            Uzman Distribütörlerin Pazardaki Gücü (Tahmini)
+          </h3>
+          <div class="chart-container">
+            <canvas id="distributorChart"></canvas>
+          </div>
+        </section>
+
+        <section class="bg-white rounded-lg shadow-md p-6 md:col-span-2">
+          <h2 class="text-2xl font-semibold text-[#00449E] mb-4">
+            3. Rekabet Analizi (Türkiye Pazarı)
+          </h2>
+          <p class="mb-6 text-gray-700">
+            Türkiye pazarındaki ana rakiplerin güçlü ve zayıf yönlerini analiz
+            etmek, Tema Metal'in benzersiz değer önerisini (UVP) belirlemesi
+            için zorunludur. Fiyatlandırma, kalite ve hizmet hızı kilit
+            faktörlerdir.
+          </p>
+          <div class="chart-container max-w-lg mx-auto">
+            <canvas id="competitorRadarChart"></canvas>
+          </div>
+          <p class="text-sm text-gray-600 mt-4 text-center">
+            Analiz, Tema Metal'in 'Ürün Kalitesi' ve 'İnovasyon' (Step-Lap,
+            Unicore) konularında güçlü olduğunu, ancak 'Fiyat' ve 'Müşteri
+            Hizmetleri Hızı' konularında rekabetin yoğun olduğunu
+            göstermektedir.
+          </p>
+        </section>
+
+        <section class="bg-white rounded-lg shadow-md p-6 md:col-span-2">
+          <h2 class="text-2xl font-semibold text-[#00449E] mb-4">
+            4. Stratejik Farklılaşma Önerileri
+          </h2>
+          <p class="mb-6 text-gray-700">
+            Rekabette öne çıkmak ve dijital varlığı güçlendirmek için Tema
+            Metal, teknolojik üstünlüklerini ve müşteri odaklı çözümlerini
+            vurgulayan entegre bir dijital strateji izlemelidir.
+          </p>
+
+          <div class="flow-container">
+            <div class="flow-item">
+              <div class="flow-step">1. Dijital Varlık Güçlendirme</div>
+              <p class="flow-subtext">
+                SEO & Teknik İçerik Pazarlaması (Makaleler, Vaka İncelemeleri)
+              </p>
+              <div class="flow-separator-mobile">
+                <div class="flow-arrow-down"></div>
+              </div>
+            </div>
+
+            <div class="flow-separator">
+              <div class="flow-arrow"></div>
+            </div>
+
+            <div class="flow-item">
+              <div class="flow-step">2. İnovasyon Vurgusu</div>
+              <p class="flow-subtext">
+                Step-Lap & Unicore teknolojilerinin avantajlarını öne çıkaran
+                dijital kampanyalar.
+              </p>
+              <div class="flow-separator-mobile">
+                <div class="flow-arrow-down"></div>
+              </div>
+            </div>
+
+            <div class="flow-separator">
+              <div class="flow-arrow"></div>
+            </div>
+
+            <div class="flow-item">
+              <div class="flow-step">3. B2B E-Ticaret Entegrasyonu</div>
+              <p class="flow-subtext">
+                Özel distribütörler ve büyük müşteriler için "Özel Sipariş
+                Portalı" geliştirmek.
+              </p>
+              <div class="flow-separator-mobile">
+                <div class="flow-arrow-down"></div>
+              </div>
+            </div>
+
+            <div class="flow-separator">
+              <div class="flow-arrow"></div>
+            </div>
+
+            <div class="flow-item">
+              <div class="flow-step">4. Müşteri Deneyimi</div>
+              <p class="flow-subtext">
+                Hızlı teknik destek, dijital sipariş takibi ve proaktif
+                iletişim.
+              </p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="text-center p-6 mt-8 text-gray-500 text-sm">
+      <p>
+        &copy; 2025 Tema Metal A.Ş. için hazırlanan Pazar Araştırması Infografik
+        Taslağı.
+      </p>
+    </footer>
+
+    <script>
+      const tooltipTitleCallback = (tooltipItems) => {
+        const item = tooltipItems[0];
+        let label = item.chart.data.labels[item.dataIndex];
+        if (Array.isArray(label)) {
+          return label.join(" ");
+        } else {
+          return label;
+        }
+      };
+
+      const wrapLabel = (label, maxWidth = 16) => {
+        if (typeof label !== "string" || label.length <= maxWidth) {
+          return label;
+        }
+        const words = label.split(" ");
+        let lines = [];
+        let currentLine = "";
+        for (const word of words) {
+          if ((currentLine + word).length <= maxWidth) {
+            currentLine += word + " ";
+          } else {
+            lines.push(currentLine.trim());
+            currentLine = word + " ";
+          }
+        }
+        lines.push(currentLine.trim());
+        return lines.filter((line) => line.length > 0);
+      };
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const chartColors = {
+          blue1: "#0381C9",
+          blue2: "#28B8E8",
+          blue3: "#8ED3EF",
+          blue4: "#00449E",
+        };
+
+        const defaultTooltipOptions = {
+          plugins: {
+            tooltip: {
+              callbacks: {
+                title: tooltipTitleCallback,
+              },
+              backgroundColor: "#00449E",
+              titleFont: { size: 14, weight: "bold" },
+              bodyFont: { size: 12 },
+              padding: 10,
+              cornerRadius: 4,
+              displayColors: true,
+              boxPadding: 4,
+            },
+          },
+        };
+
+        const defaultLegendOptions = {
+          labels: {
+            color: "#333333",
+            font: {
+              size: 12,
+              family: "Inter",
+            },
+          },
+        };
+
+        if (document.getElementById("buyerChannelChart")) {
+          const ctx = document
+            .getElementById("buyerChannelChart")
+            .getContext("2d");
+          new Chart(ctx, {
+            type: "doughnut",
+            data: {
+              labels: [
+                "Doğrudan Üreticiden",
+                "Özel Distribütörler",
+                "B2B E-Ticaret",
+                "Genel Tedarikçiler",
+              ],
+              datasets: [
+                {
+                  label: "Satın Alma Kanalı",
+                  data: [45, 35, 15, 5],
+                  backgroundColor: [
+                    chartColors.blue1,
+                    chartColors.blue2,
+                    chartColors.blue3,
+                    chartColors.blue4,
+                  ],
+                  borderColor: "#FFFFFF",
+                  borderWidth: 2,
+                },
+              ],
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: {
+                ...defaultTooltipOptions.plugins,
+                legend: {
+                  ...defaultLegendOptions,
+                  position: "bottom",
+                },
+              },
+            },
+          });
+        }
+
+        if (document.getElementById("distributorChart")) {
+          const ctx = document
+            .getElementById("distributorChart")
+            .getContext("2d");
+          const rawLabels = [
+            "ABC Elektrik",
+            "GüçKomponent A.Ş.",
+            "TrafoTeknik Ltd.",
+            "EnerjiÇözüm A.Ş.",
+          ];
+          new Chart(ctx, {
+            type: "bar",
+            data: {
+              labels: rawLabels.map((label) => wrapLabel(label)),
+              datasets: [
+                {
+                  label: "Pazar Gücü Skoru (1-100)",
+                  data: [85, 70, 60, 45],
+                  backgroundColor: chartColors.blue1,
+                  borderRadius: 4,
+                },
+              ],
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              indexAxis: "y",
+              scales: {
+                x: {
+                  beginAtZero: true,
+                  grid: {
+                    color: "#E0E0E0",
+                  },
+                  ticks: {
+                    color: "#333333",
+                  },
+                },
+                y: {
+                  grid: {
+                    display: false,
+                  },
+                  ticks: {
+                    color: "#333333",
+                  },
+                },
+              },
+              plugins: {
+                ...defaultTooltipOptions.plugins,
+                legend: {
+                  display: false,
+                },
+              },
+            },
+          });
+        }
+
+        if (document.getElementById("competitorRadarChart")) {
+          const ctx = document
+            .getElementById("competitorRadarChart")
+            .getContext("2d");
+          new Chart(ctx, {
+            type: "radar",
+            data: {
+              labels: [
+                "Ürün Kalitesi",
+                "Fiyat",
+                "Teslim Süresi",
+                "Müşteri Hizmetleri",
+                "İnovasyon",
+              ],
+              datasets: [
+                {
+                  label: "Tema Metal",
+                  data: [8, 7, 7, 6, 8],
+                  fill: true,
+                  backgroundColor: "rgba(3, 129, 201, 0.2)",
+                  borderColor: chartColors.blue1,
+                  pointBackgroundColor: chartColors.blue1,
+                  pointBorderColor: "#fff",
+                  pointHoverBackgroundColor: "#fff",
+                  pointHoverBorderColor: chartColors.blue1,
+                },
+                {
+                  label: "Rakip A",
+                  data: [9, 6, 8, 8, 7],
+                  fill: true,
+                  backgroundColor: "rgba(40, 184, 232, 0.2)",
+                  borderColor: chartColors.blue2,
+                  pointBackgroundColor: chartColors.blue2,
+                  pointBorderColor: "#fff",
+                  pointHoverBackgroundColor: "#fff",
+                  pointHoverBorderColor: chartColors.blue2,
+                },
+                {
+                  label: "Rakip B (Fiyat Odaklı)",
+                  data: [6, 9, 6, 7, 5],
+                  fill: true,
+                  backgroundColor: "rgba(142, 211, 239, 0.2)",
+                  borderColor: chartColors.blue3,
+                  pointBackgroundColor: chartColors.blue3,
+                  pointBorderColor: "#fff",
+                  pointHoverBackgroundColor: "#fff",
+                  pointHoverBorderColor: chartColors.blue3,
+                },
+              ],
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: {
+                ...defaultTooltipOptions.plugins,
+                legend: {
+                  ...defaultLegendOptions,
+                  position: "bottom",
+                },
+              },
+              scales: {
+                r: {
+                  beginAtZero: true,
+                  max: 10,
+                  min: 0,
+                  pointLabels: {
+                    font: {
+                      size: 13,
+                      weight: "600",
+                    },
+                    color: "#00449E",
+                  },
+                  grid: {
+                    color: "#BDBDBD",
+                  },
+                  angleLines: {
+                    color: "#E0E0E0",
+                  },
+                  ticks: {
+                    backdropColor: "transparent",
+                    color: "#333333",
+                  },
+                },
+              },
+            },
+          });
+        }
+      });
+    </script>
+  </body>
+</html>
