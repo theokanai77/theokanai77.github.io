@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interkakel: The Transformation Blueprint</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #f0f4f8;
+        color: #073b4c;
+      }
+      .chart-container {
+        position: relative;
+        width: 100%;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        height: 300px;
+        max-height: 400px;
+      }
+      @media (min-width: 768px) {
+        .chart-container {
+          height: 350px;
+        }
+      }
+      .card {
+        background-color: #ffffff;
+        border-radius: 0.75rem;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.07),
+          0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        padding: 1.5rem;
+        transition: all 0.3s ease-in-out;
+      }
+      .card:hover {
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+          0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        transform: translateY(-5px);
+      }
+      .brand-equation-box {
+        border: 3px dashed;
+        padding: 1rem 1.5rem;
+        border-radius: 0.5rem;
+        text-align: center;
+        font-weight: 700;
+        font-size: 1.1rem;
+      }
+      .timeline-connector {
+        width: 4px;
+        height: 4rem;
+        margin: 0.5rem auto;
+      }
+      .quadrant {
+        border: 2px solid #e0e0e0;
+        padding: 1rem;
+        height: 100%;
+        border-radius: 0.5rem;
+      }
+      .quadrant-title {
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 0.75rem;
+        color: #118ab2;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100">
+    <div class="container max-w-7xl mx-auto p-4 md:p-8">
+      <header class="text-center mb-12 md:mb-16">
+        <h1 class="text-4xl md:text-6xl font-black mb-4" style="color: #118ab2">
+          The Blueprint for Transformation
+        </h1>
+        <p class="text-xl md:text-2xl font-light" style="color: #073b4c">
+          From Tile Specialist to Total Construction Partner: An Interactive
+          Digital Strategy
+        </p>
+      </header>
+
+      <main class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <section class="md:col-span-3 card p-8">
+          <h2
+            class="text-3xl font-bold mb-6 text-center"
+            style="color: #118ab2"
+          >
+            The Strategic Mandate: Evolve or Stagnate
+          </h2>
+          <p class="text-lg mb-8 max-w-4xl mx-auto text-center">
+            Interkakel stands as a pillar of quality in the tiles and ceramics
+            market. However, the market itself is changing. This report details
+            the transformation from a vertical specialist to a horizontal
+            powerhouse, capturing a larger share of the total construction and
+            renovation wallet. This is not just growth; it's strategic
+            evolution.
+          </p>
+          <div
+            class="flex flex-col md:flex-row items-center justify-center space-y-6 md:space-y-0 md:space-x-8"
+          >
+            <div
+              class="p-6 rounded-lg text-center"
+              style="border: 3px solid #ff6b6b"
+            >
+              <span class="text-2xl font-bold block" style="color: #ff6b6b"
+                >CURRENT STATE</span
+              >
+              <span class="text-lg font-medium"
+                >Tile & Ceramics Specialist</span
+              >
+              <span class="text-sm block"
+                >Deep but narrow market penetration</span
+              >
+            </div>
+            <div
+              class="text-6xl font-light hidden md:block"
+              style="color: #118ab2"
+            >
+              &rarr;
+            </div>
+            <div class="text-6xl font-light md:hidden" style="color: #118ab2">
+              &darr;
+            </div>
+            <div
+              class="p-6 rounded-lg text-center"
+              style="border: 3px solid #06d6a0"
+            >
+              <span class="text-2xl font-bold block" style="color: #06d6a0"
+                >FUTURE STATE</span
+              >
+              <span class="text-lg font-medium"
+                >Total Construction Partner</span
+              >
+              <span class="text-sm block">Broad market leadership</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="md:col-span-1 card">
+          <h2 class="text-2xl font-bold mb-4">Foundation: Core Assets</h2>
+          <p class="mb-6">
+            Our strategy builds on a rock-solid foundation. These assets are our
+            launchpad.
+          </p>
+          <div class="space-y-4">
+            <div class="p-4 rounded-lg" style="background-color: #f0f9ff">
+              <span class="text-4xl font-black" style="color: #118ab2"
+                >120M</span
+              >
+              <span class="block text-lg font-semibold"
+                >SEK Annual Revenue</span
+              >
+            </div>
+            <div class="p-4 rounded-lg" style="background-color: #f0f9ff">
+              <span class="text-4xl font-black" style="color: #118ab2">7</span>
+              <span class="block text-lg font-semibold"
+                >Owned Stores & Warehouses</span
+              >
+            </div>
+            <div class="p-4 rounded-lg" style="background-color: #f0f9ff">
+              <span class="text-4xl font-black" style="color: #118ab2"
+                >50+</span
+              >
+              <span class="block text-lg font-semibold"
+                >National Retailer Network</span
+              >
+            </div>
+          </div>
+        </section>
+
+        <section class="md:col-span-1 card">
+          <h2 class="text-2xl font-bold mb-4">
+            The "Why Now?": Market Headwinds
+          </h2>
+          <p class="mb-4">
+            The past 3 years have created a perfect storm of market pressures,
+            making diversification a necessity for resilience and growth.
+          </p>
+          <div class="space-y-3">
+            <div class="flex items-center">
+              <span class="text-3xl mr-4" style="color: #ff6b6b">&darr;</span>
+              <span class="text-lg"
+                ><strong>Higher Interest Rates</strong> slow new
+                construction.</span
+              >
+            </div>
+            <div class="flex items-center">
+              <span class="text-3xl mr-4" style="color: #ff6b6b">&darr;</span>
+              <span class="text-lg"
+                ><strong>Supply Chain Disruption</strong> (post-war) increases
+                tile costs.</span
+              >
+            </div>
+            <div class="flex items-center">
+              <span class="text-3xl mr-4" style="color: #ff6b6b">&darr;</span>
+              <span class="text-lg"
+                ><strong>Competitor Encroachment</strong> from broad DIY
+                chains.</span
+              >
+            </div>
+          </div>
+        </section>
+
+        <section class="md:col-span-1 card">
+          <h2 class="text-2xl font-bold mb-4">Construction Sentiment</h2>
+          <p class="text-base mb-4">
+            This pressure is reflected in market sentiment, which has been
+            bearish. A digital-first, diversified model is less exposed to these
+            cycles.
+          </p>
+          <div class="chart-container w-full h-80">
+            <canvas id="marketSentimentChart"></canvas>
+          </div>
+        </section>
+
+        <section class="md:col-span-3 card">
+          <h2
+            class="text-3xl font-bold mb-6 text-center"
+            style="color: #118ab2"
+          >
+            Understanding the Modern Builder: B2C vs. B2B
+          </h2>
+          <p class="text-lg mb-8 max-w-4xl mx-auto text-center">
+            A "one-size-fits-all" digital experience will fail. We must serve
+            two distinct user journeys: the B2C Renovator and the B2B
+            Contractor.
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div
+              class="p-6 rounded-lg"
+              style="background-color: #fef8f8; border-left: 5px solid #ff6b6b"
+            >
+              <span class="text-5xl">&#128679;</span>
+              <h3 class="text-2xl font-bold my-2" style="color: #ff6b6b">
+                Persona A: The B2C Renovator
+              </h3>
+              <ul class="list-disc list-outside ml-5 space-y-2 text-lg">
+                <li>
+                  <strong>Needs:</strong> Inspiration, "how-to" guides,
+                  transparent pricing, project calculators, home delivery.
+                </li>
+                <li>
+                  <strong>Pain Points:</strong> Feeling overwhelmed, hidden
+                  costs, under-ordering, project coordination.
+                </li>
+                <li>
+                  <strong>Channels:</strong> Instagram, Pinterest, Google Search
+                  ("how to tile a bathroom"), DIY blogs, physical stores for
+                  touch-and-feel.
+                </li>
+              </ul>
+            </div>
+            <div
+              class="p-6 rounded-lg"
+              style="background-color: #f6fbfd; border-left: 5px solid #118ab2"
+            >
+              <span class="text-5xl">&#128188;</span>
+              <h3 class="text-2xl font-bold my-2" style="color: #118ab2">
+                Persona B: The B2B Contractor
+              </h3>
+              <ul class="list-disc list-outside ml-5 space-y-2 text-lg">
+                <li>
+                  <strong>Needs:</strong> Bulk pricing, inventory levels, fast
+                  "Click & Collect," credit accounts, repeat order pads.
+                </li>
+                <li>
+                  <strong>Pain Points:</strong> Stock-outs, inefficient
+                  ordering, incorrect deliveries, managing multiple job sites.
+                </li>
+                <li>
+                  <strong>Channels:</strong> B2B portals, direct to wholesaler,
+                  LinkedIn, specialist trade shows, relationships with store
+                  managers.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="md:col-span-1 card">
+          <h2 class="text-2xl font-bold mb-4">Where Buyers Are</h2>
+          <p class="text-base mb-4">
+            This chart shows the fragmented purchasing channels. Our strategy
+            must capture both the high-volume online channel and the high-trust
+            specialist channel.
+          </p>
+          <div class="chart-container w-full h-80">
+            <canvas id="buyerBehaviorChart"></canvas>
+          </div>
+        </section>
+
+        <section class="md:col-span-2 card">
+          <h2 class="text-2xl font-bold mb-4">Online Market Share</h2>
+          <p class="text-base mb-4">
+            The online market is dominated by Bygghemma. This demonstrates the
+            power of a vast catalog and aggressive SEO. Our path is not to
+            out-compete them on *everything* at once, but to win on core
+            categories.
+          </p>
+          <div class="chart-container w-full h-80">
+            <canvas id="onlineMarketShareChart"></canvas>
+          </div>
+        </section>
+
+        <section class="md:col-span-3 card p-8">
+          <h2
+            class="text-3xl font-bold mb-6 text-center"
+            style="color: #118ab2"
+          >
+            The New Competitive Map
+          </h2>
+          <p class="text-lg mb-8 max-w-4xl mx-auto text-center">
+            Expanding means entering a new arena. This map visualizes the
+            market. Interkakel's current position is a high-quality specialist.
+            The transformation moves us into the "Total Solutions" quadrant,
+            competing with new giants.
+          </p>
+          <div class="grid grid-cols-2 grid-rows-2 gap-4 h-full">
+            <div
+              class="quadrant col-start-1 row-start-1"
+              style="border-color: #ff6b6b"
+            >
+              <div class="quadrant-title">
+                Quadrant 1: Broad Range / Physical Presence
+              </div>
+              <p class="font-bold text-lg mb-2">The DIY Giants</p>
+              <ul class="list-disc list-inside">
+                <li>Bauhaus</li>
+                <li>Hornbach</li>
+                <li>Byggmax</li>
+              </ul>
+              <p class="text-sm mt-3">
+                <strong>Threat:</strong> One-stop-shop convenience for B2C.
+              </p>
+            </div>
+            <div
+              class="quadrant col-start-2 row-start-1"
+              style="border-color: #118ab2"
+            >
+              <div class="quadrant-title">
+                Quadrant 2: Broad Range / Online-First
+              </div>
+              <p class="font-bold text-lg mb-2">The E-Commerce Leaders</p>
+              <ul class="list-disc list-inside">
+                <li>Bygghemma.se</li>
+                <li>Buildor.se</li>
+              </ul>
+              <p class="text-sm mt-3">
+                <strong>Opportunity:</strong> This is the digital model to
+                emulate and disrupt.
+              </p>
+            </div>
+            <div
+              class="quadrant col-start-1 row-start-2"
+              style="border-color: #06d6a0"
+            >
+              <div class="quadrant-title">
+                Quadrant 3: Specialist / Physical Presence
+              </div>
+              <p class="font-bold text-lg mb-2">The Specialists (Us)</p>
+              <ul class="list-disc list-inside">
+                <li><strong>Interkakel (Current)</strong></li>
+                <li>Specialist B2B Wholesalers</li>
+              </ul>
+              <p class="text-sm mt-3">
+                <strong>Strength:</strong> Deep expertise, quality, B2B trust.
+              </p>
+            </div>
+            <div
+              class="quadrant col-start-2 row-start-2"
+              style="border-color: #ffd166"
+            >
+              <div class="quadrant-title">
+                Quadrant 4: Specialist / Online-First
+              </div>
+              <p class="font-bold text-lg mb-2">The Niche Players</p>
+              <ul class="list-disc list-inside">
+                <li>Proffsmagasinet (Tools)</li>
+                <li>Niche tile e-tailers</li>
+              </ul>
+              <p class="text-sm mt-3">
+                <strong>Insight:</strong> Proves that online specialization
+                works.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="md:col-span-1 card">
+          <h2 class="text-2xl font-bold mb-4">Strategic Positioning</h2>
+          <p class="text-base mb-4">
+            This radar chart shows our shift. We must retain our "Brand
+            Expertise" and "B2B Focus" while aggressively expanding our "Product
+            Range" and "Online Experience" to compete.
+          </p>
+          <div class="chart-container w-full h-80">
+            <canvas id="positioningChart"></canvas>
+          </div>
+        </section>
+
+        <section class="md:col-span-2 card">
+          <h2 class="text-2xl font-bold mb-4">SWOT Analysis</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div
+              class="p-4 rounded-lg"
+              style="background-color: #f6fefb; border-left: 4px solid #06d6a0"
+            >
+              <h3 class="text-xl font-bold mb-2" style="color: #06d6a0">
+                Strengths
+              </h3>
+              <ul class="list-disc list-inside">
+                <li>Strong brand equity & reputation</li>
+                <li>Established 7-store physical network</li>
+                <li>Loyal B2B customer base</li>
+                <li>50+ retailer relationships</li>
+              </ul>
+            </div>
+            <div
+              class="p-4 rounded-lg"
+              style="background-color: #fef8f8; border-left: 4px solid #ff6b6b"
+            >
+              <h3 class="text-xl font-bold mb-2" style="color: #ff6b6b">
+                Weaknesses
+              </h3>
+              <ul class="list-disc list-inside">
+                <li>Brand name ("kakel") implies specialization</li>
+                <li>Current e-commerce not built for scale</li>
+                <li>Limited logistics for non-tile items</li>
+                <li>Lack of brand awareness in new categories</li>
+              </ul>
+            </div>
+            <div
+              class="p-4 rounded-lg"
+              style="background-color: #f6fbfd; border-left: 4px solid #118ab2"
+            >
+              <h3 class="text-xl font-bold mb-2" style="color: #118ab2">
+                Opportunities
+              </h3>
+              <ul class="list-disc list-inside">
+                <li>Cross-sell broader materials to B2B base</li>
+                <li>Capture growing online DIY market</li>
+                <li>Become a true B2C/B2B "one-stop-shop"</li>
+                <li>Leverage stores as "Click & Collect" hubs</li>
+              </ul>
+            </div>
+            <div
+              class="p-4 rounded-lg"
+              style="background-color: #fffbf2; border-left: 4px solid #ffd166"
+            >
+              <h3 class="text-xl font-bold mb-2" style="color: #ffd166">
+                Threats
+              </h3>
+              <ul class="list-disc list-inside">
+                <li>Aggressive pricing from Bygghemma</li>
+                <li>High cost of digital marketing</li>
+                <li>Logistical complexity of new categories</li>
+                <li>Market downturn slowing all construction</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="md:col-span-3 card p-8">
+          <h2
+            class="text-3xl font-bold mb-6 text-center"
+            style="color: #118ab2"
+          >
+            Brand Evolution: The "Interkakel" Asset
+          </h2>
+          <p class="text-lg mb-8 max-w-4xl mx-auto text-center">
+            The name is not a liability; it's our anchor. We don't change it. We
+            *reframe* it. "Kakel" is our heritage of quality. "Inter" is our
+            future: international, interconnected, integrated. We augment it
+            with a powerful new tagline.
+          </p>
+          <div
+            class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-6"
+          >
+            <div class="brand-equation-box" style="border-color: #073b4c">
+              INTERKAKEL<br /><span class="text-sm font-light"
+                >(Trust, Quality, Heritage)</span
+              >
+            </div>
+            <span class="text-5xl font-light" style="color: #118ab2">+</span>
+            <div class="brand-equation-box" style="border-color: #118ab2">
+              "HOME & CONSTRUCTION SOLUTIONS"<br /><span
+                class="text-sm font-light"
+                >(New Tagline: Breadth, B2B/B2C)</span
+              >
+            </div>
+            <span class="text-5xl font-light" style="color: #06d6a0">=</span>
+            <div
+              class="brand-equation-box p-6 text-xl"
+              style="border-color: #06d6a0; background-color: #f6fefb"
+            >
+              THE NEW MARKET LEADER<br /><span class="text-sm font-light"
+                >(Full-Service Partner)</span
+              >
+            </div>
+          </div>
+        </section>
+
+        <section class="md:col-span-3">
+          <h2
+            class="text-3xl font-bold mb-8 text-center"
+            style="color: #118ab2"
+          >
+            The 4-Phase Transformation Roadmap
+          </h2>
+          <div class="flex flex-col items-center">
+            <div class="card w-full max-w-4xl p-6">
+              <span class="text-sm font-bold uppercase" style="color: #118ab2"
+                >Phase 1 (Months 0-6)</span
+              >
+              <h3 class="text-2xl font-bold mb-3">
+                Foundation: Brand & Platform
+              </h3>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                  <strong>Key Actions:</strong>
+                  <ul class="list-disc list-inside">
+                    <li>Develop new brand guidelines & tagline.</li>
+                    <li>
+                      Select & implement scalable e-com platform (e.g., Magento,
+                      Shopify Plus).
+                    </li>
+                    <li>Onboard first 100 non-tile SKUs.</li>
+                  </ul>
+                </div>
+                <div>
+                  <strong>Tech Stack:</strong>
+                  <ul class="list-disc list-inside">
+                    <li>Headless CMS</li>
+                    <li>PIM (Product Info Management)</li>
+                    <li>New E-com Platform</li>
+                  </ul>
+                </div>
+                <div>
+                  <strong>KPIs:</strong>
+                  <ul class="list-disc list-inside">
+                    <li>Platform launch on time.</li>
+                    <li>100% Core SKU data accuracy.</li>
+                    <li>Website load time < 2s.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="timeline-connector"
+              style="background-color: #118ab2"
+            ></div>
+
+            <div class="card w-full max-w-4xl p-6">
+              <span class="text-sm font-bold uppercase" style="color: #118ab2"
+                >Phase 2 (Months 6-18)</span
+              >
+              <h3 class="text-2xl font-bold mb-3">
+                Ignition: Marketing & Content Engine
+              </h3>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                  <strong>Key Actions:</strong>
+                  <ul class="list-disc list-inside">
+                    <li>Launch aggressive SEO for *new* categories.</li>
+                    <li>Build B2C content hub (DIY guides, videos).</li>
+                    <li>Launch PPC campaigns for high-intent items.</li>
+                  </ul>
+                </div>
+                <div>
+                  <strong>Tech Stack:</strong>
+                  <ul class="list-disc list-inside">
+                    <li>HubSpot (or similar CRM)</li>
+                    <li>SEO Tools (Semrush)</li>
+                    <li>Video Production</li>
+                  </ul>
+                </div>
+                <div>
+                  <strong>KPIs:</strong>
+                  <ul class="list-disc list-inside">
+                    <li>+50% non-branded organic traffic.</li>
+                    <li>Top 3 SERP for 20 new keywords.</li>
+                    <li>First 1,000 online non-tile sales.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="timeline-connector"
+              style="background-color: #118ab2"
+            ></div>
+
+            <div class="card w-full max-w-4xl p-6">
+              <span class="text-sm font-bold uppercase" style="color: #118ab2"
+                >Phase 3 (Months 12-24)</span
+              >
+              <h3 class="text-2xl font-bold mb-3">
+                Expansion: B2B & Omnichannel
+              </h3>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                  <strong>Key Actions:</strong>
+                  <ul class="list-disc list-inside">
+                    <li>Launch dedicated B2B Portal (quotes, credit).</li>
+                    <li>Implement "Click & Collect" at all 7 stores.</li>
+                    <li>Integrate retailer inventory (via API).</li>
+                  </ul>
+                </div>
+                <div>
+                  <strong>Tech Stack:</strong>
+                  <ul class="list-disc list-inside">
+                    <li>B2B E-com Module</li>
+                    <li>ERP Integration</li>
+                    <li>WMS (Warehouse Management)</li>
+                  </ul>
+                </div>
+                <div>
+                  <strong>KPIs:</strong>
+                  <ul class="list-disc list-inside">
+                    <li>100% B2B clients onboarded to portal.</li>
+                    <li>>30% of online orders via Click & Collect.</li>
+                    <li>B2B online revenue growth > 25%.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="timeline-connector"
+              style="background-color: #118ab2"
+            ></div>
+
+            <div class="card w-full max-w-4xl p-6">
+              <span class="text-sm font-bold uppercase" style="color: #118ab2"
+                >Phase 4 (Months 24+)</span
+              >
+              <h3 class="text-2xl font-bold mb-3">Scale: Market Leadership</h3>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                  <strong>Key Actions:</strong>
+                  <ul class="list-disc list-inside">
+                    <li>Expand to 5,000+ total SKUs.</li>
+                    <li>AI-driven personalization & recommendations.</li>
+                    <li>Launch targeted B2B LinkedIn campaigns.</li>
+                  </ul>
+                </div>
+                <div>
+                  <strong>Tech Stack:</strong>
+                  <ul class="list-disc list-inside">
+                    <li>Personalization Engine</li>
+                    <li>Marketing Automation</li>
+                    <li>BI & Analytics Dashboard</li>
+                  </ul>
+                </div>
+                <div>
+                  <strong>KPIs:</strong>
+                  <ul class="list-disc list-inside">
+                    <li>>20% revenue from new categories.</li>
+                    <li>Top 3 online market player in key segments.</li>
+                    <li>Customer Lifetime Value (CLV) +15%.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="md:col-span-2 card">
+          <h2 class="text-2xl font-bold mb-4">Projected 3-Year Growth</h2>
+          <p class="text-base mb-4">
+            This strategy is designed to layer new, high-growth revenue on top
+            of our stable core business. The goal is ambitious but achievable
+            diversification.
+          </p>
+          <div class="chart-container w-full h-80">
+            <canvas id="growthProjectionChart"></canvas>
+          </div>
+        </section>
+
+        <section class="md:col-span-1 card">
+          <h2 class="text-2xl font-bold mb-4">Risk & Mitigation</h2>
+          <p class="mb-4">
+            A bold strategy requires acknowledging risks. Here is our mitigation
+            plan.
+          </p>
+          <div class="space-y-4">
+            <div>
+              <strong class="block" style="color: #ff6b6b"
+                >Risk: Brand Dilution</strong
+              >
+              <p class="text-sm">
+                Customers are confused by the new offerings.
+              </p>
+              <strong class="block text-sm" style="color: #06d6a0"
+                >Mitigation:</strong
+              >
+              Strong, clear "Home & Construction Solutions" tagline everywhere.
+              Segmented B2C vs. B2B marketing.
+            </div>
+            <hr />
+            <div>
+              <strong class="block" style="color: #ff6b6b"
+                >Risk: Logistical Nightmare</strong
+              >
+              <p class="text-sm">
+                Failed deliveries of bulky new items damage reputation.
+              </p>
+              <strong class="block text-sm" style="color: #06d6a0"
+                >Mitigation:</strong
+              >
+              Phased SKU rollout. Partner with a 3PL for non-tile items
+              initially. Master "Click & Collect" first.
+            </div>
+            <hr />
+            <div>
+              <strong class="block" style="color: #ff6b6b"
+                >Risk: Cash Burn</strong
+              >
+              <p class="text-sm">
+                High cost of tech and marketing with slow ROI.
+              </p>
+              <strong class="block text-sm" style="color: #06d6a0"
+                >Mitigation:</strong
+              >
+              Focus Phase 2 marketing on high-margin, high-intent SKUs first.
+              Leverage B2B cross-selling for early wins.
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer
+        class="text-center mt-12 md:mt-16 py-6 border-t"
+        style="border-color: #118ab2"
+      >
+        <p class="text-base" style="color: #073b4c">
+          Interkakel: The Transformation Blueprint | Digital Strategy & Brand
+          Positioning Report
+        </p>
+      </footer>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const PALETTE = {
+          dark: "#073B4C",
+          blue: "#118AB2",
+          green: "#06D6A0",
+          yellow: "#FFD166",
+          red: "#FF6B6B",
+        };
+
+        const chartTooltipCallback = {
+          plugins: {
+            tooltip: {
+              callbacks: {
+                title: function (tooltipItems) {
+                  const item = tooltipItems[0];
+                  let label = item.chart.data.labels[item.dataIndex];
+                  if (Array.isArray(label)) {
+                    return label.join(" ");
+                  } else {
+                    return label;
+                  }
+                },
+              },
+            },
+          },
+        };
+
+        function processLabels(labels) {
+          return labels.map((label) => {
+            if (label.length > 16) {
+              let words = label.split(" ");
+              let lines = [];
+              let currentLine = "";
+              words.forEach((word) => {
+                if ((currentLine + word).length > 16) {
+                  lines.push(currentLine.trim());
+                  currentLine = word + " ";
+                } else {
+                  currentLine += word + " ";
+                }
+              });
+              lines.push(currentLine.trim());
+              return lines;
+            }
+            return label;
+          });
+        }
+
+        const marketSentimentCtx = document.getElementById(
+          "marketSentimentChart"
+        );
+        if (marketSentimentCtx) {
+          new Chart(marketSentimentCtx, {
+            type: "line",
+            data: {
+              labels: [
+                "Q1 2023",
+                "Q2 2023",
+                "Q3 2023",
+                "Q4 2023",
+                "Q1 2024",
+                "Q2 2024",
+              ],
+              datasets: [
+                {
+                  label: "Swedish Construction Sentiment",
+                  data: [100, 95, 88, 85, 82, 85],
+                  borderColor: PALETTE.red,
+                  backgroundColor: "rgba(255, 107, 107, 0.1)",
+                  fill: true,
+                  tension: 0.3,
+                },
+              ],
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              scales: {
+                y: {
+                  beginAtZero: false,
+                  title: { display: true, text: "Sentiment Index" },
+                },
+              },
+              ...chartTooltipCallback,
+            },
+          });
+        }
+
+        const buyerBehaviorCtx = document.getElementById("buyerBehaviorChart");
+        if (buyerBehaviorCtx) {
+          new Chart(buyerBehaviorCtx, {
+            type: "doughnut",
+            data: {
+              labels: [
+                "Online Specialist Sites",
+                "Physical DIY Stores",
+                "Direct from Wholesaler (B2B)",
+                "Specialist Stores (e.g., Tiles)",
+              ],
+              datasets: [
+                {
+                  label: "Buyer Sourcing Channel",
+                  data: [35, 30, 20, 15],
+                  backgroundColor: [
+                    PALETTE.blue,
+                    PALETTE.green,
+                    PALETTE.yellow,
+                    PALETTE.red,
+                  ],
+                },
+              ],
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              ...chartTooltipCallback,
+            },
+          });
+        }
+
+        const onlineMarketShareCtx = document.getElementById(
+          "onlineMarketShareChart"
+        );
+        if (onlineMarketShareCtx) {
+          new Chart(onlineMarketShareCtx, {
+            type: "bar",
+            data: {
+              labels: [
+                "Bygghemma.se",
+                "Buildor.se",
+                "Bauhaus.se",
+                "Proffsmagasinet",
+                "K-Rauta.se",
+              ],
+              datasets: [
+                {
+                  label: "Estimated Online Market Share (%)",
+                  data: [42, 18, 15, 12, 8],
+                  backgroundColor: [
+                    PALETTE.blue,
+                    PALETTE.green,
+                    PALETTE.yellow,
+                    PALETTE.red,
+                    PALETTE.dark,
+                  ],
+                },
+              ],
+            },
+            options: {
+              indexAxis: "y",
+              responsive: true,
+              maintainAspectRatio: false,
+              scales: {
+                x: { title: { display: true, text: "Market Share (%)" } },
+              },
+              ...chartTooltipCallback,
+            },
+          });
+        }
+
+        const positioningCtx = document.getElementById("positioningChart");
+        if (positioningCtx) {
+          const originalLabels = [
+            "Product Range",
+            "Price",
+            "Brand Expertise",
+            "Online Experience",
+            "B2B Focus",
+          ];
+          const processedLabels = processLabels(originalLabels);
+
+          new Chart(positioningCtx, {
+            type: "radar",
+            data: {
+              labels: processedLabels,
+              datasets: [
+                {
+                  label: "Current (Tile Specialist)",
+                  data: [4, 6, 9, 4, 7],
+                  fill: true,
+                  backgroundColor: "rgba(255, 107, 107, 0.2)",
+                  borderColor: PALETTE.red,
+                  pointBackgroundColor: PALETTE.red,
+                },
+                {
+                  label: "Target (Total Solutions)",
+                  data: [9, 7, 7, 9, 9],
+                  fill: true,
+                  backgroundColor: "rgba(17, 138, 178, 0.2)",
+                  borderColor: PALETTE.blue,
+                  pointBackgroundColor: PALETTE.blue,
+                },
+              ],
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              scales: {
+                r: { beginAtZero: true, max: 10 },
+              },
+              ...chartTooltipCallback,
+            },
+          });
+        }
+
+        const growthProjectionCtx = document.getElementById(
+          "growthProjectionChart"
+        );
+        if (growthProjectionCtx) {
+          new Chart(growthProjectionCtx, {
+            type: "bar",
+            data: {
+              labels: ["Year 1", "Year 2", "Year 3"],
+              datasets: [
+                {
+                  label: "Core Revenue (Tiles)",
+                  data: [120, 125, 130],
+                  backgroundColor: PALETTE.dark,
+                },
+                {
+                  label: "New Revenue (Materials)",
+                  data: [5, 25, 60],
+                  backgroundColor: PALETTE.green,
+                },
+              ],
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              scales: {
+                x: { stacked: true },
+                y: {
+                  stacked: true,
+                  title: { display: true, text: "Revenue (M SEK)" },
+                },
+              },
+              ...chartTooltipCallback,
+            },
+          });
+        }
+      });
+    </script>
+  </body>
+</html>
