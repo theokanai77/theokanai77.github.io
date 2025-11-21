@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Opel Erdemir Analiz Paneli</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Babel (JSX'i tarayıcının anlaması için) -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- Import Map (React ve Ikonlar için) -->
+    <script type="importmap">
+      {
+        "imports": {
+          "react": "https://esm.sh/react@18.2.0",
+          "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
+          "lucide-react": "https://esm.sh/lucide-react@0.263.1"
+        }
+      }
+    </script>
+  </head>
+  <body class="bg-slate-50 text-slate-900 min-h-screen pb-12">
+    <div id="root"></div>
+
+    <script type="text/babel" data-type="module">
+      import React, { useState } from "react";
+      import { createRoot } from "react-dom/client";
+      import {
+        Users,
+        Eye,
+        Heart,
+        MousePointer,
+        TrendingUp,
+        Activity,
+        Clock,
+        Calendar,
+        Instagram,
+        ArrowUpRight,
+        ArrowDownRight,
+        BarChart2,
+        PieChart,
+        MessageCircle,
+        Filter,
+      } from "lucide-react";
+
+      // --- Bileşenler ---
+
+      const Card = ({ children, className = "" }) => (
+        <div
+          className={`bg-white rounded-xl shadow-sm border border-slate-100 p-6 ${className}`}
+        >
+          {children}
+        </div>
+      );
+
+      const MetricItem = ({
+        label,
+        value,
+        subtext,
+        trend,
+        icon: Icon,
+        color = "blue",
+        trendLabel = "90g Ort. Kıyasla",
+      }) => {
+        const colorClasses = {
+          blue: "bg-blue-50 text-blue-600",
+          pink: "bg-pink-50 text-pink-600",
+          purple: "bg-purple-50 text-purple-600",
+          orange: "bg-orange-50 text-orange-600",
+        };
+
+        return (
+          <Card>
+            <div className="flex items-start justify-between mb-4">
+              <div className={`p-3 rounded-lg ${colorClasses[color]}`}>
+                <Icon size={24} />
+              </div>
+              {trend !== null && (
+                <div className="text-right">
+                  <span
+                    className={`flex items-center justify-end text-sm font-bold ${
+                      trend >= 0 ? "text-green-600" : "text-red-500"
+                    }`}
+                  >
+                    {trend >= 0 ? (
+                      <ArrowUpRight size={16} className="mr-1" />
+                    ) : (
+                      <ArrowDownRight size={16} className="mr-1" />
+                    )}
+                    {Math.abs(trend)}%
+                  </span>
+                  <span className="text-[10px] text-slate-400 uppercase tracking-wider">
+                    {trendLabel}
+                  </span>
+                </div>
+              )}
+            </div>
+            <div>
+              <p className="text-slate-500 text-sm font-medium mb-1">{label}</p>
+              <h3 className="text-2xl font-bold text-slate-800">{value}</h3>
+              {subtext && (
+                <p className="text-slate-400 text-xs mt-2">{subtext}</p>
+              )}
+            </div>
+          </Card>
+        );
+      };
+
+      const BarChart = ({ data, color = "bg-pink-500" }) => {
+        const maxVal = Math.max(...data.map((d) => d.value));
+
+        return (
+          <div className="flex items-stretch justify-between h-48 gap-2 pt-6">
+            {data.map((item, idx) => (
+              <div
+                key={idx}
+                className="flex flex-col items-center justify-end gap-2 flex-1 group h-full"
+              >
+                <div className="relative w-full flex-1 flex items-end justify-center">
+                  <div
+                    className={`w-full max-w-[30px] rounded-t-md transition-all duration-500 relative ${
+                      item.highlight
+                        ? color
+                        : "bg-slate-200 group-hover:bg-pink-300"
+                    }`}
+                    style={{ height: `${(item.value / maxVal) * 100}%` }}
+                  >
+                    <div className="opacity-0 group-hover:opacity-100 absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-[10px] py-1 px-2 rounded pointer-events-none transition-opacity whitespace-nowrap z-10 shadow-lg">
+                      {item.value} Aktif
+                    </div>
+                  </div>
+                </div>
+                <span className="text-xs text-slate-500 font-medium">
+                  {item.label}
+                </span>
+              </div>
+            ))}
+          </div>
+        );
+      };
+
+      // --- Ana Uygulama ---
+
+      const App = () => {
+        const [timeRange, setTimeRange] = useState("30d");
+
+        // --- VERİ SETLERİ ---
+
+        const data30d = {
+          metrics: {
+            followers: "2,827",
+            reach: 14495,
+            interactions: 38,
+            profileVisits: 310,
+            nonFollowerReach: 84.6,
+            followerReach: 15.4,
+            followerInteraction: 89.5,
+            nonFollowerInteraction: 10.5,
+          },
+          activity: [
+            { label: "00:00", value: 800, highlight: false },
+            { label: "03:00", value: 803, highlight: false },
+            { label: "06:00", value: 858, highlight: false },
+            { label: "09:00", value: 973, highlight: true },
+            { label: "12:00", value: 687, highlight: false },
+            { label: "15:00", value: 192, highlight: false },
+            { label: "18:00", value: 259, highlight: false },
+            { label: "21:00", value: 649, highlight: false },
+          ],
+          topPosts: [
+            {
+              id: 1,
+              title: "Yeşil Mokka",
+              metric: "717",
+              type: "Görüntülenme",
+              image: "bg-green-100",
+              icon: Eye,
+              iconClass: "text-green-600",
+            },
+            {
+              id: 2,
+              title: "Cumhuriyet Bayramı",
+              metric: "591",
+              type: "Görüntülenme",
+              image: "bg-red-100",
+              icon: Eye,
+              iconClass: "text-red-600",
+            },
+            {
+              id: 3,
+              title: "Gri Mokka (17 Kas)",
+              metric: "5",
+              type: "Etkileşim",
+              image: "bg-slate-200",
+              icon: MousePointer,
+              iconClass: "text-slate-600",
+            },
+          ],
+          insights: {
+            title: "Topluluk Stabilizasyonu",
+            text: "Erişim, önceki viral artışlardan sonra normalleşti. Etkileşimlerin %89'u artık takipçilerden geliyor, bu da 'Keşfet'ten 'Sadakat'e geçişi gösteriyor.",
+            color: "blue",
+          },
+        };
+
+        const data90d = {
+          metrics: {
+            followers: "2,827",
+            reach: 129546,
+            interactions: 264,
+            profileVisits: 1205,
+            nonFollowerReach: 91.2,
+            followerReach: 8.8,
+            followerInteraction: 49.6,
+            nonFollowerInteraction: 50.4,
+          },
+          activity: [
+            { label: "00:00", value: 800, highlight: false },
+            { label: "03:00", value: 803, highlight: false },
+            { label: "06:00", value: 858, highlight: false },
+            { label: "09:00", value: 973, highlight: true },
+            { label: "12:00", value: 687, highlight: false },
+            { label: "15:00", value: 192, highlight: false },
+            { label: "18:00", value: 259, highlight: false },
+            { label: "21:00", value: 649, highlight: false },
+          ],
+          topPosts: [
+            {
+              id: 1,
+              title: "Opel Frontera Tanıtım",
+              metric: "1.8K",
+              type: "Görüntülenme",
+              image: "bg-orange-100",
+              icon: Eye,
+              iconClass: "text-orange-600",
+            },
+            {
+              id: 2,
+              title: "Zafer Bayramı",
+              metric: "1.2K",
+              type: "Görüntülenme",
+              image: "bg-red-100",
+              icon: Eye,
+              iconClass: "text-red-600",
+            },
+            {
+              id: 3,
+              title: "Ekip Tanıtımı",
+              metric: "11",
+              type: "Etkileşim",
+              image: "bg-blue-100",
+              icon: MousePointer,
+              iconClass: "text-blue-600",
+            },
+          ],
+          insights: {
+            title: "Viral Edinme Aşaması",
+            text: "Takipçi olmayanlardan (%91) kaynaklanan yüksek viral erişim (129K). Etkileşim yeni ve mevcut kullanıcılar arasında eşit dağıldı.",
+            color: "purple",
+          },
+        };
+
+        const currentData = timeRange === "30d" ? data30d : data90d;
+
+        const calculateTrend = (currentVal, total90dVal) => {
+          if (timeRange === "90d") return null;
+          const monthlyAverage = total90dVal / 3;
+          const diff = ((currentVal - monthlyAverage) / monthlyAverage) * 100;
+          return Math.round(diff);
+        };
+
+        const reachTrend = calculateTrend(
+          data30d.metrics.reach,
+          data90d.metrics.reach
+        );
+        const interactionTrend = calculateTrend(
+          data30d.metrics.interactions,
+          data90d.metrics.interactions
+        );
+        const visitsTrend = calculateTrend(
+          data30d.metrics.profileVisits,
+          data90d.metrics.profileVisits
+        );
+
+        return (
+          <div className="min-h-screen bg-slate-50 font-sans text-slate-900">
+            {/* Header */}
+            <header className="bg-white border-b border-slate-200 sticky top-0 z-20">
+              <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="flex items-center justify-between h-16">
+                  <div className="flex items-center gap-3">
+                    <div className="bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600 p-0.5 rounded-full">
+                      <div className="bg-white p-0.5 rounded-full">
+                        <div className="h-8 w-8 bg-slate-200 rounded-full flex items-center justify-center text-xs font-bold text-slate-500">
+                          OE
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <h1 className="text-lg font-bold text-slate-800">
+                        opel.erdemir
+                      </h1>
+                      <p className="text-xs text-slate-500">
+                        Analiz Paneli • Kasım 2025
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Time Range Toggle */}
+                  <div className="flex bg-slate-100 p-1 rounded-lg">
+                    <button
+                      onClick={() => setTimeRange("30d")}
+                      className={`px-4 py-1.5 text-sm font-medium rounded-md transition-all ${
+                        timeRange === "30d"
+                          ? "bg-white text-slate-800 shadow-sm"
+                          : "text-slate-500 hover:text-slate-700"
+                      }`}
+                    >
+                      Son 30 Gün
+                    </button>
+                    <button
+                      onClick={() => setTimeRange("90d")}
+                      className={`px-4 py-1.5 text-sm font-medium rounded-md transition-all ${
+                        timeRange === "90d"
+                          ? "bg-white text-slate-800 shadow-sm"
+                          : "text-slate-500 hover:text-slate-700"
+                      }`}
+                    >
+                      Son 90 Gün
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </header>
+
+            <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+              {/* KPI Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <MetricItem
+                  label="Toplam Erişim"
+                  value={currentData.metrics.reach.toLocaleString()}
+                  subtext={`%${currentData.metrics.nonFollowerReach} Takip Etmeyen`}
+                  icon={Activity}
+                  color="purple"
+                  trend={reachTrend}
+                  trendLabel="90g Ort. Kıyasla"
+                />
+                <MetricItem
+                  label="Toplam Etkileşim"
+                  value={currentData.metrics.interactions.toLocaleString()}
+                  subtext="Beğeni, Yorum, Paylaşım"
+                  icon={Heart}
+                  color="pink"
+                  trend={interactionTrend}
+                  trendLabel="90g Ort. Kıyasla"
+                />
+                <MetricItem
+                  label="Toplam Takipçi"
+                  value={currentData.metrics.followers}
+                  subtext="İstikrarlı Büyüme"
+                  icon={Users}
+                  color="blue"
+                  trend={null}
+                />
+                <MetricItem
+                  label="Profil Ziyaretleri"
+                  value={currentData.metrics.profileVisits.toLocaleString()}
+                  subtext="Profil İlgisi"
+                  icon={MousePointer}
+                  color="orange"
+                  trend={visitsTrend}
+                  trendLabel="90g Ort. Kıyasla"
+                />
+              </div>
+
+              {/* Insight Banner */}
+              <div
+                className={`mb-8 p-4 rounded-lg border flex items-start gap-4 ${
+                  currentData.insights.color === "purple"
+                    ? "bg-purple-50 border-purple-100 text-purple-900"
+                    : "bg-blue-50 border-blue-100 text-blue-900"
+                }`}
+              >
+                <div className="mt-1">
+                  <TrendingUp size={20} />
+                </div>
+                <div>
+                  <h4 className="font-bold text-sm mb-1">
+                    {currentData.insights.title}
+                  </h4>
+                  <p className="text-sm opacity-90">
+                    {currentData.insights.text}
+                  </p>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                {/* Main Chart: Activity */}
+                <div className="lg:col-span-2">
+                  <Card className="h-full">
+                    <div className="flex items-center justify-between mb-6">
+                      <div>
+                        <h3 className="text-lg font-bold text-slate-800 flex items-center gap-2">
+                          <Clock size={20} className="text-slate-400" />
+                          Takipçi Aktif Saatleri
+                        </h3>
+                        <p className="text-sm text-slate-500">
+                          Paylaşım için en iyi saat tutarlı bir şekilde 09:00.
+                        </p>
+                      </div>
+                      <div className="flex gap-2">
+                        <span className="px-2 py-1 text-xs font-medium bg-pink-100 text-pink-700 rounded">
+                          Zirve: 09:00
+                        </span>
+                        <span className="px-2 py-1 text-xs font-medium bg-slate-100 text-slate-600 rounded">
+                          Düşük: 15:00
+                        </span>
+                      </div>
+                    </div>
+                    <BarChart
+                      data={currentData.activity}
+                      color={
+                        timeRange === "90d" ? "bg-purple-500" : "bg-pink-500"
+                      }
+                    />
+                  </Card>
+                </div>
+
+                {/* Secondary Chart: Reach Split */}
+                <div className="lg:col-span-1">
+                  <Card className="h-full">
+                    <h3 className="text-lg font-bold text-slate-800 mb-2 flex items-center gap-2">
+                      <PieChart size={20} className="text-slate-400" />
+                      Erişim ve Etkileşim
+                    </h3>
+                    <p className="text-sm text-slate-500 mb-6">
+                      Kim Görüyor vs. Kim Etkileşime Giriyor?
+                    </p>
+
+                    <div className="space-y-6">
+                      {/* Reach */}
+                      <div>
+                        <div className="flex justify-between text-xs mb-1">
+                          <span className="font-semibold">Erişim Kaynağı</span>
+                        </div>
+                        <div className="flex h-4 rounded-full overflow-hidden w-full">
+                          <div
+                            style={{
+                              width: `${currentData.metrics.nonFollowerReach}%`,
+                            }}
+                            className="bg-purple-500 h-full transition-all duration-500"
+                          ></div>
+                          <div
+                            style={{
+                              width: `${currentData.metrics.followerReach}%`,
+                            }}
+                            className="bg-slate-200 h-full transition-all duration-500"
+                          ></div>
+                        </div>
+                        <div className="flex justify-between text-[10px] mt-1 text-slate-500">
+                          <span>
+                            %{currentData.metrics.nonFollowerReach} Takip
+                            Etmeyen
+                          </span>
+                          <span>
+                            %{currentData.metrics.followerReach} Takipçi
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Interactions */}
+                      <div>
+                        <div className="flex justify-between text-xs mb-1">
+                          <span className="font-semibold">
+                            Etkileşim Kaynağı
+                          </span>
+                        </div>
+                        <div className="flex h-4 rounded-full overflow-hidden w-full">
+                          <div
+                            style={{
+                              width: `${currentData.metrics.nonFollowerInteraction}%`,
+                            }}
+                            className="bg-pink-500 h-full transition-all duration-500"
+                          ></div>
+                          <div
+                            style={{
+                              width: `${currentData.metrics.followerInteraction}%`,
+                            }}
+                            className="bg-slate-200 h-full transition-all duration-500"
+                          ></div>
+                        </div>
+                        <div className="flex justify-between text-[10px] mt-1 text-slate-500">
+                          <span>
+                            %{currentData.metrics.nonFollowerInteraction} Takip
+                            Etmeyen
+                          </span>
+                          <span>
+                            %{currentData.metrics.followerInteraction} Takipçi
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="mt-6 p-3 bg-slate-50 rounded border border-slate-100 text-xs text-slate-600">
+                      <strong>Analiz:</strong>
+                      {timeRange === "30d"
+                        ? " Takipçi olmayan etkileşimlerinde düşüş. Strateji mevcut takipçileri yeniden harekete geçirmeye odaklanmalı."
+                        : " Son 90 günde takipçi olmayanlara devasa erişim, ancak etkileşime dönüşüm düşük."}
+                    </div>
+                  </Card>
+                </div>
+              </div>
+
+              {/* Bottom Section: Content & Efficiency */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {/* Comparison / Summary */}
+                <Card>
+                  <h3 className="text-lg font-bold text-slate-800 mb-6 flex items-center gap-2">
+                    <Filter size={20} className="text-slate-400" />
+                    {timeRange === "30d"
+                      ? "30 Günlük Performans ve Ortalama"
+                      : "90 Günlük Performans Özeti"}
+                  </h3>
+
+                  <div className="space-y-4">
+                    {timeRange === "30d" ? (
+                      <>
+                        <div className="flex items-center justify-between p-3 bg-red-50 rounded-lg border border-red-100">
+                          <div>
+                            <h4 className="text-sm font-bold text-red-900">
+                              Erişim Düşüşü
+                            </h4>
+                            <p className="text-xs text-red-700">
+                              Mevcut erişim, 3 aylık ortalamadan %66 daha düşük.
+                            </p>
+                          </div>
+                          <ArrowDownRight className="text-red-600" />
+                        </div>
+                        <div className="flex items-center justify-between p-3 bg-orange-50 rounded-lg border border-orange-100">
+                          <div>
+                            <h4 className="text-sm font-bold text-orange-900">
+                              Etkileşim Farkı
+                            </h4>
+                            <p className="text-xs text-orange-700">
+                              Etkileşimler ortalamaya göre %57 düştü.
+                            </p>
+                          </div>
+                          <ArrowDownRight className="text-orange-600" />
+                        </div>
+                        <div className="flex items-center justify-between p-3 bg-green-50 rounded-lg border border-green-100">
+                          <div>
+                            <h4 className="text-sm font-bold text-green-900">
+                              Takipçi Sadakati
+                            </h4>
+                            <p className="text-xs text-green-700">
+                              Etkileşim artık %89 oranında takipçilerden
+                              (önceden %50).
+                            </p>
+                          </div>
+                          <ArrowUpRight className="text-green-600" />
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <div className="flex items-center justify-between p-3 bg-purple-50 rounded-lg border border-purple-100">
+                          <div>
+                            <h4 className="text-sm font-bold text-purple-900">
+                              Viral Erişim
+                            </h4>
+                            <p className="text-xs text-purple-700">
+                              Çoğunlukla takipçi olmayanlardan 129k görüntüleme
+                              sağlandı.
+                            </p>
+                          </div>
+                          <TrendingUp className="text-purple-600" />
+                        </div>
+                        <div className="p-3">
+                          <p className="text-sm text-slate-500 leading-relaxed">
+                            Son 90 gün, geniş kitlelere ulaşan ancak etkileşim
+                            derinliği düşük olan yüksek görünürlüklü içeriklerle
+                            (Frontera lansmanı, Bayramlar) geçti.
+                          </p>
+                        </div>
+                      </>
+                    )}
+                  </div>
+                </Card>
+
+                {/* Top Content Cards */}
+                <Card>
+                  <h3 className="text-lg font-bold text-slate-800 mb-6 flex items-center gap-2">
+                    <Instagram size={20} className="text-slate-400" />
+                    En İyi İçerikler ({timeRange === "30d" ? "30g" : "90g"})
+                  </h3>
+
+                  <div className="space-y-4">
+                    {currentData.topPosts.map((post) => (
+                      <div
+                        key={post.id}
+                        className="flex items-center p-3 rounded-lg border border-slate-100 hover:bg-slate-50 transition-colors"
+                      >
+                        <div
+                          className={`w-16 h-16 rounded-md ${post.image} flex-shrink-0 mr-4 flex items-center justify-center`}
+                        >
+                          <span className="text-xs font-bold opacity-30 text-slate-600">
+                            RESİM
+                          </span>
+                        </div>
+                        <div className="flex-1">
+                          <h4 className="font-semibold text-slate-800 text-sm">
+                            {post.title}
+                          </h4>
+                          <p className="text-xs text-slate-500">
+                            {timeRange === "30d"
+                              ? "Son Gönderi"
+                              : "Viral Gönderi"}
+                          </p>
+                        </div>
+                        <div className="text-right">
+                          <div
+                            className={`flex items-center justify-end gap-1 font-bold ${
+                              post.iconClass || "text-slate-800"
+                            }`}
+                          >
+                            <post.icon size={16} />
+                            {post.metric}
+                          </div>
+                          <span className="text-xs text-slate-500">
+                            {post.type}
+                          </span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </Card>
+              </div>
+            </main>
+          </div>
+        );
+      };
+
+      const root = createRoot(document.getElementById("root"));
+      root.render(<App />);
+    </script>
+  </body>
+</html>
