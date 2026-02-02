@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Metro Elektrik Analiz Paneli</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Babel (JSX'i tarayıcının anlaması için) -->
+    <script src="https://unpkg.com/@babel/standalone@7.24.7/babel.min.js"></script>
+
+    <!-- Import Map (React ve Ikonlar için) -->
+    <script type="importmap">
+      {
+        "imports": {
+          "react": "https://esm.sh/react@18.2.0",
+          "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
+          "lucide-react": "https://esm.sh/lucide-react@0.263.1"
+        }
+      }
+    </script>
+  </head>
+  <body class="bg-slate-50 text-slate-900 min-h-screen pb-12">
+    <div id="root"></div>
+
+    <script type="text/babel" data-type="module" data-presets="react">
+      import React, { useState } from "react";
+      import { createRoot } from "react-dom/client";
+      import {
+        Users,
+        Eye,
+        Heart,
+        MousePointer,
+        TrendingUp,
+        Activity,
+        Clock,
+        Calendar,
+        Instagram,
+        ArrowUpRight,
+        ArrowDownRight,
+        BarChart2,
+        PieChart,
+        MessageCircle,
+        Filter,
+        MapPin,
+        UserPlus,
+        Link2,
+      } from "lucide-react";
+
+      // --- Components ---
+
+      const Card = ({ children, className = "" }) => (
+        <div
+          className={`bg-white rounded-xl shadow-sm border border-slate-100 p-6 ${className}`}
+        >
+          {children}
+        </div>
+      );
+
+      const MetricItem = ({
+        label,
+        value,
+        subtext,
+        trend,
+        icon: Icon,
+        color = "blue",
+        trendLabel = "Onceki Donem",
+      }) => {
+        const colorClasses = {
+          blue: "bg-blue-50 text-blue-600",
+          pink: "bg-pink-50 text-pink-600",
+          purple: "bg-purple-50 text-purple-600",
+          orange: "bg-orange-50 text-orange-600",
+          green: "bg-green-50 text-green-600",
+        };
+
+        return (
+          <Card>
+            <div className="flex items-start justify-between mb-4">
+              <div className={`p-3 rounded-lg ${colorClasses[color]}`}>
+                <Icon size={24} />
+              </div>
+              {trend !== null && trend !== undefined && (
+                <div className="text-right">
+                  <span
+                    className={`flex items-center justify-end text-sm font-bold ${
+                      trend >= 0 ? "text-green-600" : "text-red-500"
+                    }`}
+                  >
+                    {trend >= 0 ? (
+                      <ArrowUpRight size={16} className="mr-1" />
+                    ) : (
+                      <ArrowDownRight size={16} className="mr-1" />
+                    )}
+                    {Math.abs(trend)}%
+                  </span>
+                  <span className="text-[10px] text-slate-400 uppercase tracking-wider">
+                    {trendLabel}
+                  </span>
+                </div>
+              )}
+            </div>
+            <div>
+              <p className="text-slate-500 text-sm font-medium mb-1">{label}</p>
+              <h3 className="text-2xl font-bold text-slate-800">{value}</h3>
+              {subtext && (
+                <p className="text-slate-400 text-xs mt-2">{subtext}</p>
+              )}
+            </div>
+          </Card>
+        );
+      };
+
+      const BarChart = ({ data, color = "bg-pink-500" }) => {
+        const maxVal = Math.max(...data.map((d) => d.value));
+
+        return (
+          <div className="flex items-stretch justify-between h-48 gap-2 pt-6">
+            {data.map((item, idx) => (
+              <div
+                key={idx}
+                className="flex flex-col items-center justify-end gap-2 flex-1 group h-full"
+              >
+                <div className="relative w-full flex-1 flex items-end justify-center">
+                  <div
+                    className={`w-full max-w-[30px] rounded-t-md transition-all duration-500 relative ${
+                      item.highlight
+                        ? color
+                        : "bg-slate-200 group-hover:bg-pink-300"
+                    }`}
+                    style={{ height: `${(item.value / maxVal) * 100}%` }}
+                  >
+                    <div className="opacity-0 group-hover:opacity-100 absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-[10px] py-1 px-2 rounded pointer-events-none transition-opacity whitespace-nowrap z-10 shadow-lg">
+                      {item.value} Aktif
+                    </div>
+                  </div>
+                </div>
+                <span className="text-xs text-slate-500 font-medium">
+                  {item.label}
+                </span>
+              </div>
+            ))}
+          </div>
+        );
+      };
+
+      // --- Main App ---
+
+      const App = () => {
+        const [timeRange, setTimeRange] = useState("30d");
+
+        // --- DATA SETS ---
+
+        const data30d = {
+          metrics: {
+            followers: "4,830",
+            followersGrowth: 2.1,
+            newFollowers: 159,
+            unfollows: 62,
+            netGrowth: 97,
+            reach: 444336,
+            reachGrowth: 412.6,
+            views: 171626,
+            viewsFromAds: 87.9,
+            interactions: 531,
+            interactionsFromAds: 50.3,
+            profileVisits: 1706,
+            profileVisitsGrowth: 28.0,
+            externalLinkTaps: 90,
+            externalLinkTapsGrowth: 100,
+            totalProfileActivity: 1796,
+            profileActivityGrowth: 30.3,
+            nonFollowerReach: 90.6,
+            followerReach: 9.4,
+            followerInteraction: 52.2,
+            nonFollowerInteraction: 47.8,
+          },
+          contentTypes: {
+            posts: 80.6,
+            stories: 18.2,
+            reels: 1.2,
+          },
+          interactionTypes: {
+            posts: 83.8,
+            stories: 16.2,
+          },
+          engagement: {
+            likes: 200,
+            comments: 5,
+            saves: 15,
+            shares: 20,
+          },
+          activity: [
+            { label: "00:00", value: 400, highlight: false },
+            { label: "03:00", value: 100, highlight: false },
+            { label: "06:00", value: 300, highlight: false },
+            { label: "09:00", value: 600, highlight: false },
+            { label: "12:00", value: 750, highlight: false },
+            { label: "15:00", value: 700, highlight: false },
+            { label: "18:00", value: 900, highlight: true },
+            { label: "21:00", value: 850, highlight: true },
+          ],
+          topPosts: [
+            {
+              id: 1,
+              title: "ABB Kampanya",
+              metric: "9,944",
+              type: "Goruntuleme",
+              image: "bg-red-100",
+              icon: Eye,
+              iconClass: "text-red-600",
+            },
+            {
+              id: 2,
+              title: "CHNT Urunleri",
+              metric: "5,103",
+              type: "Goruntuleme",
+              image: "bg-blue-100",
+              icon: Eye,
+              iconClass: "text-blue-600",
+            },
+            {
+              id: 3,
+              title: "SKP Kablo Pabuclari",
+              metric: "31",
+              type: "Takip",
+              image: "bg-green-100",
+              icon: UserPlus,
+              iconClass: "text-green-600",
+            },
+          ],
+          demographics: {
+            cities: [
+              { name: "Istanbul", percent: 16.5 },
+              { name: "Izmir", percent: 4.3 },
+              { name: "Ankara", percent: 3.6 },
+              { name: "Bursa", percent: 2.9 },
+              { name: "Adana", percent: 2.3 },
+            ],
+            ageRanges: [
+              { range: "35-44", percent: 35.0 },
+              { range: "25-34", percent: 24.7 },
+              { range: "45-54", percent: 22.9 },
+              { range: "55-64", percent: 9.2 },
+              { range: "65+", percent: 4.2 },
+              { range: "18-24", percent: 4.0 },
+            ],
+            gender: {
+              male: 94.5,
+              female: 5.5,
+            },
+          },
+          insights: {
+            title: "Reklam Odakli Buyume",
+            text: "Erisimlerin %87.9'u ve etkilesimlerin %50.3'u reklamlardan geliyor. Profil ziyaretleri %28 artti, harici baglanti tiklari iki katina cikti. Reklam stratejisi guclu sonuclar veriyor.",
+            color: "green",
+          },
+        };
+
+        const currentData = data30d;
+
+        return (
+          <div className="min-h-screen bg-slate-50 font-sans text-slate-900">
+            {/* Header */}
+            <header className="bg-white border-b border-slate-200 sticky top-0 z-20">
+              <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="flex items-center justify-between h-16">
+                  <div className="flex items-center gap-3">
+                    <div className="bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600 p-0.5 rounded-full">
+                      <div className="bg-white p-0.5 rounded-full">
+                        <div className="h-8 w-8 bg-slate-200 rounded-full flex items-center justify-center text-xs font-bold text-slate-500">
+                          ME
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <h1 className="text-lg font-bold text-slate-800">
+                        metro.elektrik
+                      </h1>
+                      <p className="text-xs text-slate-500">
+                        Analiz Paneli - 3 Oca - 1 Sub 2025
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Time Range Badge */}
+                  <div className="flex bg-slate-100 p-1 rounded-lg">
+                    <span className="px-4 py-1.5 text-sm font-medium rounded-md bg-white text-slate-800 shadow-sm">
+                      Son 30 Gun
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </header>
+
+            <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+              {/* KPI Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <MetricItem
+                  label="Erişilen Hesaplar"
+                  value={currentData.metrics.reach.toLocaleString()}
+                  subtext={`%${currentData.metrics.nonFollowerReach} Takip Etmeyen`}
+                  icon={Activity}
+                  color="purple"
+                  trend={currentData.metrics.reachGrowth}
+                  trendLabel="Onceki Donem"
+                />
+                <MetricItem
+                  label="Toplam Goruntuleme"
+                  value={currentData.metrics.views.toLocaleString()}
+                  subtext={`%${currentData.metrics.viewsFromAds} Reklamlardan`}
+                  icon={Eye}
+                  color="blue"
+                  trend={null}
+                />
+                <MetricItem
+                  label="Toplam Etkilesim"
+                  value={currentData.metrics.interactions.toLocaleString()}
+                  subtext={`%${currentData.metrics.interactionsFromAds} Reklamlardan`}
+                  icon={Heart}
+                  color="pink"
+                  trend={null}
+                />
+                <MetricItem
+                  label="Toplam Takipci"
+                  value={currentData.metrics.followers}
+                  subtext={`+${currentData.metrics.netGrowth} Net Buyume`}
+                  icon={Users}
+                  color="green"
+                  trend={currentData.metrics.followersGrowth}
+                  trendLabel="Onceki Donem"
+                />
+              </div>
+
+              {/* Secondary KPIs */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <MetricItem
+                  label="Profil Ziyaretleri"
+                  value={currentData.metrics.profileVisits.toLocaleString()}
+                  subtext="Profil Ilgisi"
+                  icon={MousePointer}
+                  color="orange"
+                  trend={currentData.metrics.profileVisitsGrowth}
+                  trendLabel="Onceki Donem"
+                />
+                <MetricItem
+                  label="Harici Baglanti Tiklari"
+                  value={currentData.metrics.externalLinkTaps}
+                  subtext="Web Sitesi Trafigi"
+                  icon={Link2}
+                  color="blue"
+                  trend={currentData.metrics.externalLinkTapsGrowth}
+                  trendLabel="Onceki Donem"
+                />
+                <MetricItem
+                  label="Yeni Takipciler"
+                  value={currentData.metrics.newFollowers}
+                  subtext={`${currentData.metrics.unfollows} Takibi Birakan`}
+                  icon={UserPlus}
+                  color="green"
+                  trend={null}
+                />
+              </div>
+
+              {/* Insight Banner */}
+              <div
+                className={`mb-8 p-4 rounded-lg border flex items-start gap-4 bg-green-50 border-green-100 text-green-900`}
+              >
+                <div className="mt-1">
+                  <TrendingUp size={20} />
+                </div>
+                <div>
+                  <h4 className="font-bold text-sm mb-1">
+                    {currentData.insights.title}
+                  </h4>
+                  <p className="text-sm opacity-90">
+                    {currentData.insights.text}
+                  </p>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                {/* Main Chart: Activity */}
+                <div className="lg:col-span-2">
+                  <Card className="h-full">
+                    <div className="flex items-center justify-between mb-6">
+                      <div>
+                        <h3 className="text-lg font-bold text-slate-800 flex items-center gap-2">
+                          <Clock size={20} className="text-slate-400" />
+                          Takipci Aktif Saatleri
+                        </h3>
+                        <p className="text-sm text-slate-500">
+                          En iyi paylasim saatleri: 18:00 ve 21:00
+                        </p>
+                      </div>
+                      <div className="flex gap-2">
+                        <span className="px-2 py-1 text-xs font-medium bg-pink-100 text-pink-700 rounded">
+                          Zirve: 18:00
+                        </span>
+                        <span className="px-2 py-1 text-xs font-medium bg-slate-100 text-slate-600 rounded">
+                          Dusuk: 03:00
+                        </span>
+                      </div>
+                    </div>
+                    <BarChart data={currentData.activity} color="bg-pink-500" />
+                  </Card>
+                </div>
+
+                {/* Secondary Chart: Reach Split */}
+                <div className="lg:col-span-1">
+                  <Card className="h-full">
+                    <h3 className="text-lg font-bold text-slate-800 mb-2 flex items-center gap-2">
+                      <PieChart size={20} className="text-slate-400" />
+                      Erisim ve Etkilesim
+                    </h3>
+                    <p className="text-sm text-slate-500 mb-6">
+                      Kim Goruyor vs. Kim Etkilesiyor?
+                    </p>
+
+                    <div className="space-y-6">
+                      {/* Reach */}
+                      <div>
+                        <div className="flex justify-between text-xs mb-1">
+                          <span className="font-semibold">Erisim Kaynagi</span>
+                        </div>
+                        <div className="flex h-4 rounded-full overflow-hidden w-full">
+                          <div
+                            style={{
+                              width: `${currentData.metrics.nonFollowerReach}%`,
+                            }}
+                            className="bg-purple-500 h-full transition-all duration-500"
+                          ></div>
+                          <div
+                            style={{
+                              width: `${currentData.metrics.followerReach}%`,
+                            }}
+                            className="bg-slate-200 h-full transition-all duration-500"
+                          ></div>
+                        </div>
+                        <div className="flex justify-between text-[10px] mt-1 text-slate-500">
+                          <span>
+                            %{currentData.metrics.nonFollowerReach} Takip
+                            Etmeyen
+                          </span>
+                          <span>
+                            %{currentData.metrics.followerReach} Takipci
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Interactions */}
+                      <div>
+                        <div className="flex justify-between text-xs mb-1">
+                          <span className="font-semibold">
+                            Etkilesim Kaynagi
+                          </span>
+                        </div>
+                        <div className="flex h-4 rounded-full overflow-hidden w-full">
+                          <div
+                            style={{
+                              width: `${currentData.metrics.nonFollowerInteraction}%`,
+                            }}
+                            className="bg-pink-500 h-full transition-all duration-500"
+                          ></div>
+                          <div
+                            style={{
+                              width: `${currentData.metrics.followerInteraction}%`,
+                            }}
+                            className="bg-slate-200 h-full transition-all duration-500"
+                          ></div>
+                        </div>
+                        <div className="flex justify-between text-[10px] mt-1 text-slate-500">
+                          <span>
+                            %{currentData.metrics.nonFollowerInteraction} Takip
+                            Etmeyen
+                          </span>
+                          <span>
+                            %{currentData.metrics.followerInteraction} Takipci
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="mt-6 p-3 bg-slate-50 rounded border border-slate-100 text-xs text-slate-600">
+                      <strong>Analiz:</strong> Erisim buyuk olcude takip
+                      etmeyenlerden (%90.6) geliyor ancak etkilesim dengeli
+                      dagilmis. Reklam stratejisi yeni kitlelere ulasmada
+                      etkili.
+                    </div>
+                  </Card>
+                </div>
+              </div>
+
+              {/* Content Type & Engagement Breakdown */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                {/* Content Type */}
+                <Card>
+                  <h3 className="text-lg font-bold text-slate-800 mb-6 flex items-center gap-2">
+                    <BarChart2 size={20} className="text-slate-400" />
+                    Icerik Turu Dagilimi
+                  </h3>
+
+                  <div className="space-y-4">
+                    <div>
+                      <div className="flex justify-between text-sm mb-2">
+                        <span className="font-medium">Gonderiler</span>
+                        <span className="font-bold">
+                          %{currentData.contentTypes.posts}
+                        </span>
+                      </div>
+                      <div className="h-3 bg-slate-100 rounded-full overflow-hidden">
+                        <div
+                          className="h-full bg-blue-500 rounded-full"
+                          style={{ width: `${currentData.contentTypes.posts}%` }}
+                        ></div>
+                      </div>
+                    </div>
+                    <div>
+                      <div className="flex justify-between text-sm mb-2">
+                        <span className="font-medium">Hikayeler</span>
+                        <span className="font-bold">
+                          %{currentData.contentTypes.stories}
+                        </span>
+                      </div>
+                      <div className="h-3 bg-slate-100 rounded-full overflow-hidden">
+                        <div
+                          className="h-full bg-pink-500 rounded-full"
+                          style={{
+                            width: `${currentData.contentTypes.stories}%`,
+                          }}
+                        ></div>
+                      </div>
+                    </div>
+                    <div>
+                      <div className="flex justify-between text-sm mb-2">
+                        <span className="font-medium">Reels</span>
+                        <span className="font-bold">
+                          %{currentData.contentTypes.reels}
+                        </span>
+                      </div>
+                      <div className="h-3 bg-slate-100 rounded-full overflow-hidden">
+                        <div
+                          className="h-full bg-purple-500 rounded-full"
+                          style={{ width: `${currentData.contentTypes.reels}%` }}
+                        ></div>
+                      </div>
+                    </div>
+                  </div>
+                </Card>
+
+                {/* Engagement Breakdown */}
+                <Card>
+                  <h3 className="text-lg font-bold text-slate-800 mb-6 flex items-center gap-2">
+                    <Heart size={20} className="text-slate-400" />
+                    Etkilesim Detaylari
+                  </h3>
+
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="p-4 bg-pink-50 rounded-lg text-center">
+                      <p className="text-2xl font-bold text-pink-600">
+                        {currentData.engagement.likes}
+                      </p>
+                      <p className="text-xs text-pink-700 mt-1">Begeni</p>
+                    </div>
+                    <div className="p-4 bg-blue-50 rounded-lg text-center">
+                      <p className="text-2xl font-bold text-blue-600">
+                        {currentData.engagement.comments}
+                      </p>
+                      <p className="text-xs text-blue-700 mt-1">Yorum</p>
+                    </div>
+                    <div className="p-4 bg-purple-50 rounded-lg text-center">
+                      <p className="text-2xl font-bold text-purple-600">
+                        {currentData.engagement.saves}
+                      </p>
+                      <p className="text-xs text-purple-700 mt-1">Kaydetme</p>
+                    </div>
+                    <div className="p-4 bg-green-50 rounded-lg text-center">
+                      <p className="text-2xl font-bold text-green-600">
+                        {currentData.engagement.shares}
+                      </p>
+                      <p className="text-xs text-green-700 mt-1">Paylasim</p>
+                    </div>
+                  </div>
+                </Card>
+              </div>
+
+              {/* Demographics Section */}
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                {/* Top Cities */}
+                <Card>
+                  <h3 className="text-lg font-bold text-slate-800 mb-6 flex items-center gap-2">
+                    <MapPin size={20} className="text-slate-400" />
+                    Baslica Sehirler
+                  </h3>
+
+                  <div className="space-y-3">
+                    {currentData.demographics.cities.map((city, idx) => (
+                      <div key={idx}>
+                        <div className="flex justify-between text-sm mb-1">
+                          <span>{city.name}</span>
+                          <span className="font-bold">%{city.percent}</span>
+                        </div>
+                        <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
+                          <div
+                            className="h-full bg-pink-500 rounded-full"
+                            style={{ width: `${city.percent * 5}%` }}
+                          ></div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </Card>
+
+                {/* Age Ranges */}
+                <Card>
+                  <h3 className="text-lg font-bold text-slate-800 mb-6 flex items-center gap-2">
+                    <Users size={20} className="text-slate-400" />
+                    Yas Araliklari
+                  </h3>
+
+                  <div className="space-y-3">
+                    {currentData.demographics.ageRanges.map((age, idx) => (
+                      <div key={idx}>
+                        <div className="flex justify-between text-sm mb-1">
+                          <span>{age.range}</span>
+                          <span className="font-bold">%{age.percent}</span>
+                        </div>
+                        <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
+                          <div
+                            className="h-full bg-purple-500 rounded-full"
+                            style={{ width: `${age.percent * 2.5}%` }}
+                          ></div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </Card>
+
+                {/* Gender */}
+                <Card>
+                  <h3 className="text-lg font-bold text-slate-800 mb-6 flex items-center gap-2">
+                    <Filter size={20} className="text-slate-400" />
+                    Cinsiyet Dagilimi
+                  </h3>
+
+                  <div className="flex items-center justify-center mb-6">
+                    <div className="relative w-40 h-40">
+                      <svg
+                        className="w-full h-full transform -rotate-90"
+                        viewBox="0 0 36 36"
+                      >
+                        <path
+                          d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                          fill="none"
+                          stroke="#e2e8f0"
+                          strokeWidth="3"
+                        />
+                        <path
+                          d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                          fill="none"
+                          stroke="#ec4899"
+                          strokeWidth="3"
+                          strokeDasharray={`${currentData.demographics.gender.male}, 100`}
+                        />
+                      </svg>
+                      <div className="absolute inset-0 flex flex-col items-center justify-center">
+                        <span className="text-2xl font-bold text-slate-800">
+                          %{currentData.demographics.gender.male}
+                        </span>
+                        <span className="text-xs text-slate-500">Erkek</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex justify-center gap-6 text-sm">
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 bg-pink-500 rounded-full"></div>
+                      <span>Erkek: %{currentData.demographics.gender.male}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 bg-slate-200 rounded-full"></div>
+                      <span>
+                        Kadin: %{currentData.demographics.gender.female}
+                      </span>
+                    </div>
+                  </div>
+                </Card>
+              </div>
+
+              {/* Top Content Cards */}
+              <Card>
+                <h3 className="text-lg font-bold text-slate-800 mb-6 flex items-center gap-2">
+                  <Instagram size={20} className="text-slate-400" />
+                  En Iyi Icerikler
+                </h3>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  {currentData.topPosts.map((post) => (
+                    <div
+                      key={post.id}
+                      className="flex items-center p-4 rounded-lg border border-slate-100 hover:bg-slate-50 transition-colors"
+                    >
+                      <div
+                        className={`w-16 h-16 rounded-md ${post.image} flex-shrink-0 mr-4 flex items-center justify-center`}
+                      >
+                        <span className="text-xs font-bold opacity-30 text-slate-600">
+                          RESIM
+                        </span>
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-semibold text-slate-800 text-sm">
+                          {post.title}
+                        </h4>
+                        <p className="text-xs text-slate-500">En Basarili</p>
+                      </div>
+                      <div className="text-right">
+                        <div
+                          className={`flex items-center justify-end gap-1 font-bold ${
+                            post.iconClass || "text-slate-800"
+                          }`}
+                        >
+                          <post.icon size={16} />
+                          {post.metric}
+                        </div>
+                        <span className="text-xs text-slate-500">
+                          {post.type}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </Card>
+            </main>
+
+            {/* Footer */}
+            <footer className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center text-xs text-slate-400">
+              Metro Elektrik Instagram Analiz Paneli - Subat 2025
+            </footer>
+          </div>
+        );
+      };
+
+      const root = createRoot(document.getElementById("root"));
+      root.render(<App />);
+    </script>
+  </body>
+</html>
