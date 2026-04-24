@@ -1494,13 +1494,13 @@
     tr: {
       stages: [
         { tier: 'L1', name: 'Yardımlı',      blurb: 'Rutin işleri — müşteri destek, pazar, fiyat, rakip araştırma, CRM , iş ayıklama — Genesis yapay zeka temsilcilerine devrederek başlayın. Siz yönlendirirsiniz, onlar hızlandırır.', chips: ['insan-merkezli', 'tek-görev', '< 30 dk kurulum'], viz: 'assisted' },
-        { tier: 'L2', name: 'Yardımcı Pilot',blurb: 'Genesis\'e playbook\'larınızı öğretin. Çok adımlı akışları — outbound sekansları, toplantı hazırlığı, takipler — Genesis yapay zeka temsilcileri işi üstlenmeye başlar.', chips: ['playbook\'lar', 'çok-adımlı', 'siz onaylarsınız'], viz: 'copilot' },
-        { tier: 'L3', name: 'Otopilot',      blurb: 'İş akışları sinyallerle çalışan, pipeline üzerinde aksiyon alan ve yalnızca istisnaları devreden AI iş güçlerine dönüşür.', chips: ['olay-tetikli', 'sadece-istisna', 'ölçülen ROI'], viz: 'autopilot' },
+        { tier: 'L2', name: 'Yardımcı Pilot',blurb: 'Genesis\'e oyun planınızı öğretin. Çok adımlı akışları — outbound sekansları, toplantı hazırlığı, takipler — Genesis yapay zeka temsilcileri işi üstlenmeye başlar.', chips: ['playbook\'lar', 'çok-adımlı', 'siz onaylarsınız'], viz: 'copilot' },
+        { tier: 'L3', name: 'Otopilot',      blurb: 'İş akışları sinyallerle çalışan, satış hunisi üzerinde aksiyon alan ve yalnızca istisnaları devreden AI iş güçlerine dönüşür.', chips: ['olay-tetikli', 'sadece-istisna', 'ölçülen ROI'], viz: 'autopilot' },
         { tier: 'L4', name: 'Otonom',        blurb: 'İş gücünüz kendini optimize eder — yeni yapay zeka temsilcileri açar, kendi A/B testlerini  yapar. Siz stratejiyi belirlersiniz.', chips: ['kendini-geliştiren', 'birleşik', 'strateji-odaklı'], viz: 'selfdriving' }
       ],
       agents: [
-        { num:'01', name:'Genesis Satış',    role:'Satış Temsilcisi',    desc:'Pipeline\'ınızı 7/24 işleyen BDR/SDR otomasyonu — kişiselleştirilmiş outreach, niyet temelli sekanslar ve sürekli CRM zenginleştirme.', tags:['BDR/SDR','outreach','crm-zenginleştirme'] },
-        { num:'02', name:'Genesis Destek',   role:'Destek Temsilcisi',   desc:'7/24 müşteri hizmetleri — Müşteri talepleri sizin tonunuz, politikalarınız ve bilgi tabanınızla çözer; yalnızca gerçekten insana ihtiyaç duyan durumları yükseltir.', tags:['7/24','talepler','kb-native'] },
+        { num:'01', name:'Genesis Satış',    role:'Satış Temsilcisi',    desc:'Satış huninizi 7/24 işleyen İş Geliştirme/Satış Geliştirme otomasyonu — kişiselleştirilmiş ilk temas ve sürekli CRM zenginleştirme.', tags:['BDR/SDR','outreach','crm-zenginleştirme'] },
+        { num:'02', name:'Genesis Destek',   role:'Destek Temsilcisi',   desc:'7/24 müşteri hizmetleri — Müşteri taleplerini sizin tonunuz, politikalarınız ve bilgi tabanınızla çözer; yalnızca gerçekten insana ihtiyaç duyan durumları yükseltir.', tags:['7/24','talepler','kb-native'] },
         { num:'03', name:'Genesis Araştırma',role:'Araştırma Temsilcisi',desc:'Talep üzerine derin pazar araştırması — rakip analizleri, trend sentezi ve ekibinizin gerçekten okuyacağı raporlara dönüşen web ölçeğinde veri.', tags:['pazar','rakip','web-agg'] },
         { num:'04', name:'Genesis Operasyon',role:'Operasyon Temsilcisi',desc:'Gölge güç, sessiz işgücü — veri girişi, döküman işleme, yönlendirme ve akış optimizasyonu. Zaten kullandığınız araçlara bağlanır.', tags:['veri-girişi','dökümanlar','akış'] },
         { num:'05', name:'Genesis Pazarlama',role:'Pazarlama Temsilcisi',desc:'Sürekli içerik üretimi ve SEO araştırması — brief\'ler, taslaklar, sayfa içi optimizasyon ve marka sesinize uyumlu konu kümeleri.', tags:['içerik','SEO','marka-sesi'] }
@@ -1509,7 +1509,7 @@
         sales: {
           label:'Satış için', tab:'Satış', meta:'DEPARTMAN / 01 · SATIŞ',
           headline:'<em>Satış</em> için YZ Temsilcileri inşa edin.',
-          desc:'Uyumayan pipeline. Genesis ajanları potansiyel müşteri bulur, zenginleştirir ve outreach\'i kişiselleştirir — sonra sıcak konuşmaları tam doğru anda temsilcilerinize devreder.',
+          desc:'Uyumayan satış hunisi. Genesis ajanları potansiyel müşteri bulur, zenginleştirir ve kişiselleştirir — sonra sıcak konuşmaları tam doğru anda temsilcilerinize devreder.',
           bullets:[
             ['Potansiyel müşteriler üç katına çıkaran iş akışları','aynı çalışan sayısıyla, yeni işe alım yapmadan.'],
             ['CRM zenginleştirme','sürekli çalışır — artık eskimiş kayıtlar yok.'],
@@ -1524,9 +1524,9 @@
           bn:{
             title:'Satış ekipleri saatlerini <em>satış olmayan</em> işlere harcıyor.',
             cards:[
-              ['01','Satış ekibi haftanın %60\'ını idari işlere harcıyor','Müşteri görüşmelerine ayrılması gereken zaman veri girişi, liste oluşturma ile kayboluyor. Pipeline olması gerekenden yavaş birleşiyor.'],
-              ['02','Kişiselleştirme ölçekte kırılıyor','Genel outreach görmezden geliniyor. Manuel doğru işleri yapmak her satış temsilcisini günde belirli sayıda potansiyel  müşteri ile sınırlıyor.'],
-              ['03','CRM  gerçek zamanda bozuluyor','Eskimiş alanlar tahminlemeyi öldürür. Yöneticiler pipeline\'ın bu ayki değil geçen ayki haritasından karar veriyor.']
+              ['01','Satış ekibi haftanın %60\'ını idari işlere harcıyor','Müşteri görüşmelerine ayrılması gereken zaman veri girişi, liste oluşturma ile kayboluyor. Satış hunisi olması gerekenden yavaş birleşiyor.'],
+              ['02','Kişiselleştirme ölçeklenince bozuluyor','Genel iletişim görmezden geliniyor. Manuel doğru işleri yapmak her satış temsilcisini günde belirli sayıda potansiyel  müşteri ile sınırlıyor.'],
+              ['03','CRM  gerçek zamanda bozuluyor','Eskimiş alanlar tahminlemeyi öldürür. Yöneticiler satış hunisinin bu ayki değil geçen ayki haritasından karar veriyor.']
             ]
           }
         },
