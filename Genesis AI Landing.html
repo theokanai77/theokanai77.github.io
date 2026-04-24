@@ -1630,6 +1630,8 @@
     }
   };
 
+  // Clean up legacy storage so default switches to TR for returning visitors
+  try { localStorage.removeItem('genesis-lang'); } catch(e) {}
   let LOCALE = localStorage.getItem('genesis-lang-v2') || 'tr';
 
   function applyStatic(lang) {
